@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" >
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #87AAAA;">  
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Inicio</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Posts
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" th:href="@{/posts}">Mostrar Libros</a></li>
+                        <li><a class="dropdown-item" th:href="@{/posts/create}">Crear Libro</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Zones
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" th:href="@{/zones}">Mostrar zonas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/zones/create}">Crear Zona</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Users
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" th:href="@{/users}">Mostrar usuarios</a></li>
+                        <li><a class="dropdown-item" th:href="@{/users/create}">Crear Usuario</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<footer th:fragment="footer" class="footer py-1 fixed-bottom" style="background-color: #87AAAA;">
+    <div class="container d-flex justify-content-center">
+        <span class="text-muted">&copy; Wanda Rocha - 2021</span>
+    </div>
+</footer>
