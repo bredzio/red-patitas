@@ -11,14 +11,14 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Modifying
-    @Query("UPDATE Post p SET p.enabled = true WHERE p.id = :id")
+    @Query("UPDATE posts p SET p.enabled = true WHERE p.id = :id")
     void enabled(@Param("id") Integer id);
 
     @Modifying
-    @Query("UPDATE Post p SET p.lostOrFound = true WHERE p.id = :id")
+    @Query("UPDATE posts p SET p.lostOrFound = true WHERE p.id = :id")
     void found(@Param("id") Integer id);
 
     @Modifying
-    @Query("UPDATE Post p SET p.lostOrFound = false WHERE p.id = :id")
+    @Query("UPDATE posts p SET p.lostOrFound = false WHERE p.id = :id")
     void lost(@Param("id") Integer id);
 }

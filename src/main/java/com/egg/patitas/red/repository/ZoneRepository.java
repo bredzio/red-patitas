@@ -1,4 +1,4 @@
-package com.egg.patitas.red.Repository;
+package com.egg.patitas.red.repository;
 
 
 import com.egg.patitas.red.model.Zone;

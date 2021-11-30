@@ -10,7 +10,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@SQLDelete(sql = "UPDATE Post p SET p.enabled = false WHERE p.id = ?")
+@Table(name = "posts")
+@SQLDelete(sql = "UPDATE posts p SET p.enabled = false WHERE p.id = ?")
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
