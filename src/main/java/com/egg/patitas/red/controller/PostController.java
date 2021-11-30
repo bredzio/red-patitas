@@ -2,10 +2,7 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.model.User;
-import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.service.PostService;
-import com.egg.patitas.red.service.UserService;
-import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
