@@ -7,10 +7,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-@SQLDelete(sql = "UPDATE Post p SET p.enabled = false WHERE p.id = ?")
+@Table(name = "posts")
+@SQLDelete(sql = "UPDATE posts SET enabled = false WHERE id = ?")
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
@@ -19,19 +22,22 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(nullable = false)
+    @NotNull
+    @NotEmpty
     @ManyToOne
     private Zone zone;
 
-    @JoinColumn(nullable = false)
+    @NotNull
+    @NotEmpty
     @ManyToOne(fetch=FetchType.LAZY)
     private User user;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String commentary;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private LocalDateTime dateCreated;
 
     @LastModifiedDate
