@@ -40,6 +40,8 @@ public class ZoneService {
         zone.setCity(city);
         zone.setProvince(province);
         zone.setZipCode(zipCod);
+
+        zoneRepository.save(zone);
     }
 
     @Transactional(readOnly = true)
