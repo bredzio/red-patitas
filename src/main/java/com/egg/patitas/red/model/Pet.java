@@ -1,46 +1,51 @@
 package com.egg.patitas.red.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "pets")
+@SQLDelete(sql = "UPDATE pets SET enabled = false WHERE id = ?")
 public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String name;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
+    @NotNull
+    @NotEmpty
     private String photo;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private Boolean enabled;
 
-    @JoinColumn(nullable = false)
-    @ManyToOne
+    @NotNull
+    @NotEmpty
+    @ManyToOne(fetch=FetchType.LAZY)
     private Animal animal;
 
-    @Column
     @CreatedDate
+    @Column (updatable = false)
     private LocalDateTime dateCreated;
 
-    @Column
     @LastModifiedDate
     private LocalDateTime dateModified;
 
