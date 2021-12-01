@@ -15,10 +15,10 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "animals", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(name = "animal", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE animals SET enabled = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE Animal SET enabled = false WHERE id = ?")
 public class Animal {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

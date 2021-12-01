@@ -17,8 +17,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@SQLDelete(sql = "UPDATE users SET enabled = false WHERE id = ?")
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@SQLDelete(sql = "UPDATE User SET enabled = false WHERE id = ?")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 

@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "pets")
-@SQLDelete(sql = "UPDATE pets SET enabled = false WHERE id = ?")
+@Table(name = "pet")
+@SQLDelete(sql = "UPDATE Pet SET enabled = false WHERE id = ?")
 public class Pet {
 
     @Id
