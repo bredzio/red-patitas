@@ -5,36 +5,44 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
+import java.util.List;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+@Table(name = "zones")
+@Entity
 @Setter
 @Getter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE Zone z SET false where z.id = ? ")
+@SQLDelete(sql = "UPDATE zones z SET false where z.id = ? ")
 public class Zone {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-
-    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String city;
 
-    @Column(nullable = false)
-    private String Province;
+    @NotNull
+    @NotEmpty
+    private String province;
 
-    @Column(nullable = false)
+
+    @NotNull
+    @NotEmpty
     private Integer zipCode;
 
     //Verificar la relacion
     @OneToMany(mappedBy = "zone")
     private List<Post> posts;
 
-    @Column(nullable = false)
-    private Boolean alta;
+    @NotNull
+    @NotEmpty
+    private Boolean enabled;
 }
