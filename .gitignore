@@ -4,10 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### application.prop spring ###
-src/main/resources/application.properties
-.application.properties
-
 ### STS ###
 .apt_generated
 .classpath
