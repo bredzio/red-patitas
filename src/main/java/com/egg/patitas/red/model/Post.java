@@ -12,8 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-@Table(name = "posts")
-@SQLDelete(sql = "UPDATE posts SET enabled = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE Post SET enabled = false WHERE id = ?")
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
@@ -29,7 +28,7 @@ public class Post {
 
     @NotNull
     @NotEmpty
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     private User user;
 
     @NotNull

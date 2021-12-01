@@ -1,27 +1,19 @@
 package com.egg.patitas.red.service;
 
-<<<<<<< HEAD
 import com.egg.patitas.red.model.Zone;
-import com.egg.patitas.red.repository.UserRepository;
 import com.egg.patitas.red.repository.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-=======
 
 import com.egg.patitas.red.model.Post;
-import com.egg.patitas.red.model.Zone;
-import com.egg.patitas.red.repository.ZoneRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
->>>>>>> develop
+
 import java.util.List;
 
 @Service
 public class ZoneService {
-<<<<<<< HEAD
+
     @Autowired
     private ZoneRepository zoneRepository;
 
@@ -29,10 +21,7 @@ public class ZoneService {
     public List<Zone> findAll() {
         return zoneRepository.findAll();
     }
-=======
 
-    @Autowired
-    private ZoneRepository zoneRepository;
 
     @Transactional
     public void create(String city, String province, Integer zipCode) throws Exception {
@@ -46,7 +35,7 @@ public class ZoneService {
         zone.setCity(city);
         zone.setProvince(province);
         zone.setZipCode(zipCode);
-        zone.setPosts(Collections.emptyList());
+        //zone.setPosts(Collections.emptyList());
         zoneRepository.save(zone);
     }
 
@@ -60,10 +49,6 @@ public class ZoneService {
         zone.setZipCode(zipCod);
     }
 
-    @Transactional(readOnly = true)
-    public List<Zone> findAll(){
-        return zoneRepository.findAll();
-    }
 
     @Transactional(readOnly = true)
     public List<Post> findPostsByIdZone(Integer id) throws Exception{
@@ -78,9 +63,6 @@ public class ZoneService {
     public void enabled(Integer id) {zoneRepository.enabled(id);
     }
 
-    @Transactional
-    public void disable(Integer id) {zoneRepository.disable(id);
-    }
 
 
     public void validateCity(String city) throws Exception {
@@ -101,6 +83,6 @@ public class ZoneService {
         }
     }
 
->>>>>>> develop
+
 }
 

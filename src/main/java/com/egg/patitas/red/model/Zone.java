@@ -12,13 +12,13 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Table(name = "zones")
+
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE zones z SET false where z.id = ? ")
+@SQLDelete(sql = "UPDATE Zone z SET z.enabled = false where z.id = ? ")
 public class Zone {
 
     @Id
@@ -33,14 +33,14 @@ public class Zone {
     @NotEmpty
     private String province;
 
+    @OneToMany(mappedBy="zone")
+    private List<Post> posts;
+
 
     @NotNull
     @NotEmpty
     private Integer zipCode;
 
-    //Verificar la relacion
-    @OneToMany(mappedBy = "zone")
-    private List<Post> posts;
 
     @NotNull
     @NotEmpty

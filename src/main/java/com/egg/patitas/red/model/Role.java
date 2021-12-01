@@ -9,11 +9,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(name = "role", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@SQLDelete(sql = "UPDATE roles SET enabled = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE Role SET enabled = false WHERE id = ?")
 public class Role {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
