@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-@Controller
+/*@Controller
 @RequestMapping("/zones")
 public class ZoneController {
 
@@ -21,7 +21,7 @@ public class ZoneController {
     @GetMapping
     public ModelAndView showAll(){
         ModelAndView mav = new ModelAndView("zones");
-        mav.addObject("zones", zoneService.findAll());
+        //mav.addObject("zones", zoneService.findAll());
         return mav;
     }
 
@@ -38,7 +38,12 @@ public class ZoneController {
     @PostMapping("/save")
     public RedirectView save(@RequestParam String city)  {
 
-        zoneService.create(city);
+        //zoneService.create(city);
         return new RedirectView("/zones");
     }
+<<<<<<< HEAD
 }
+*/
+=======
+}
+>>>>>>> develop

@@ -42,6 +42,11 @@ public class Pet {
     @ManyToOne(fetch=FetchType.LAZY)
     private Animal animal;
 
+    @NotNull
+    @NotEmpty
+    @ManyToOne(fetch=FetchType.LAZY)
+    private User user;
+
     @CreatedDate
     @Column (updatable = false)
     private LocalDateTime dateCreated;

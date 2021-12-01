@@ -1,5 +1,13 @@
 package com.egg.patitas.red.service;
 
+<<<<<<< HEAD
+import com.egg.patitas.red.model.Zone;
+import com.egg.patitas.red.repository.UserRepository;
+import com.egg.patitas.red.repository.ZoneRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+=======
 
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.model.Zone;
@@ -8,10 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
+>>>>>>> develop
 import java.util.List;
 
 @Service
 public class ZoneService {
+<<<<<<< HEAD
+    @Autowired
+    private ZoneRepository zoneRepository;
+
+
+    public List<Zone> findAll() {
+        return zoneRepository.findAll();
+    }
+=======
 
     @Autowired
     private ZoneRepository zoneRepository;
@@ -85,5 +103,6 @@ public class ZoneService {
         }
     }
 
+>>>>>>> develop
 }
 
