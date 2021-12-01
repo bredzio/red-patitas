@@ -26,42 +26,32 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Name cannot be null")
     private String name;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Lastname cannot be null")
     private String lastname;
 
-    @NotNull
-    @NotEmpty
+
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     @JoinColumn(name = "roleId")
     private Role role;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Email cannot be null")
     @Email(message = "Email should be valid.", regexp = "[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
     @Size(min = 5, max = 15)
     private String email;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Password cannot be null")
     private String password;
 
     @NotNull
-    @NotEmpty
     private Boolean enabled = true;
 
-    @NotNull
-    @NotEmpty
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime dateCreated;
 
-    @NotNull
-    @NotEmpty
     @LastModifiedDate
     private LocalDateTime dateModified;
 
@@ -72,6 +62,10 @@ public class User {
     @OneToMany (mappedBy = "user")
     @Nullable
     private List<Pet> pets;
+
+    @ManyToOne
+    @JoinColumn(nullable=false)
+    private Role rol;
 
 
 }

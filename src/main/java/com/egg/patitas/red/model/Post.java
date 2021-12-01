@@ -43,7 +43,6 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime dateModified;
 
-    @LastModifiedDate
     private LocalDateTime dateLostOrFound;
 
     private Boolean enabled;

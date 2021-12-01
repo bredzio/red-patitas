@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE animals SET enabled = false WHERE id = ?")
-public class Animal<Pet> {
+public class Animal {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
