@@ -37,6 +37,12 @@
         </div>
     </div>
 
+    <div th:if="${exito}" class="container mt-4 text-center">
+        <div class="row col-md-4 mx-auto">
+            <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+        </div>
+    </div>
+
     <div class="container p-4">
         <div class="row">
             <div class="col-md-4 mx-auto px-0">
@@ -48,12 +54,12 @@
                         <form id="formulario" class="needs-validation mb-4" th:action="@{/logincheck}" method="POST" autocomplete="off" novalidate>
 
                             <div class="form-group mb-3">
-                                <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" required>
+                                <input type="email" id="email" name="email" placeholder="Correo" class="form-control" required>
                                 <div class="invalid-feedback text-start">El correo es obligatorio</div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="password" id="clave" name="clave" placeholder="Contraseña" class="form-control" required>
+                                <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control" required>
                                 <div class="invalid-feedback text-start">La contraseña es obligatoria</div>
                             </div>
 

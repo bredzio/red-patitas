@@ -20,7 +20,7 @@
 
             <div class="text-end">
                 <a class="btn btn-light me-1" th:href="@{/login}">Ingresar</a>
-                <a class="btn btn-warning" th:href="@{/signup}">Registrarse</a>
+                <a class="btn btn-warning" th:href="@{/auth/signup}">Registrarse</a>
             </div>
         </div>
     </nav>
@@ -39,25 +39,25 @@
                         <h3>Registro</h3>
                     </div>
                     <div class="card-body">
-                        <form id="user" class="needs-validation mb-4" th:action="@{/auth/register}" method="POST" autocomplete="off" novalidate th:oject="${user}">
+                        <form id="formulario" class="needs-validation mb-4" th:action="@{/auth/register}" method="POST" autocomplete="off" novalidate th:object="${user}">
                             <div class="form-group mb-3">
                                 <input type="text" id="name" name="nombre" th:field="*{name}" placeholder="Nombre" class="form-control" required>
                                 <div class="invalid-feedback text-start">El nombre es obligatorio</div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="text" id="lastname" name="apellido" th:value="*{lastname}" placeholder="Apellido" class="form-control" required>
+                                <input type="text" id="lastname" name="apellido" th:field="*{lastname}" placeholder="Apellido" class="form-control" required>
                                 <div class="invalid-feedback text-start">El apellido es obligatorio</div>
                             </div>                         
                        
 
                             <div class="form-group mb-3">
-                                <input type="email" id="email" name="correo" th:value="*{email}" placeholder="Correo" class="form-control" required>
+                                <input type="email" id="email" name="correo" th:field="*{email}" placeholder="Correo" class="form-control" required>
                                 <div class="invalid-feedback text-start">El correo es obligatorio</div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="password" id="password" name="clave" th:value="*{password}" placeholder="Contraseña" class="form-control" required>
+                                <input type="password" id="password" name="clave" th:field="*{password}" placeholder="Contraseña" class="form-control" required>
                                 <div class="invalid-feedback text-start">La contraseña es obligatoria</div>
                             </div>
 
