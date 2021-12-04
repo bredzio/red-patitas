@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
     <meta content="Libreria Spring Boot" name="description"/>
-    <meta content="Wnada Rocha" name="author"/>
+    <meta content="Wanda Rocha" name="author"/>
     <title th:text="|${title}|"></title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
@@ -23,36 +23,45 @@
 </div>
 
 <div class="container mt-5 main">
-
     <h2 th:text="${title}"></h2>
-    <hr class="mb-5" />
-    <div th:if="${zones.isEmpty()}">
-        <h5>Todavía no hay editoriales cargadas. <a th:href="@{/zones/create}">Cargar zona</a></h5>
-    </div>
-    <div class="table-responsive" th:unless="${zones.isEmpty()}">
-        <table class="table table-hover table-sm table-bordered">
-            <thead class="table-secondary text-center">
-            <tr>
-                <th class="col-md-4 px-md-2" scope="col">Ciudad</th>
-                <th class="col-md-4 px-md-2" scope="col">Provincia</th>
-                <th class="col-md-4 px-md-2" scope="col">Zip Code</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="zone : ${zones}">
-                    <td class="col-md-4 px-md-2" th:text="${zone.city}"></td>
-                    <td class="col-md-4 px-md-2" th:text="${zone.province}"></td>
-                    <td class="col-md-4 px-md-2" th:text="${zone.zipCode}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <hr class="mb-5 col-xl-12" />
+    <form autocomplete="off" class="needs-validation" id="formulario" method="POST" novalidate
+          th:action="@{/animals/__${action}__}" th:object="${animal}">
+        <input th:field="*{id}" type="hidden" />
+        <div class="form-floating mb-3 col-xl-6">
+            <input class="form-control" id="city" placeholder="City" required th:field="*{name}" type="text"/>
+            <label for="City">Animal</label>
+            <div class="invalid-feedback">El animal es obligatorio</div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-3">
+                <button class="btn btn-success" th:text="${action == 'save'} ? 'Crear zona' : 'Guardar cambios'"
+                        type="submit"></button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <footer th:replace="fragmentos :: footer"></footer>
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script>
+    (() => {
+        "use strict";
+
+        const form = document.getElementById("formulario");
+        form.addEventListener("submit", (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add("was-validated");
+        }, false);
+    })()
+</script>
 </body>
 
 </html>

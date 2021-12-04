@@ -5,11 +5,13 @@ import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @SQLDelete(sql = "UPDATE Post SET enabled = false WHERE id = ?")
@@ -21,19 +23,22 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @NotEmpty
+    @Nullable
     @ManyToOne
     private Zone zone;
 
-    @NotNull
-    @NotEmpty
+    @Nullable
     @ManyToOne
     private User user;
 
-    @NotNull
-    @NotEmpty
-    private String commentary;
+//    agregado para acceder directo a pets
+    @Nullable
+    @OneToOne
+    private Pet pet;
+
+    @NotEmpty(message = "La descrpcion es obligatoria")
+    @NotNull(message = "La descripcion no puede ser nulo")
+    private String description;
 
     @CreatedDate
     @Column(updatable = false)
@@ -42,6 +47,7 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime dateModified;
 
+    @LastModifiedDate
     private LocalDateTime dateLostOrFound;
 
     private Boolean enabled;

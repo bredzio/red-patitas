@@ -60,8 +60,8 @@ public class User implements UserDetails {
     @LastModifiedDate
     private LocalDateTime dateModified;
 
-   @Nullable
-   @OneToMany (mappedBy = "user")
+    @Nullable
+    @OneToMany (mappedBy = "user")
     private List<Post> posts;
 
     @OneToMany (mappedBy = "user")

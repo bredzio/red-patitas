@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public ModelAndView createPost() {
+    public ModelAndView createUser() {
         ModelAndView mav = new ModelAndView("user-form");
 
         mav.addObject("user", new User());
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public RedirectView save(@RequestParam @RequestBody User user) throws EmailExistException {
+    public RedirectView save(@ModelAttribute User user) throws EmailExistException {
         userService.createUser(user);
         return new RedirectView("/users");
     }

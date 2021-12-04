@@ -17,7 +17,7 @@ public class ZoneService {
     @Autowired
     private ZoneRepository zoneRepository;
 
-
+    @Transactional
     public List<Zone> findAll() {
         return zoneRepository.findAll();
     }
@@ -35,7 +35,7 @@ public class ZoneService {
         zone.setCity(city);
         zone.setProvince(province);
         zone.setZipCode(zipCode);
-        //zone.setPosts(Collections.emptyList());
+        zone.setPosts(Collections.emptyList());
         zoneRepository.save(zone);
     }
 

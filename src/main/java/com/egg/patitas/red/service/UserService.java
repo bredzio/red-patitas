@@ -38,6 +38,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void createUser(User dto)  throws EmailExistException {
+//        no es dto , solo lo puso de nombre por si en el futuro usamos dto
        if (userRepository.findByEmail(dto.getEmail()) != null) {
                 throw new EmailExistException(dto.getEmail());
             }
@@ -95,15 +96,30 @@ public class UserService implements UserDetailsService {
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
-        HttpSession sesion = attr.getRequest().getSession(true);
+//        HttpSession sesion = attr.getRequest().getSession(true); //para que sirve realmente
+        HttpSession session = attr.getRequest().getSession(true);
 
-        sesion.setAttribute("idUsuario", user.getId());
-        sesion.setAttribute("email", user.getEmail());
+//        sesion.setAttribute("id", user.getId());
+//        sesion.setAttribute("name", user.getName());
+//        sesion.setAttribute("email", user.getEmail());
+//        sesion.setAttribute("rol", user.getRole().getName());
+        //si es sesion o session no importa, en thymelef siempre session
+
+        session.setAttribute("id", user.getId());
+        session.setAttribute("name", user.getName());
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("rol", user.getRole().getName());
+        session.setAttribute("pets", user.getPets());
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(), Collections.singletonList(authority));
     }
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

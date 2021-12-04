@@ -16,26 +16,33 @@
 <body>
     <nav th:replace="fragmentos :: navbar"></nav>
 
+    <div th:if="${error}" class="container mt-4 text-center">
+        <div class="row col-md-4 mx-auto">
+            <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+        </div>
+    </div>
+
     <div class="container mt-4 main">
         <h1>Listado de Post</h1>
         <hr class="mb-4"/>
         <div th:if="${posts.isEmpty()}">
             <h5>Todavía no hay posts cargados. <a th:href="@{/posts/create}">Cargar post</a></h5>
         </div>
-        <div class="row my-auto g-4 justify-content-evenly">
-            <div class="col" th:each="post : ${posts}">
-                <div class="card mb-4 shadow">
-                    <!--
+<!--        <div class="row my-auto g-4 justify-content-evenly">-->
+       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col mb-4" th:each="post : ${posts}">
+                <div class="card mb-4 shadow h-100">
+
                     <div class="card-body text-center my-2">
                         <img class="rounded-circle"
-                             th:src="${autor.image != null} ? @{/uploads/__${autor.image}__} : @{/uploads/foto-no-disponible.png}"
+                             th:src="${post.pet.photo != null} ? @{/img/__${post.pet.photo}__} : @{/img/foto-no-disponible.png}"
                              width="165">
                     </div>
-                    -->
+
                     <div class="card-footer">
-                        <div th:text="|Nombre: ${post.user.name}|"></div>
+                        <div th:text="|Nombre: ${post.pet.name}|"></div>
                         <div th:text="|Zona: ${post.zone.city}|"></div>
-                        <div th:text="|Comentarios: ${post.commentary}|"></div>
+<!--                        <div th:text="|Comentarios: ${post.description}|" ></div>-->
                         <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
                         <div class="d-flex justify-content-start my-2">
                             <a class="btn btn-warning btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>

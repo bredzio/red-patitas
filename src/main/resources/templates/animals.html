@@ -26,24 +26,20 @@
 
     <h2 th:text="${title}"></h2>
     <hr class="mb-5" />
-    <div th:if="${zones.isEmpty()}">
-        <h5>Todavía no hay editoriales cargadas. <a th:href="@{/zones/create}">Cargar zona</a></h5>
+    <div th:if="${animals.isEmpty()}">
+        <h5>Todavía no hay editoriales cargadas. <a th:href="@{/animals/create}">Cargar zona</a></h5>
     </div>
-    <div class="table-responsive" th:unless="${zones.isEmpty()}">
+    <div class="table-responsive" th:unless="${animals.isEmpty()}">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">
             <tr>
-                <th class="col-md-4 px-md-2" scope="col">Ciudad</th>
-                <th class="col-md-4 px-md-2" scope="col">Provincia</th>
-                <th class="col-md-4 px-md-2" scope="col">Zip Code</th>
+                <th class="col-md-4 px-md-2" scope="col">Especie</th>
             </tr>
             </thead>
             <tbody>
-                <tr th:each="zone : ${zones}">
-                    <td class="col-md-4 px-md-2" th:text="${zone.city}"></td>
-                    <td class="col-md-4 px-md-2" th:text="${zone.province}"></td>
-                    <td class="col-md-4 px-md-2" th:text="${zone.zipCode}"></td>
-                </tr>
+            <tr th:each="animal : ${animals}">
+                <td class="col-md-4 px-md-2" th:text="${animal.name}"></td>
+            </tr>
             </tbody>
         </table>
     </div>

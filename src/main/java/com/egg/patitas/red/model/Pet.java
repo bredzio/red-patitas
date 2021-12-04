@@ -5,6 +5,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -33,19 +34,23 @@ public class Pet {
     @NotEmpty
     private String photo;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     private Boolean enabled;
 
     @NotNull
-    @NotEmpty
+//    @NotEmpty
     @ManyToOne(fetch=FetchType.LAZY)
     private Animal animal;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     @ManyToOne(fetch=FetchType.LAZY)
     private User user;
+
+//    @Nullable
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    private Post post;
 
     @CreatedDate
     @Column (updatable = false)
