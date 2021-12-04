@@ -25,26 +25,13 @@ public class AnimalController {
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request) {
-//        HttpServletRequest request
         ModelAndView mav = new ModelAndView("animals");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
 //            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
-
-//        try {
-//            if (flashMap != null) {
-//    //            mav.addObject("exito", flashMap.get("exito-name"));
-//                mav.addObject("error", flashMap.get("error"));
-//            }
-//            mav.addObject("animals", animalService.listAnimal());
-//        } catch (Exception e) {
-//            mav.addObject("error", e.getMessage());
-//        }
-//        return mav;
-//    }
-
+        mav.addObject("title", "Animals");
         mav.addObject("animals", animalService.findAll());
         return mav;
     }

@@ -36,30 +36,16 @@ public class PostController {
     private PetService petService;
 
     @GetMapping
-    public ModelAndView showAll(){
+    public ModelAndView showAll(HttpServletRequest request){
         ModelAndView mav = new ModelAndView("posts");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error"));
+        }
         mav.addObject("posts", postService.findAll());
         return mav;
     }
-
-//    @GetMapping("/create")
-//    public ModelAndView createPost() {
-//        ModelAndView mav = new ModelAndView("post-form");
-//
-//        mav.addObject("post", new Post());
-//        mav.addObject("users", userService.findAll()); // lista animal en html
-//        mav.addObject("zones", zoneService.findAll());
-//        mav.addObject("title", "Crear Post");
-//        mav.addObject("action", "save");
-//        return mav;
-//    }
-//
-//    @PostMapping("/save")
-//    public RedirectView save(@RequestParam Zone zone, @RequestParam User user, @RequestParam String commentary, @RequestParam Boolean lostOrFound)  {
-//
-//        postService.create(zone, user,commentary, lostOrFound);
-//        return new RedirectView("/posts");
-//    }
 
     @GetMapping("/create")
     public ModelAndView createPost(HttpServletRequest request) {

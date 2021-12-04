@@ -28,13 +28,13 @@
               th:action="@{/posts/__${action}__}" th:object="${post}">
             <input th:field="*{id}" type="hidden" />
             <div class="form-floating mb-3 col-xl-6">
-                <select aria-label="Elegir Zona" class="form-select" id="autor" th:field="*{zone}">
+                <select aria-label="Elegir Zona" class="form-select" id="zone" th:field="*{zone}">
                     <option selected value="">Elegir zona</option>
                     <option th:each="zone : ${zones}" th:text="|${zone.city}|"
                             th:value="${zone.id}">
                     </option>
                 </select>
-                <label for="autor">Zone</label>
+                <label for="zone">Zone</label>
             </div>
 
             <div class="form-floating mb-3 col-xl-6" >
@@ -48,13 +48,13 @@
             </div>
 
             <div class="form-floating mb-3 col-xl-6">
-                <select aria-label="Elegir Zona" class="form-select" id="autor" th:field="*{pet}">
+                <select aria-label="Elegir Zona" class="form-select" id="pet" th:field="*{pet}">
                     <option selected value="">Elegir Animal</option>
                     <option th:each="pet : ${pets}" th:text="|${pet.name}|"
                             th:value="${pet.id}">
                     </option>
                 </select>
-                <label for="autor">Zone</label>
+                <label for="pet">Zone</label>
             </div>
 
             <div class="mb-3 col-xl-6">

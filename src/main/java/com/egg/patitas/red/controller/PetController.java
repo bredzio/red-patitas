@@ -43,6 +43,7 @@ public class PetController {
             //mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
+        mav.addObject("title", "Mascotas");
         mav.addObject("pets",petService.findAll());
         return mav;
     }

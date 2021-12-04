@@ -31,10 +31,6 @@ public class AuthController {
     public ModelAndView login(@RequestParam(required = false) String error,@RequestParam(required = false) String success, @RequestParam(required = false) String logout, Principal principal) {
         ModelAndView mav = new ModelAndView("login");
 
-        if (success != null) {
-            mav.addObject("exito", "Usuario registrado: Por favor valide su correo electrónico");
-        }
-
         if (error != null) {
             mav.addObject("error", "Correo o contraseña inválida");
         }
@@ -42,6 +38,11 @@ public class AuthController {
         if (logout != null) {
             mav.addObject("logout", "Ha salido correctamente de la plataforma");
         }
+
+        if (success != null) {
+            mav.addObject("exito", "Usuario registrado: Por favor valide su correo electrónico");
+        }
+
 
         if (principal != null) {
             mav.setViewName("redirect:/");

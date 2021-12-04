@@ -20,6 +20,7 @@ public class UserController {
     public ModelAndView showAll(){
         ModelAndView mav = new ModelAndView("users");
         mav.addObject("users", userService.findAll());
+        mav.addObject("title", "Users");
         return mav;
     }
 

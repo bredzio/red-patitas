@@ -36,8 +36,8 @@ public class Zone {
     private List<Post> posts;
 
     @NotNull
-//    @NotEmpty
     private Integer zipCode;
 
-    private Boolean enabled = true;
+    private Boolean enabled;
+
 }
