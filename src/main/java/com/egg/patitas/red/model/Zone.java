@@ -38,11 +38,9 @@ public class Zone {
 
 
     @NotNull
-    @NotEmpty
     private Integer zipCode;
 
 
-    @NotNull
-    @NotEmpty
+
     private Boolean enabled;
 }
