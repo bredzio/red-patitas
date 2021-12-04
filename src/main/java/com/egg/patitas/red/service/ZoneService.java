@@ -17,12 +17,10 @@ public class ZoneService {
     @Autowired
     private ZoneRepository zoneRepository;
 
-
     @Transactional
     public List<Zone> findAll() {
         return zoneRepository.findAll();
     }
-
 
     @Transactional
     public void create(String city, String province, Integer zipCode) throws Exception {
@@ -36,10 +34,9 @@ public class ZoneService {
         zone.setCity(city);
         zone.setProvince(province);
         zone.setZipCode(zipCode);
-        //zone.setPosts(Collections.emptyList());
+        zone.setPosts(Collections.emptyList());
         zoneRepository.save(zone);
     }
-
 
     @Transactional
     public void modify(Integer id, String city, String province, Integer zipCod){
@@ -64,7 +61,6 @@ public class ZoneService {
         return zone;
     }
 
-
     @Transactional(readOnly = true)
     public List<Post> findPostsByIdZone(Integer id) throws Exception{
         Zone zone = zoneRepository.findById(id).get();
@@ -76,13 +72,9 @@ public class ZoneService {
         return zone.getPosts();
     }
 
-
-
     @Transactional
     public void enabled(Integer id) {zoneRepository.enabled(id);
     }
-
-
 
     public void validateCity(String city) throws Exception {
         if (city == null || city.trim().isEmpty()){

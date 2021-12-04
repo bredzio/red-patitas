@@ -16,8 +16,8 @@
                         Posts
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" th:href="@{/posts}">Mostrar Libros</a></li>
-                        <li><a class="dropdown-item" th:href="@{/posts/create}">Crear Libro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/posts}">Mostrar Posts</a></li>
+                        <li><a class="dropdown-item" th:href="@{/posts/create}">Crear Post</a></li>
 
                     </ul>
                 </li>
@@ -43,6 +43,29 @@
 
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Animals
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" th:href="@{/animals}">Mostrar animales</a></li>
+                        <li><a class="dropdown-item" th:href="@{/animals/create}">Crear Animal</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pets
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" th:href="@{/pets}">Mostrar Mascotas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/pets/create}">Crear Mascota</a></li>
+
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <div class="text-end">
@@ -53,6 +76,9 @@
 
 <footer th:fragment="footer" class="footer py-1 fixed-bottom" style="background-color: #87AAAA;">
     <div class="container d-flex justify-content-center">
-        <span class="text-muted">&copy; Wanda Rocha - 2021</span>
+        <!-- al principio puse sesion pero no lo tomaba despues puse session y ando-->
+        <span class="text-muted text-reset"
+              th:text="${session.id != null} ? |${session.id} - ${session.name} - ${session.rol}| : 'HuellApp '">
+        </span>
     </div>
 </footer>

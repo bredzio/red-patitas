@@ -9,8 +9,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import java.util.List;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -36,11 +35,9 @@ public class Zone {
     @OneToMany(mappedBy="zone")
     private List<Post> posts;
 
-
     @NotNull
     private Integer zipCode;
 
-
-
     private Boolean enabled;
+
 }

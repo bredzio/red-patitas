@@ -120,10 +120,12 @@ public class UserService implements UserDetailsService {
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
-        HttpSession sesion = attr.getRequest().getSession(true);
+        HttpSession session = attr.getRequest().getSession(true);
 
-        sesion.setAttribute("idUsuario", user.getId());
-        sesion.setAttribute("email", user.getEmail());
+        session.setAttribute("id", user.getId());
+        session.setAttribute("name", user.getName());
+        session.setAttribute("email", user.getEmail());
+        session.setAttribute("rol", user.getRole().getName());
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
@@ -131,16 +133,6 @@ public class UserService implements UserDetailsService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
-
-
-
-
-
-
-
-
-
 
     private String buildEmail(String name) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
@@ -209,5 +201,6 @@ public class UserService implements UserDetailsService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
+
     }
 }

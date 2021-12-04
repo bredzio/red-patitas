@@ -1,6 +1,5 @@
 package com.egg.patitas.red.controller;
 
-import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +21,40 @@ public class ZoneController {
     private ZoneService zoneService;
 
     @GetMapping
-    public ModelAndView showAll(HttpServletRequest request){
+    public ModelAndView showAll(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("zones");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+        mav.addObject("title", "Zonas");
+        mav.addObject("zones", zoneService.findAll());
+        return mav;
+    }
+
+    @GetMapping("/create")
+    public ModelAndView create(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("zone-form");
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
+//            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
-
-        mav.addObject("zones",zoneService.findAll());
+        mav.addObject("zone", new Zone());
+        mav.addObject("title", "Crear Zona");
+        mav.addObject("action", "save");
         return mav;
     }
 
     @GetMapping("/{id}")
-    public ModelAndView showById(@PathVariable Integer id){
+    public ModelAndView showById(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("zone-detail");
         try {
             Zone zone = zoneService.findById(id);
             mav.addObject("zone", zone);
+            mav.addObject("title", "Detalles Zona");
             mav.addObject("postByZoneId", zoneService.findPostsByIdZone(id));
         } catch (Exception e) {
             mav.addObject("error-get-zone", e.getMessage());
@@ -48,27 +63,20 @@ public class ZoneController {
         return mav;
     }
 
-    @GetMapping("/create")
-    public ModelAndView createZone() {
-        ModelAndView mav = new ModelAndView("zone-form");
-        mav.addObject("zone", new Zone());
-        mav.addObject("title", "Crear Zona");
-        mav.addObject("action", "save");
-        return mav;
-    }
     //Falta delete
 
     @PostMapping("/save")
-    public RedirectView save(@RequestParam String city, @RequestParam String province, @RequestParam Integer zipCode, RedirectAttributes attributes)  {
+    public RedirectView save(@RequestParam String city, @RequestParam String province, @RequestParam Integer zipCode, RedirectAttributes attributes) {
         RedirectView redirectView = new RedirectView("/zones");
+
         try {
             zoneService.create(city, province, zipCode);
-        } catch(Exception e){
+            redirectView.setUrl("/zones");
+        } catch (Exception e) {
             attributes.addFlashAttribute("error", e.getMessage());
+            redirectView.setUrl("/zones/create");
         }
 
         return redirectView;
     }
-
 }
-

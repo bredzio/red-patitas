@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,6 +19,7 @@ import java.util.List;
 @Table(name = "animal", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @SQLDelete(sql = "UPDATE Animal SET enabled = false WHERE id = ?")
 public class Animal {
     @Id
@@ -32,9 +34,10 @@ public class Animal {
     @OneToMany(mappedBy = "animal")
     private List<Pet> pets;
 
-    private boolean enabled=true;
+    private Boolean enabled = true;
 
     @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime dateCreation;
 
     @LastModifiedDate

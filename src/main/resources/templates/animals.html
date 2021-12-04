@@ -16,41 +16,32 @@
 <body>
 <nav th:replace="fragmentos :: navbar"></nav>
 
+<div th:if="${error}" class="container mt-4 text-center">
+    <div class="row col-md-4 mx-auto">
+        <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+    </div>
+</div>
+
 <div class="container mt-5 main">
 
-    <h2 th:text='${"Nombre de la ciudad: "+zone.city}'></h2>
-<br>
-    <h3 th:text='${"Nombre de la provincia: "+zone.province}'></h3>
-    <br>
-    <h3 th:text='${"Codigo postal: "+zone.zipCode}'></h3>
-    <br>
-    <br>
-    <br>
-
-
-    <div th:if="${postByZoneId.isEmpty()}">
-        <h5>Todavía no hay posteos cargados en esta ciudad</h5>
+    <h2 th:text="${title}"></h2>
+    <hr class="mb-5" />
+    <div th:if="${animals.isEmpty()}">
+        <h5>Todavía no hay editoriales cargadas. <a th:href="@{/animals/create}">Cargar zona</a></h5>
     </div>
-    <div class="table-responsive" th:unless="${postByZoneId.isEmpty()}">
+    <div class="table-responsive" th:unless="${animals.isEmpty()}">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">
-<!--            ESTO ES PARA EL POST , NO PARA ZONE - ACORDARSE !! -->
             <tr>
-                <th class="col-md-4 px-md-2" scope="col">Ciudad</th>
-                <th class="col-md-4 px-md-2" scope="col">Provincia</th>
-                <th class="col-md-4 px-md-2" scope="col">Zip Code</th>
+                <th class="col-md-4 px-md-2" scope="col">Especie</th>
             </tr>
             </thead>
             <tbody>
-<!--            <tr th:each="zone : ${zonesById}">-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.city}"></td>-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.province}"></td>-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.zipCode}"></td>-->
-<!--            </tr>-->
+            <tr th:each="animal : ${animals}">
+                <td class="col-md-4 px-md-2" th:text="${animal.name}"></td>
+            </tr>
             </tbody>
         </table>
-    </div>
-        
     </div>
 </div>
 

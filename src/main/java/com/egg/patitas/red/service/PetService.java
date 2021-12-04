@@ -3,12 +3,14 @@ package com.egg.patitas.red.service;
 
 import com.egg.patitas.red.model.Animal;
 import com.egg.patitas.red.model.Pet;
+import com.egg.patitas.red.model.Post;
+import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,7 @@ public class PetService {
     private PhotoService photoService;
 
     @Transactional
-    public void createPet(String name, MultipartFile photo, Animal animal) throws Exception{
+    public void createPet(String name, MultipartFile photo, Animal animal, User user) throws Exception{
 
         if(name==null || name.isEmpty()){
             throw new Exception("El nombre no puede ser nulo");
@@ -39,6 +41,7 @@ public class PetService {
 
         Pet pet = new Pet();
         pet.setAnimal(animal);
+        pet.setUser(user);
         pet.setEnabled(true);
         pet.setName(name);
         pet.setPhoto(photoService.copy(photo));
@@ -103,6 +106,11 @@ public class PetService {
     }
 
     @Transactional
+    public List<Pet> findAll(){
+        return petRepository.findAll();
+    }
+
+    @Transactional
     public List<Pet> listPet() throws Exception{
         List<Pet> pets = new ArrayList();
         List<Pet> petsEnabled = new ArrayList();
@@ -120,5 +128,10 @@ public class PetService {
         }else{
             return petsEnabled;
         }
+    }
+
+    @Transactional
+    public List<Pet> finByUserId(Integer id){
+        return petRepository.findByUser_Id(id);
     }
 }
