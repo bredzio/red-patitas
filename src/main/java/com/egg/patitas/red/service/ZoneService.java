@@ -18,6 +18,7 @@ public class ZoneService {
     private ZoneRepository zoneRepository;
 
 
+    @Transactional
     public List<Zone> findAll() {
         return zoneRepository.findAll();
     }
@@ -42,22 +43,40 @@ public class ZoneService {
 
     @Transactional
     public void modify(Integer id, String city, String province, Integer zipCod){
+
         Zone zone = zoneRepository.findById(id).get();
 
         zone.setCity(city);
         zone.setProvince(province);
         zone.setZipCode(zipCod);
+
+        zoneRepository.save(zone);
+    }
+
+    @Transactional(readOnly = true)
+    public Zone findById(Integer id) throws Exception{
+        Zone zone = zoneRepository.findById(id).get();
+
+        if(zone == null) {
+            throw new Exception("no se encuentra la zona con id "+ id.toString());
+        }
+
+        return zone;
     }
 
 
     @Transactional(readOnly = true)
     public List<Post> findPostsByIdZone(Integer id) throws Exception{
         Zone zone = zoneRepository.findById(id).get();
+
         if(zone == null) {
             throw new Exception("no se encuentra la zona con id "+ id.toString());
         }
-            return zone.getPosts();
+
+        return zone.getPosts();
     }
+
+
 
     @Transactional
     public void enabled(Integer id) {zoneRepository.enabled(id);
