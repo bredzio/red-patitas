@@ -65,7 +65,7 @@ public class UserService implements UserDetailsService {
         user.setName(dto.getName());
         user.setLastname(dto.getLastname());
         user.setEmail(dto.getEmail());
-        user.setEnabled(true);
+        user.setEnabled(false);
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
 
         if (roleRepository.findAll().isEmpty()) {
@@ -87,12 +87,40 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        emailSend.send((dto.getEmail()), buildEmail(dto.getName()));
+        String token = buildToken(user);
+
+        String link = "http://localhost:8080/auth/register/confirm?token=" + token;
+        emailSend.send((dto.getEmail()), buildEmail(dto.getName(),link));
         return user;
     }
 
+    @Transactional
+    public String confirmToken(String token) {
+        TokenConfirmation tokenConfirmation = tokenConfirmationService.getToken(token).orElseThrow(() -> new IllegalStateException("Token no encontrado"));
 
-    public String enableUser(User user) {
+        if (tokenConfirmation.getConfirmedAt() != null) {
+            throw new IllegalStateException("Email confirmado");
+        }
+
+        LocalDateTime expiredAt = tokenConfirmation.getExpiresAt();
+
+        if (expiredAt.isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Expiró token");
+        }
+
+        tokenConfirmationService.setConfirmedAt(token);
+
+        enableAppUser(tokenConfirmation.getUser().getEmail());
+
+        return "Cuenta confirmada";
+    }
+
+    public int enableAppUser(String email) {
+        return userRepository.enableAppUser(email);
+    }
+
+
+    public String buildToken(User user) {
 
         String token = UUID.randomUUID().toString();
 
@@ -134,7 +162,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    private String buildEmail(String name) {
+    private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -190,7 +218,7 @@ public class UserService implements UserDetailsService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hola " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Muchas gracias por registrarse. Por favor, apriete sobre el boton para activar su cuenta: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=>Activar Ahora</a> </p></blockquote>\n El link expira en 15 minutos. <p>¡Nos vemos!</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hola " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Muchas gracias por registrarse. Por favor, apriete sobre el boton para activar su cuenta: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activar Ahora</a> </p></blockquote>\n El link expira en 15 minutos. <p>¡Nos vemos!</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
@@ -201,6 +229,5 @@ public class UserService implements UserDetailsService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
-
     }
 }

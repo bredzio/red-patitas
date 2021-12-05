@@ -40,7 +40,7 @@ public class AuthController {
         }
 
         if (success != null) {
-            mav.addObject("exito", "Usuario registrado: Por favor valide su correo electrónico");
+            mav.addObject("exito", "Por favor verifique su correo electrónico");
         }
 
 
@@ -98,6 +98,18 @@ public class AuthController {
         }
 
         return redirectView;
+    }
+
+    @GetMapping("/register/confirm")
+    public ModelAndView login(@RequestParam("token") String token) {
+        ModelAndView mav = new ModelAndView("login");
+        try {
+            mav.addObject("exito", userService.confirmToken(token));
+
+        }catch(Exception e){
+               mav.addObject("error",e.getMessage());
+        }
+        return mav;
     }
 
 }
