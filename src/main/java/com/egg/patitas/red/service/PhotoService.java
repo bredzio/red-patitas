@@ -1,7 +1,9 @@
 package com.egg.patitas.red.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +19,21 @@ public class PhotoService {
     @Value("${my.property}")
     private String directory;
 
+    @Autowired
+    private StorageService storageService;
+
     public String copy(MultipartFile photo) throws Exception{
+
+        try{
+            return storageService.uploadFile(photo);
+        }catch(Exception e){
+            throw new Exception("Error al guardar la foto");
+        }
+
+    }
+
+
+    /*public String copy(MultipartFile photo) throws Exception{
 
         try{
             String namePhoto = photo.getOriginalFilename();
@@ -32,5 +48,5 @@ public class PhotoService {
             throw new Exception("Error al guardar la foto");
         }
 
-    }
+    }*/
 }

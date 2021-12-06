@@ -24,6 +24,9 @@ public class PetService {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private StorageService storageService;
+
     @Transactional
     public void createPet(String name, MultipartFile photo, Animal animal, User user) throws Exception{
 
@@ -75,7 +78,8 @@ public class PetService {
             pet.setAnimal(animal);
             pet.setEnabled(true);
             pet.setName(name);
-            pet.setPhoto(photoService.copy(photo));
+            //pet.setPhoto(photoService.copy(photo));
+            pet.setPhoto(storageService.uploadFile(photo));
             petRepository.save(pet);
 
         }else{

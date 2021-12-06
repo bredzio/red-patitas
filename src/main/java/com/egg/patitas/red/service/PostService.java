@@ -60,6 +60,7 @@ public class PostService {
     @Transactional
     public List<Post> findAll(){
         return postRepository.findAll();
+
     }
 
 
