@@ -50,7 +50,7 @@ public class PetService {
     }
 
     @Transactional
-    public void editPet(Integer id, String name, MultipartFile photo, Animal animal) throws Exception{
+    public void editPet(Integer id, String name, MultipartFile photo, Animal animal, User user) throws Exception{
 
         if(id==null){
             throw new Exception("El id no puede ser nulo");
