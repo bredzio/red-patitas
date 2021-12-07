@@ -4,10 +4,7 @@ import com.egg.patitas.red.model.Animal;
 import com.egg.patitas.red.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -65,5 +62,35 @@ public class AnimalController {
 
         return redirectView;
     }
+
+    @PostMapping("/delete/{id}")
+
+    public RedirectView deleteAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
+        RedirectView redirectView = new RedirectView("/animals");
+        try {
+            animalService.deleteAnimal(id);
+            attributes.addFlashAttribute("successful","Se borro el animal");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+
+        }
+
+        return redirectView;
+    }
+
+    @PostMapping("/enabled/{id}")
+
+    public RedirectView enabledAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
+        RedirectView redirectView = new RedirectView("/animals");
+        try {
+            animalService.enabledAnimal(id);
+            attributes.addFlashAttribute("successful","Se habilto el animal");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+        return redirectView;
+    }
+
 
 }
