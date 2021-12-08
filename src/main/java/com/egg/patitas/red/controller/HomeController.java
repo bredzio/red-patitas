@@ -21,4 +21,10 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("quienes-somos");
         return mav;
     }
+
+    @GetMapping("/ayuda")
+    public ModelAndView ayuda(Principal principal) {
+        ModelAndView mav = new ModelAndView("como-funciona");
+        return mav;
+    }
 }
