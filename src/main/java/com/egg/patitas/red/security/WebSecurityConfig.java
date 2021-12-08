@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth/signup","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda", "/posts").permitAll()
+                .antMatchers("/auth/signup","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda").permitAll()
                 .antMatchers("/**").authenticated()//.permitAll() //.authenticated()
                 .and()
                 .formLogin()
@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/auth/login?logout=truse")
+                .logoutSuccessUrl("/auth/login?logout=true")
                 .permitAll()
                 .deleteCookies("JSSESIONID")
                 .and()
