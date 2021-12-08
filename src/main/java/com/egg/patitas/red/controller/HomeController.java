@@ -10,9 +10,10 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    @GetMapping("/")
+
+    @GetMapping("/home")
     public ModelAndView home(Principal principal) {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("home");
         return mav;
     }
 
