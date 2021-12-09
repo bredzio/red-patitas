@@ -64,11 +64,11 @@ public class PetService {
         }
 
         if(photo==null || photo.isEmpty()){
-            throw new Exception("Tiene que subir una foto");
+            throw new Exception("Debe ingresar una foto de su mascota");
         }
 
         if(animal==null){
-            throw new Exception("Tiene que seleccionar un animal");
+            throw new Exception("Debe seleccionar un animal");
         }
 
         Optional<Pet> answer = petRepository.findById(id);
