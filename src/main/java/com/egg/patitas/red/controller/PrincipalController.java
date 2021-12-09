@@ -22,7 +22,7 @@ public class PrincipalController {
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito"));
             mav.addObject("error", flashMap.get("error"));
-            mav.addObject("contact", flashMap.get("contact"));
+            mav.addObject("contact", new Contact());
 
         }else{
             mav.addObject("contact", new Contact());
