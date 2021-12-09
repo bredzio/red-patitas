@@ -1,17 +1,10 @@
 package com.egg.patitas.red.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Service
 public class PhotoService {
@@ -23,6 +16,14 @@ public class PhotoService {
     private StorageService storageService;
 
     public String copy(MultipartFile photo) throws Exception{
+        if(photo.isEmpty()){
+            throw new IllegalStateException("Debe ingresar una foto de su mascota");
+        }
+
+        String contentType = photo.getContentType();
+        if(!isSupportedContentTypee(contentType)){
+            throw new IllegalArgumentException("Debe ingresar un archivo de tipo IMG/PNG/JPEG");
+        }
 
         try{
             return storageService.uploadFile(photo);
@@ -32,6 +33,11 @@ public class PhotoService {
 
     }
 
+    private boolean isSupportedContentTypee(String contentType) {
+        return contentType.equals("image/png")
+                || contentType.equals("image/jpg")
+                || contentType.equals("image/jpeg");
+    }
 
     /*public String copy(MultipartFile photo) throws Exception{
 
