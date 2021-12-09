@@ -22,6 +22,10 @@ body{
   font-family: 'Nunito', sans-serif;
   margin: 0;
   background-color: #ececec;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .elipse1 {
@@ -140,6 +144,7 @@ header .logo-huellapp {
 
 /* ----------------MAIN------------------*/
 /* SECCION PRINCIPAL */
+
 .main {
   width: 100%;
 }
@@ -152,7 +157,7 @@ header .logo-huellapp {
 .main-content {
   padding-inline: 20px;
   position: relative;
-  margin-block-start: 120px;
+  margin-block-start: 80px;
 }
 
 .main hr{
@@ -196,17 +201,13 @@ h3 {
   display: flex;
   justify-content: space-between;
   margin-block-end: 50px;
-  padding-block: 40px;
+  padding-block: 50px;
 }
 
 .main-content p{
   margin-block-start: 10px;
   color: var(--black20);
   font-size: 18px;
-}
-
-.main-content{
-  position: relative;
 }
 
 h3 .registrarse {
@@ -248,9 +249,7 @@ h3 .registrarse:hover {
 .section-content h2 {
   font-weight: bold;
   text-align: center;
-}
-
-.section-content h2 {
+  padding-block-start: 40px;
   font-size: 30px;
   margin-block-end: 0;
   color: var(--black20);
@@ -338,6 +337,7 @@ p .enlaces {
   box-shadow: 1px 2px 12px -4px var(--black);
   border-radius: 10px;
   width: 75%;
+  margin-block-end: 40px;
 }
 
 .container_start {
@@ -522,7 +522,7 @@ p .enlaces {
   color: var(--blanco30);
 }
 
-.index-form h4 {
+.contactanos h4 {
   height: 64px;
   width: 543px;
   font-weight: bold;
@@ -536,14 +536,19 @@ p .enlaces {
   margin: 0;
 }
 
-/* --------LOGIN---------- */
+/* --------LOGIN y SIGNUP---------- */
 
-#formulario {
-  height: 150px;
-  margin-block: 30px;
+.col-md-4 {
+  display: flex;
+  align-items: center;
+  width: 450px;
 }
+
+.mb-4 {
+  margin-bottom: 0 !important;
+}
+
 .card-header {
-  /* border: 1px solid red; */
   display: flex;
   background: var(--black20);
   padding: 0;
@@ -553,25 +558,11 @@ p .enlaces {
   align-content: center;
 }
 
-.container-login {
-  margin-block: 61.5px;
-}
-/* .card-header:first-child {
-  border-start-end-radius: 10px;
-  border-start-start-radius: 10px;
-} */
-
-.shadow {
-  border-radius: 10px;
-}
-
 .line-header{
   width: 100%;
   height: 20px;
   background-image: linear-gradient(135deg, #0dc7a5 0%, #3FB6E0 63.54%, #3573d0 100%);
   margin-block-end: 20px;
-  /* border-start-end-radius: 10px;
-  border-start-start-radius: 10px; */
 }
 
 .card-header h4 {
@@ -580,11 +571,16 @@ p .enlaces {
 }
 
 .card {
-  width: 450px;
+  width: 100%;
 }
 
 .form-floating {
  color:var(--black30);
+ padding-inline: 12px;
+}
+
+.form-floating>label {
+  left: 10px;
 }
 
 .btn-success {
@@ -592,14 +588,28 @@ p .enlaces {
   border: none;
 }
 
+
+.btn-login, .btn-signup {
+  border-radius: 0px;
+  height: 50px;
+  width: 100%;
+}
+
+.card-body {
+  padding: 0px;
+  margin-block-start: 30px;
+}
+
+.form-group {
+  margin-block-start: 30px;
+}
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
 footer {
-    background-image: linear-gradient(135deg, #0dc7a5 0%, #3FB6E0 63.54%, #3573d0 100%);
     background: var(--blue30);
     color: var(--blanco30);
     text-align: center;
-    margin-block-start: 40px;
     font-size: 14px;
+    margin-top: auto;
 }
 
 footer a {
