@@ -15,7 +15,7 @@ public class ContactService {
     @Autowired
     private EmailSend emailSend;
 
-    private final String emailUs= "brunoredzio@hotmail.com";
+    private final String emailUs= "teamhuellapp@gmail.com";
     private final String subject= "Contacto: nuevo mensaje";
 
     @Transactional
