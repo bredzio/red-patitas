@@ -1,7 +1,6 @@
 package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.model.Contact;
-import com.egg.patitas.red.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
