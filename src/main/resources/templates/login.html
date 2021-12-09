@@ -1,148 +1,119 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Libreria Spring Boot" name="description" />
-    <meta content="Wanda Rocha" name="author" />
-    <title>HuellApp</title>
-    <!-- CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
-    <!-- CSS FUNCIONANDO -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link rel="stylesheet" th:href="@{/css/main-style.css}" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Libreria Spring Boot" name="description" />
+        <meta content="Wanda Rocha" name="author" />
+        <title>HuellApp</title>
+        <!-- CSS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
+        <!-- CSS FUNCIONANDO -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        <link rel="stylesheet" th:href="@{/css/main-style.css}" />
+    </head>
 
-<body>
-    <nav th:replace="fragmentos :: navbarIndex"></nav>
+    <body>
+        <nav th:replace="fragmentos :: navbarIndex"></nav>
 
-    <img class="elipse1" th:src="@{/img/elipse1.svg}" alt="fondo de elipse">
-    <!-- <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse"> -->
+        <!-- <img class="elipse1" th:src="@{/img/elipse1.svg}" alt="fondo de elipse"> -->
+        <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse">
 
-    <div class="main">
-        <div class="wrapper">
-            <div class="main-content">
-                <div th:if="${error}" class="container mt-4 text-center">
-                    <div class="row col-md-4 mx-auto">
-                        <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+        <div class="main">
+            <div class="wrapper">
+                <div class="main-content">
+                    <div th:if="${error}" class="container mt-4 text-center">
+                        <div class="row col-md-4 mx-auto">
+                            <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div th:if="${logout}" class="container mt-4 text-center">
-                    <div class="row col-md-4 mx-auto">
-                        <div th:text="${logout}" class="alert alert-success m-0 shadow"></div>
+                    <div th:if="${logout}" class="container mt-4 text-center">
+                        <div class="row col-md-4 mx-auto">
+                            <div th:text="${logout}" class="alert alert-success m-0 shadow"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div th:if="${exito}" class="container mt-4 text-center">
-                    <div class="row col-md-4 mx-auto">
-                        <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+                    <div th:if="${exito}" class="container mt-4 text-center">
+                        <div class="row col-md-4 mx-auto">
+                            <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="container p-4">
-                    <div class="row">
-                        <div class="col-md-4 mx-auto px-0">
-                            <div class="card text-center shadow">
-                                <div class="card-header">
-                                    <h3>Iniciar Sesion</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form id="formulario" class="needs-validation mb-4" th:action="@{/logincheck}" method="POST" autocomplete="off" novalidate>
+                    <div class="container-login p-4">
+                        <div class="row">
+                            <div class="col-md-4 mx-auto px-0">
+                                <div class="card text-center shadow">
 
-                                        <div class="form-group mb-3">
-                                            <input type="email" id="email" name="email" placeholder="Correo" class="form-control" required>
-                                            <div class="invalid-feedback text-start">El correo es obligatorio</div>
-                                        </div>
+                                    <div class="card-header">
+                                        <div class="line-header"></div>
+                                        <h4>Iniciar Sesión</h4>
+                                    </div>
 
-                                        <div class="form-group mb-3">
-                                            <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control" required>
-                                            <div class="invalid-feedback text-start">La contraseña es obligatoria</div>
-                                        </div>
+                                    <div class="card-body">
+                                        <form id="formulario" class="needs-validation mb-4" th:action="@{/logincheck}" method="POST"
+                                            autocomplete="off" novalidate>
+                                            <div class="form-floating mb-3">
+                                                <input type="email" id="email" name="email" placeholder="Correo" class="form-control"
+                                                    required>
+                                                <label for="floatingInput">Correo Electrónico</label>
+                                                <div class="invalid-feedback text-start">El correo es obligatorio</div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="password" id="password" name="password" placeholder="Contraseña"
+                                                    class="form-control" required>
+                                                <label for="floatingPassword">Contraseña</label>
+                                                <div class="invalid-feedback text-start">La contraseña es obligatoria</div>
+                                            </div>
+                                            <div class="form-group d-grid gap-2">
+                                                <button class="btn-login btn-success" type="submit">Ingresar</button>
+                                            </div>
+                                        </form>
+                                    </div>
 
-                                        <div class="form-group d-grid gap-2">
-                                            <button class="btn btn-success" type="submit">Ingresar</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> 
-
-                <!-- <div class="container-login p-4">
-                    <div class="row">
-                        <div class="col-md-4 mx-auto px-0">
-                            <div class="card text-center shadow">
-                                <div class="card-header">
-                                    <div class="line-header"></div>
-                                    <h4>Iniciar Sesion</h4>
-                                </div>
-
-                                <div class="card-body">
-                                    <form id="formulario" class="needs-validation mb-4" th:action="@{/logincheck}" method="POST"
-                                        autocomplete="off" novalidate>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                                            <label for="floatingInput">Correo Electrónico</label>
-                                            <div class="invalid-feedback text-start">El correo es obligatorio</div>
-                                        </div>
-                                        <div class="form-floating">
-                                            <input type="password" class="form-control" id="password" placeholder="Password">
-                                            <label for="floatingPassword">Contraseña</label>
-                                            <div class="invalid-feedback text-start">La contraseña es obligatoria</div>
-                                        </div>
-                                
-
-                                        <div class="form-group d-grid gap-2">
-                                            <button class="btn btn-success" type="submit">Ingresar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
                 </div>
             </div>
-            <footer th:replace="fragmentos :: footer"></footer>
-    </div>
+        </div>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
-        (() => {
-            "use strict";
+        <!-- JavaScript -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+        <script>
+            (() => {
+                "use strict";
 
-            const form = document.getElementById("formulario");
-            form.addEventListener("submit", (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+                const form = document.getElementById("formulario");
+                form.addEventListener("submit", (event) => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
 
-                form.classList.add("was-validated");
-            }, false);
-        })()
-    </script>
+                    form.classList.add("was-validated");
+                }, false);
+            })()
+        </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-        crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
+    </body>
+    <footer th:replace="fragmentos :: footer"></footer>
 </html>
