@@ -158,8 +158,14 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
 
+    @Transactional
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
     private String buildEmail(String name, String link) {

@@ -8,10 +8,7 @@ import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,7 +37,7 @@ public class PetController {
         ModelAndView mav = new ModelAndView("pets");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            //mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("title", "Mascotas");
@@ -49,7 +46,7 @@ public class PetController {
     }
 
     @GetMapping("/create")
-    public ModelAndView createPet(HttpServletRequest request) {
+    public ModelAndView createPet(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("pet-form");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
@@ -59,8 +56,8 @@ public class PetController {
 
         mav.addObject("pet", new Pet());
         mav.addObject("animals",animalService.findAll());
-//        mav.addObject("users", userService.findById());
-//        mav.addObject("users",userService.findAll());
+        String email=(String) session.getAttribute("email");
+        mav.addObject("users", userService.findByEmail(email));
         mav.addObject("title", "Crear Mascota");
         mav.addObject("action", "save");
         return mav;
@@ -77,10 +74,30 @@ public class PetController {
         return new RedirectView("/pets");
     }
 
-//    @GetMapping("/{id}")
-//    public ModelAndView viewPet() throws Exception {
-//        ModelAndView mav = new ModelAndView("detailpet");
-//        mav.addObject("pets",petService.listPet());
-//        return mav;
-//    }
+    @PostMapping("/delete/{id}")
+    public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes)  {
+        RedirectView redirectView = new RedirectView("/pets");
+        try {
+            petService.deletePet(id);
+            attributes.addFlashAttribute("success","Se borro el animal");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+
+        }
+
+        return redirectView;
+    }
+
+    @PostMapping("/enabled/{id}")
+    public RedirectView enabledPet(@PathVariable Integer id , RedirectAttributes attributes)  {
+        RedirectView redirectView = new RedirectView("/pets");
+        try {
+            petService.enabledPet(id);
+            attributes.addFlashAttribute("success","Se habilto el animal");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+        return redirectView;
+    }
 }
