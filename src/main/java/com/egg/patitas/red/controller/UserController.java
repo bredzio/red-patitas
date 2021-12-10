@@ -25,7 +25,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private  UserService userService;
 
     @GetMapping
     public ModelAndView showAll(){
