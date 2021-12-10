@@ -64,7 +64,6 @@ public class AnimalController {
     }
 
     @PostMapping("/delete/{id}")
-
     public RedirectView deleteAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/animals");
         try {
@@ -80,7 +79,6 @@ public class AnimalController {
     }
 
     @PostMapping("/enabled/{id}")
-
     public RedirectView enabledAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/animals");
         try {

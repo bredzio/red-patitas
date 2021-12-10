@@ -89,7 +89,6 @@ public class PetService {
 
     }
 
-
     @Transactional
     public void deletePet(Integer id) throws Exception{
         if(id==null){
@@ -106,6 +105,21 @@ public class PetService {
             petRepository.save(pet);
         }else{
             throw new Exception("No se encontró la pet solicitada");
+        }
+    }
+
+    @Transactional
+    public void enabledPet(Integer id) throws Exception{
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        Optional<Pet> answer = petRepository.findById(id);
+        if(answer.isPresent()){
+            Pet pet = answer.get();
+            pet.setEnabled(true);
+            petRepository.save(pet);
+        }else{
+            throw new Exception("No se encontró el pet solicitado");
         }
     }
 
@@ -134,8 +148,9 @@ public class PetService {
         }
     }
 
+
     @Transactional
-    public List<Pet> finByUserId(Integer id){
-        return petRepository.findByUser_Id(id);
+    public List<Pet> findByUserEmail(String email) {
+        return petRepository.findByUser_Email(email);
     }
 }

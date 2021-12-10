@@ -22,6 +22,12 @@
         </div>
     </div>
 
+    <div th:if="${success}" class="container mt-4 text-center">
+        <div class="row col-md-4 mx-auto">
+            <div th:text="${success}" class="alert alert-success m-0 shadow"></div>
+        </div>
+    </div>
+
     <div class="container mt-4 main">
         <h1>Listado de Post</h1>
         <hr class="mb-4"/>
