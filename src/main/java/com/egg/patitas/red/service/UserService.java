@@ -22,9 +22,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -168,6 +170,24 @@ public class UserService implements UserDetailsService {
     @Transactional
     public User findByEmail(String email){
         return userRepository.findByEmail(email);
+    }
+
+    @Transactional
+    public Optional<User> findById(Integer id){return userRepository.findById(id);}
+
+    @Transactional
+    public void edit(Integer id, String name, String lastname, String email, String password) {
+        userRepository.modificar(id,name,lastname,email,bCryptPasswordEncoder.encode(password));
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void enabled(Integer id) {
+        userRepository.enabled(id);
     }
 
     private String buildEmail(String name, String link) {
