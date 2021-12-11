@@ -32,6 +32,9 @@ public class PetController {
     @Autowired
     AnimalService animalService;
 
+    @Autowired
+    UserService userService;
+
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request) {
@@ -104,23 +107,23 @@ public class PetController {
 
 
     @PostMapping("/edit/save")
-    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name ,@RequestParam Animal animal ,@RequestParam(required = false) MultipartFile photo, RedirectAttributes attributes){
-        try{
-                if(photo.isEmpty() || photo==null){
-                    petService.editPet(id,name,animal);
-                }else{
-                    petService.editPet(id,name,photo, animal);
-                }
+    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name ,@RequestParam Animal animal ,@RequestParam(required = false) MultipartFile photo, RedirectAttributes attributes) {
+        try {
+            if (photo.isEmpty() || photo == null) {
+                petService.editPet(id, name, animal);
+            } else {
+                petService.editPet(id, name, photo, animal);
+            }
 
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/pet-edit");
         }
 
         return new RedirectView("/pets");
-
+    }
     @PostMapping("/delete/{id}")
     public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/pets");
