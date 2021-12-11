@@ -48,7 +48,7 @@
             <tr th:each="pet : ${pets}">
 
                 <td class="col-md-6 px-md-4" th:text="${pet.name}"></td>
-                <td><a class="btn btn-warning btn-sm me-2" th:href="@{/pets/edit/__${pet.id}__}">Editar</a></td>
+
 
                 <td class="col-md-3 px-md-2" th:text="${pet.name}"></td>
                 <td class="col-md-3 px-md-2" th:text="${pet.animal.name}"></td>
