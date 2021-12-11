@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
+import org.springframework.web.bind.annotation.Mapping;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -32,12 +34,14 @@ public class Zone {
     @NotEmpty
     private String province;
 
-    @OneToMany(mappedBy="zone")
-    private List<Post> posts;
-
     @NotNull
     private Integer zipCode;
 
+
     private Boolean enabled;
+
+    @Transient
+    // esto no se guarda en la base de datos
+    private Integer numberOfPosts;
 
 }
