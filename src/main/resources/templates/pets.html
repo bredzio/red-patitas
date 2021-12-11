@@ -46,6 +46,10 @@
             </thead>
             <tbody>
             <tr th:each="pet : ${pets}">
+
+                <td class="col-md-6 px-md-4" th:text="${pet.name}"></td>
+
+
                 <td class="col-md-3 px-md-2" th:text="${pet.name}"></td>
                 <td class="col-md-3 px-md-2" th:text="${pet.animal.name}"></td>
 <!--                me olvide de poner .name y en consola me tiraba null-->
@@ -61,11 +65,13 @@
                         </form>
                     </div>
                 </td>
+
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <footer th:replace="fragmentos :: footer"></footer>
 

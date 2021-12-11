@@ -1,5 +1,6 @@
 package com.egg.patitas.red.controller;
 
+import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -55,9 +59,15 @@ public class ZoneController {
             Zone zone = zoneService.findById(id);
             mav.addObject("zone", zone);
             mav.addObject("title", "Detalles Zona");
-            mav.addObject("postByZoneId", zoneService.findPostsByIdZone(id));
+
+            List<Post> postsLost = zoneService.findLostPostsByIdZone(id);
+            mav.addObject("postsLostByZoneId", postsLost);
+
+            List<Post> postsFound = zoneService.findFoundPostByIdZone(id);
+            mav.addObject("postsFoundByZoneId", postsFound);
+
         } catch (Exception e) {
-            mav.addObject("error-get-zone", e.getMessage());
+            mav.addObject("ezone", e.getMessage());
         }
 
         return mav;
@@ -79,4 +89,17 @@ public class ZoneController {
 
         return redirectView;
     }
+
+    @PostMapping("/disable/{id}")
+    public RedirectView disable(@PathVariable Integer id){
+        zoneService.disable(id);
+        return new RedirectView("/zones");
+    }
+
+    @PostMapping("/enable/{id}")
+    public RedirectView enable(@PathVariable Integer id){
+        zoneService.enable(id);
+        return new RedirectView("/zones");
+    }
+
 }
