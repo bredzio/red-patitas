@@ -47,6 +47,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private TokenConfirmationService tokenConfirmationService;
 
+    private final String subject= "Confirme su email";
+
 
     @Transactional
     public void createUser(User dto) throws EmailExistException {
@@ -90,7 +92,7 @@ public class UserService implements UserDetailsService {
         String token = buildToken(user);
 
         String link = "http://localhost:8080/auth/register/confirm?token=" + token;
-        emailSend.send((dto.getEmail()), buildEmail(dto.getName(),link));
+        emailSend.send((dto.getEmail()), buildEmail(dto.getName(),link), subject);
         return user;
     }
 
@@ -158,8 +160,14 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(authority));
     }
 
+    @Transactional
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
     private String buildEmail(String name, String link) {

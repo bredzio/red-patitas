@@ -64,11 +64,11 @@ public class PetService {
         }
 
         if(photo==null || photo.isEmpty()){
-            throw new Exception("Tiene que subir una foto");
+            throw new Exception("Debe ingresar una foto de su mascota");
         }
 
         if(animal==null){
-            throw new Exception("Tiene que seleccionar un animal");
+            throw new Exception("Debe seleccionar un animal");
         }
 
         Optional<Pet> answer = petRepository.findById(id);
@@ -88,6 +88,7 @@ public class PetService {
 
 
     }
+
 
     @Transactional
     public void editPet(Integer id, String name,Animal animal) throws Exception{
@@ -123,6 +124,7 @@ public class PetService {
     }
 
 
+
     @Transactional
     public void deletePet(Integer id) throws Exception{
         if(id==null){
@@ -139,6 +141,21 @@ public class PetService {
             petRepository.save(pet);
         }else{
             throw new Exception("No se encontró la pet solicitada");
+        }
+    }
+
+    @Transactional
+    public void enabledPet(Integer id) throws Exception{
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        Optional<Pet> answer = petRepository.findById(id);
+        if(answer.isPresent()){
+            Pet pet = answer.get();
+            pet.setEnabled(true);
+            petRepository.save(pet);
+        }else{
+            throw new Exception("No se encontró el pet solicitado");
         }
     }
 
@@ -167,6 +184,7 @@ public class PetService {
         }
     }
 
+
    /* @Transactional
     public List<Pet> finByUserId(Integer id){
         return petRepository.findByUser_Id(id);
@@ -176,6 +194,12 @@ public class PetService {
     public Pet findById(Integer id){
        return petRepository.findById(id).orElse(null);
 
+
+
+
+    @Transactional
+    public List<Pet> findByUserEmail(String email) {
+        return petRepository.findByUser_Email(email);
 
     }
 }

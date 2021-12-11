@@ -59,6 +59,23 @@ public class AnimalService {
             }
         }
 
+    @Transactional
+    public void enabledAnimal(Integer id) throws Exception{
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        Optional<Animal> answer = animalRepository.findById(id);
+        if(answer.isPresent()){
+            Animal animal = answer.get();
+            animal.setEnabled(true);
+            animalRepository.save(animal);
+        }else{
+            throw new Exception("No se encontró el animal solicitado");
+        }
+    }
+
+
+
         @Transactional
         public List<Animal> listAnimal() throws Exception{
             List<Animal> animals = new ArrayList<>();
@@ -78,6 +95,9 @@ public class AnimalService {
                 return animalsEnabled;
             }
         }
+
+        
+
 
         public void isValidUsername(String name) throws Exception {
             if (name == null || name.trim().isEmpty()) {

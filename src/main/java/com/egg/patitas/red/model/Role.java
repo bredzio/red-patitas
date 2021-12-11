@@ -1,7 +1,5 @@
 package com.egg.patitas.red.model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -12,7 +10,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "role", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @SQLDelete(sql = "UPDATE Role SET enabled = false WHERE id = ?")
 public class Role {
     @Id

@@ -21,6 +21,7 @@
             <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
         </div>
     </div>
+
     <div class="container mt-5 main" style="margin-bottom: 60px;">
         <h2 th:text="${title}"></h2>
         <hr class="mb-5 col-xl-12" />
@@ -37,24 +38,24 @@
                 <label for="zone">Zone</label>
             </div>
 
-            <div class="form-floating mb-3 col-xl-6" >
+            <div class="form-floating mb-3 col-xl-6">
                 <select aria-label="Elegir User" class="form-select" id="user" th:field="*{user}">
-    <!--                <option selected value="">Elegir user</option>-->
-                <option th:text="|${session.name}|"
-                        th:value="${session.id}">
-                </option>
+<!--                    <option selected value="">Elegir user</option>-->
+                    <option th:each="user : ${users}" th:text="|${user.name}|"
+                            th:value="${user.id}">
+                    </option>
                 </select>
                 <label for="user">User</label>
             </div>
 
             <div class="form-floating mb-3 col-xl-6">
                 <select aria-label="Elegir Zona" class="form-select" id="pet" th:field="*{pet}">
-                    <option selected value="">Elegir Animal</option>
+                    <option selected value="">Elegir Mascota</option>
                     <option th:each="pet : ${pets}" th:text="|${pet.name}|"
                             th:value="${pet.id}">
                     </option>
                 </select>
-                <label for="pet">Zone</label>
+                <label for="pet">Mascota</label>
             </div>
 
             <div class="mb-3 col-xl-6">
