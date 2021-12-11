@@ -6,6 +6,7 @@ import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.repository.PetRepository;
 import com.egg.patitas.red.service.AnimalService;
 import com.egg.patitas.red.service.PetService;
+import com.egg.patitas.red.service.PhotoService;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,6 @@ public class PetController {
     @Autowired
     AnimalService animalService;
 
-    @Autowired
-    PetRepository petRepository;
-
-    @Autowired
-    UserService userService;
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request) {
@@ -86,33 +82,35 @@ public class PetController {
 //        return mav;
 //    }
 
-    @PostMapping("/edit/{id}")
-    public RedirectView editPet(HttpServletRequest request, @PathVariable Integer id, RedirectAttributes attributes){
-
-        Optional<Pet> answer = petRepository.findById(id);
 
 
-        if(answer.isPresent()){
-            Pet pet = answer.get();
+    @GetMapping("/edit/{id}")
+    public ModelAndView editPet(@PathVariable Integer id){
 
-            attributes.addFlashAttribute("pet", pet );
-            attributes.addFlashAttribute("title", "Editar Mascota");
-            attributes.addFlashAttribute("animals",animalService.findAll());;
+        ModelAndView mav = new ModelAndView("pet-edit");
 
-            return  new RedirectView("/pets/pet-edit");
-        }else{
-            attributes.addFlashAttribute("error", "No se encontró un pet con ese ID");
-            return new RedirectView("/pets");
+        try{
+            mav.addObject("pet", petService.findById(id));
+            mav.addObject("title", "Editar Mascota");
+            mav.addObject("animals",animalService.findAll());;
+            mav.addObject("action", "edit/save");
+            return  mav;
+        }catch(Exception e){
+            mav.addObject("error", e.getMessage());
+            return  mav;
         }
-
-
-    }
+ }
 
 
     @PostMapping("/edit/save")
-    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name, @RequestParam MultipartFile photo, @RequestParam Animal animal, @RequestParam User user ,RedirectAttributes attributes){
+    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name ,@RequestParam Animal animal ,@RequestParam(required = false) MultipartFile photo, RedirectAttributes attributes){
         try{
-                petService.editPet(id,name,photo,animal,user);
+                if(photo.isEmpty() || photo==null){
+                    petService.editPet(id,name,animal);
+                }else{
+                    petService.editPet(id,name,photo, animal);
+                }
+
 
         }catch(Exception e){
 

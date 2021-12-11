@@ -29,19 +29,25 @@
           th:action="@{/pets/__${action}__}" th:object="${pet}" enctype="multipart/form-data">
         <input th:field="*{id}" type="hidden" />
         <div class="form-floating mb-3 col-xl-6">
-            <input class="form-control" id="nombre" placeholder="Nombre" required th:field="*{name}"  type="text"/>
+            <input class="form-control" id="nombre" placeholder="Nombre" required th:field="*{name}" type="text"/>
             <label for="nombre">nombre</label>
             <div class="invalid-feedback">El nombre es obligatorio</div>
         </div>
 
         <div class="mb-3 col-xl-6">
             <label>Cargar foto</label>
-            <input class="form-control mt-2" type="file" name="photo"   accept="image/*">
+            <input  class="form-control mt-2" type="file" th:value="${pet.photo}" name="photo" accept="image/*">
+        </div>
+
+        <div class="card-body text-center my-2">
+            <img class="rounded-circle"
+                 th:src="${pet.photo != null} ? @{https://huellapp.s3.us-east-2.amazonaws.com/}+${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                 width="165">
         </div>
 
         <div class="form-floating mb-3 col-xl-6">
-            <select aria-label="Elegir Animal" class="form-select" id="animal" th:field="*{animal}">
-                <option selected value="">Elegir Especie</option>
+            <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}">
+                <option selected value="" th:text="${pet.animal.name}"></option>
                 <option th:each="animal : ${animals}" th:text="|${animal.name}|"
                         th:value="${animal.id}">
                 </option>
@@ -49,20 +55,11 @@
             <label for="animal">Especie</label>
         </div>
 
-        <div class="form-floating mb-3 col-xl-6">
-            <select aria-label="Elegir User" class="form-select" id="user" th:field="*{user}">
-                <!--                <option selected value="">Elegir user</option>-->
-                <option th:text="|${session.name}|"
-                        th:value="${session.id}">
-                </option>
-            </select>
-            <label for="user">User</label>
-        </div>
 
 
         <div class="row">
             <div class="col-xl-3">
-                <button class="btn btn-success" th:text="${action == 'edit/{pet.id}'} ? 'Crear zona' : 'Guardar cambios'"
+                <button class="btn btn-success" th:text="${action == 'save'} ? 'Crear zona' : 'Guardar cambios'"
                         type="submit"></button>
             </div>
         </div>

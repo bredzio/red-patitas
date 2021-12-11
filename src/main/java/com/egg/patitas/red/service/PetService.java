@@ -24,6 +24,9 @@ public class PetService {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private StorageService storageService;
+
     @Transactional
     public void createPet(String name, MultipartFile photo, Animal animal, User user) throws Exception{
 
@@ -50,7 +53,7 @@ public class PetService {
     }
 
     @Transactional
-    public void editPet(Integer id, String name, MultipartFile photo, Animal animal, User user) throws Exception{
+    public void editPet(Integer id, String name, MultipartFile photo,Animal animal) throws Exception{
 
         if(id==null){
             throw new Exception("El id no puede ser nulo");
@@ -75,7 +78,41 @@ public class PetService {
             pet.setAnimal(animal);
             pet.setEnabled(true);
             pet.setName(name);
-            pet.setPhoto(photoService.copy(photo));
+            //pet.setPhoto(photoService.copy(photo));
+            pet.setPhoto(storageService.uploadFile(photo));
+            petRepository.save(pet);
+
+        }else{
+            throw new Exception("No se encontró la pet solicitada");
+        }
+
+
+    }
+
+    @Transactional
+    public void editPet(Integer id, String name,Animal animal) throws Exception{
+
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+
+        if(name==null || name.isEmpty()){
+            throw new Exception("El nombre no puede ser nulo");
+        }
+
+
+        if(animal==null){
+            throw new Exception("Tiene que seleccionar un animal");
+        }
+
+        Optional<Pet> answer = petRepository.findById(id);
+
+        if(answer.isPresent()){
+            Pet pet = answer.get();
+            pet.setAnimal(animal);
+            pet.setEnabled(true);
+            pet.setName(name);
+            //pet.setPhoto(photoService.copy(photo));
             petRepository.save(pet);
 
         }else{
@@ -130,8 +167,15 @@ public class PetService {
         }
     }
 
-    @Transactional
+   /* @Transactional
     public List<Pet> finByUserId(Integer id){
         return petRepository.findByUser_Id(id);
+    }*/
+
+    @Transactional
+    public Pet findById(Integer id){
+       return petRepository.findById(id).orElse(null);
+
+
     }
 }

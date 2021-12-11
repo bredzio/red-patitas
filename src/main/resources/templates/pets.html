@@ -39,11 +39,13 @@
             <tbody>
             <tr th:each="pet : ${pets}">
                 <td class="col-md-6 px-md-4" th:text="${pet.name}"></td>
+                <td><a class="btn btn-warning btn-sm me-2" th:href="@{/pets/edit/__${pet.id}__}">Editar</a></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <footer th:replace="fragmentos :: footer"></footer>
 
