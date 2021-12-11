@@ -6,7 +6,6 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.AllArgsConstructor;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -18,7 +17,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class ContactTemplateService {
     private final Configuration config;
-    private final MessageSource messageSource;
+    private final String SUBJECT="Ha recibido un nuevo mensaje";
 
     public String setTemplate(Contact contact) throws EmailExistException {
         Map<String, Object> model = new HashMap<>();
@@ -41,6 +40,6 @@ public class ContactTemplateService {
     }
 
     public String getSubject(){
-        return "Ha recibido un nuevo mensaje";
+        return SUBJECT;
     }
 }

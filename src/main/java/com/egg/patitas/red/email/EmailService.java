@@ -19,6 +19,7 @@ public class EmailService implements EmailSend{
     private final JavaMailSender mailSender;
     private final WelcomeTemplateService welcomeTemplateService;
     private final ContactTemplateService contactTemplateService;
+    private final String ORGANIZATION_EMAIL= "teamhuellapp@gmail.com";
 
     @Override
     @Async
@@ -28,7 +29,7 @@ public class EmailService implements EmailSend{
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setFrom("huellaAPP@huellapp.com");
+            helper.setFrom(ORGANIZATION_EMAIL);
             mailSender.send(mimeMessage);
 
     }
@@ -43,10 +44,10 @@ public class EmailService implements EmailSend{
 
     @Override
     @Async
-    public void sendContactEmail(String to, Contact contact) throws EmailExistException, MessagingException {
+    public void sendContactEmail(Contact contact) throws EmailExistException, MessagingException {
         String subject = contactTemplateService.getSubject();
         String template = contactTemplateService.setTemplate(contact);
-        send(to, template, subject);
+        send(ORGANIZATION_EMAIL, template, subject);
     }
 }
 

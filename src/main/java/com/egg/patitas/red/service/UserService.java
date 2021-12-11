@@ -38,17 +38,13 @@ public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EmailSend emailSend;
     private final TokenConfirmationService tokenConfirmationService;
-    private final String subject= "Confirme su email";
+    private final String CONFIRM="http://localhost:8080/auth/register/confirm?token=";
 
 
     @Transactional
     public void createUser(User dto) throws EmailExistException, MessagingException {
-        if (userRepository.findByEmail(dto.getEmail()) != null) {
-            throw new EmailExistException(dto.getEmail());
-        }
-
+        if (userRepository.findByEmail(dto.getEmail()) != null) throw new EmailExistException(dto.getEmail());
         userRepository.save(buildUser(dto));
-
     }
 
     @Transactional
@@ -80,9 +76,8 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
 
-        String token = buildToken(user);
+        String link = CONFIRM + buildToken(user);
 
-        String link = "http://localhost:8080/auth/register/confirm?token=" + token;
         emailSend.sendWelcomeEmail(user.getEmail(),user.getName(),user.getLastname(), link);
         return user;
     }
@@ -91,15 +86,11 @@ public class UserService implements UserDetailsService {
     public String confirmToken(String token) {
         TokenConfirmation tokenConfirmation = tokenConfirmationService.getToken(token).orElseThrow(() -> new IllegalStateException("Token no encontrado"));
 
-        if (tokenConfirmation.getConfirmedAt() != null) {
-            throw new IllegalStateException("Email confirmado");
-        }
+        if (tokenConfirmation.getConfirmedAt() != null) throw new IllegalStateException("Email confirmado");
 
         LocalDateTime expiredAt = tokenConfirmation.getExpiresAt();
 
-        if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("Expiró token");
-        }
+        if (expiredAt.isBefore(LocalDateTime.now())) throw new IllegalStateException("Expiró token");
 
         tokenConfirmationService.setConfirmedAt(token);
         enableAppUser(tokenConfirmation.getUser().getEmail());
@@ -128,13 +119,9 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
 
-        if (email == null) {
-            throw new UsernameNotFoundException("Usuario no encontrado");
-        }
+        if (email == null) throw new UsernameNotFoundException("Usuario no encontrado");
 
-        if (!user.getEnabled()) {
-            throw new UsernameNotFoundException("Usuario dado de baja");
-        }
+        if (!user.getEnabled()) throw new UsernameNotFoundException("Usuario dado de baja");
 
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER" + user.getRole().getName());
 

@@ -15,7 +15,6 @@ import javax.mail.MessagingException;
 public class ContactService {
     private final ContactRepository contactRepository;
     private final EmailSend emailSend;
-    private final String emailUs= "teamhuellapp@gmail.com";
 
     @Transactional
     public void createContact(Contact dto) throws MessagingException, EmailExistException {
@@ -30,7 +29,7 @@ public class ContactService {
         contact.setEmail(dto.getEmail());
         contact.setMessage(dto.getMessage());
 
-        emailSend.sendContactEmail(emailUs,contact);
+        emailSend.sendContactEmail(contact);
 
         return contact;
     }

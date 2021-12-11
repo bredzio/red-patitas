@@ -4,8 +4,7 @@ import com.egg.patitas.red.exception.EmailExistException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -14,12 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class WelcomeTemplateService {
-    @Autowired
-    private Configuration config;
-
-    @Autowired
-    private MessageSource messageSource;
+    private final Configuration config;
+    private final String SUBJECT="Por favor, confirme su cuenta";
 
     public String setTemplate(String name, String surname, String link) throws EmailExistException {
         Map<String, Object> model = new HashMap<>();
@@ -42,7 +39,6 @@ public class WelcomeTemplateService {
     }
 
     public String getSubject(){
-
-        return "Por favor confirme su cuenta";
+        return SUBJECT;
     }
 }
