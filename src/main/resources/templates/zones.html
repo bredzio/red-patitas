@@ -37,6 +37,7 @@
                 <th class="col-md-4 px-md-2" scope="col">Provincia</th>
                 <th class="col-md-4 px-md-2" scope="col">Zip Code</th>
                 <th class="col-md-4 px-md-2" scope="col">Cantidad de posteos</th>
+                <th class="col-md-4 px-md-2" scope="col">Habilitacion</th>
                 <th class="col-md-4 px-md-2" scope="col">Opciones</th>
             </tr>
             </thead>
@@ -45,7 +46,24 @@
                 <td class="col-md-4 px-md-2" th:text="${zone.city}"></td>
                 <td class="col-md-4 px-md-2" th:text="${zone.province}"></td>
                 <td class="col-md-4 px-md-2" th:text="${zone.zipCode}"></td>
-                <td class="col-md-4 px-md-2">Hacer</td>
+                <td class="col-md-4 px-md-2" th:text="${zone.numberOfPosts}"></td>
+
+                <td class="text-center" th:switch="${zone.enabled}">
+                    <span th:case="true">
+                            <form method="post" th:action="@{/zones/disable/__${zone.id}__}">
+                                <button class="btn btn-info" type="submit"> Baja
+                                </button>
+                            </form>
+                        </span>
+
+                    <span th:case="false">
+                            <form method="post" th:action="@{/zones/enable/__${zone.id}__}">
+                                <button class="btn btn-secondary" type="submit"> Alta
+                                </button>
+                            </form>
+                        </span>
+                </td>
+
                 <td><a th:href="@{/zones/__${zone.id}__}">Ver</a></td>
             </tr>
             </tbody>
