@@ -121,7 +121,7 @@ public class UserService implements UserDetailsService {
 
         if (email == null) throw new UsernameNotFoundException("Usuario no encontrado");
 
-        if (!user.getEnabled()) throw new UsernameNotFoundException("Usuario dado de baja");
+        if (!user.getEnabled()) throw new UsernameNotFoundException("Usuario inhabilitado");
 
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER" + user.getRole().getName());
 

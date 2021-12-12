@@ -29,26 +29,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth/signup","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda","/createContact").permitAll()
+                .antMatchers("/auth/signup","/auth/login/**","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda","/createContact").permitAll()
                 .antMatchers("/**").authenticated()//.permitAll() //.authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/auth/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/home",true)
-                .failureUrl("/auth/login?error=true")
-                .failureUrl("/auth/login?success=true")
-                .permitAll()
+                    .loginPage("/auth/login")
+                    .loginProcessingUrl("/logincheck")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/home",true)
+                    .failureUrl("/auth/login?error=true")
+
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
-                .deleteCookies("JSSESIONID")
+                    .logout()
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                        .deleteCookies("JSSESIONID")
                 .and()
-                .csrf()
-                .disable();
+                    .csrf()
+                    .disable();
     }
 }
