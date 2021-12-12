@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth/signup","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda","/createContact").permitAll()
+                .antMatchers("/auth/signup","/auth/register/**","/css/**","/assets/*","/img/*","/","/nosotros","/ayuda","/createContact","/selectPost").permitAll()
                 .antMatchers("/**").authenticated()//.permitAll() //.authenticated()
                 .and()
                 .formLogin()
@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/logincheck")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/home",true)
+                .defaultSuccessUrl("/selectPost",true)
                 .failureUrl("/auth/login?error=true")
                 .failureUrl("/auth/login?success=true")
                 .permitAll()
