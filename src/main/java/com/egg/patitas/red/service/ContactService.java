@@ -30,6 +30,7 @@ public class ContactService {
         contact.setMessage(dto.getMessage());
 
         emailSend.sendContactEmail(contact);
+        emailSend.sendThanksContactEmail(contact);
 
         return contact;
     }
