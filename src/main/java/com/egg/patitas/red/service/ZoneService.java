@@ -55,7 +55,7 @@ public class ZoneService {
 
         Zone zone = zoneRepository.findById(id).get();
 
-        zone.setCity(city);
+        zone.setCity(city.toLowerCase());
         zone.setProvince(province);
         zone.setZipCode(zipCod);
 
