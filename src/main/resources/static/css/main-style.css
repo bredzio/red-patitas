@@ -88,6 +88,10 @@ header .logo-huellapp {
 
 /*--------NAVBAR-----------*/
 
+.navbar-nav .navbar-container {
+  display: flex;
+}
+
 .bg-light{
   background-color: transparent !important;
 }
@@ -95,17 +99,19 @@ header .logo-huellapp {
 .nav-item, .nav-item .dropdown{
   padding-block-start: 10px;
   padding-inline-start: 30px;
-  /* background: var(--blanco30); */
 }
 
-.navbar a:hover {
+.navbar-container li:first-child .inicio {
+  padding-inline-start: 0px;
+}
+
+.navbar a:hover, .navbar-nav a:hover {
   color: var(--aquamarine20);
 }
 
-.navbar a{
-  display: flex;
+.navbar-nav a{
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px 0 10px 30px;
   font-size: 14px;
   color: var(--blanco10);
@@ -125,7 +131,8 @@ header .logo-huellapp {
   background: linear-gradient(135deg, #0dc7a5 0%, #3FB6E0 63.54%, #3573d0 100%);
   border-radius: 4px;
   color: var(--blanco30);
-  margin-inline-start: 200px;
+  width: 90px;
+  display: inline-flex;
 }
 
 .navbar-nav .dropdown-ingresar .nav-link:hover {
@@ -134,8 +141,12 @@ header .logo-huellapp {
 
 .dropdown-ingresar .dropdown-menu {
   box-shadow: 0px 0px 40px rgb(127 137 161 / 25%);
-  border: none;
-  margin-inline-start: 200px;
+  border: 0px;
+}
+
+.dropdown .dropdown-menu {
+  border: 0px;
+  box-shadow: 0px 0px 40px rgb(127 137 161 / 25%);
 }
 
 .navbar-nav .active {
@@ -143,8 +154,6 @@ header .logo-huellapp {
 }
 
 /* ----------------MAIN------------------*/
-/* SECCION PRINCIPAL */
-
 .main {
   width: 100%;
 }
@@ -164,24 +173,16 @@ header .logo-huellapp {
   display: none;
 }
 
-.section-description {
+/* -----SECCION PRINCIPAL---- */
+.text-main {
   max-width: 550px;
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
   padding-inline-end: 40px;
 }
 
 h1 {
-  display: block;
   font-size: 60px;
   font-weight: bold;
-  margin-block-end: 0;
   color: var(--black20);
-  margin-block-start: 0;
 }
 
 .description h3 {
@@ -190,8 +191,6 @@ h1 {
 
 h3 {
   margin-block-start: 50px;
-  margin-block-end: 0;
-  font-weight: normal;
   text-align: justify ;
   font-size: 20px;
   line-height : 30px;
@@ -217,11 +216,6 @@ h3 .registrarse {
 
 h3 .registrarse:hover {
   text-decoration: underline;
-}
-
-.main-content .slider {
-  flex: 1;
-  position: relative;
 }
 
 .section-form {
@@ -368,59 +362,33 @@ p .enlaces {
 
 /* -----------SLIDER DE FOTOS----------- */
 
-.slider-container img {
-    object-fit:cover;
-}
-
-.slider-container {
-  display: block;
-  overflow: hidden;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  font-size: 0;
-  border-radius: 10px;
-}
-
-.slider-slide img {
-  margin: 0;
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 8/6;
-}
-
-.slider-bullet-list {
-  text-align: center;
-  margin-block-start: 8px;
-  position: relative;
-}
-
-.slider-bullet {
-  display: inline-block;
-  inline-size: 10px;
-  block-size: 10px;
-  background: var(--blue30);
-  border-radius: 50%;
-}
-
-/* .carousel {
+.carousel {
   display: flex;
   overflow: hidden;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  font-size: 0;
   border-radius: 10px;
 }
+
+.carousel-inner {
+  width: 600px;
+}
+
 .carousel-inner img {
   margin: 0;
   display: inline-block;
+  height: 450px;
+  object-fit:cover;
 }
-.carousel, .carousel-inner > .item > img {
-  height: 500px;
-  width: 400px;
-} */
+
+.carousel-item {
+  transition: transform .5s ease-out;
+}
 
 /* -------------SECCION DE COMENTARIOS------------ */
+
+.section-comment {
+  display: flex;
+  flex-direction: column;
+}
 .section-comment h2{
   font-weight: bold;
   text-align: center;
@@ -434,7 +402,6 @@ p .enlaces {
 
 .container__column {
     background: var(--blanco30);
-    /* background: rgba(185, 255, 237, 0.45); */
     backdrop-filter: blur(40px);
     border-inline-start: 6px solid var(--aquamarine10);
     border-radius: 24px;
@@ -450,8 +417,10 @@ p .enlaces {
 }
 
 .container__content {
-    /* Take available height */
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container__content img {
@@ -603,6 +572,60 @@ p .enlaces {
 .form-group {
   margin-block-start: 30px;
 }
+
+/* ----------BUSCAR: PERDIDOS Y ENCONTRADOS / CREAR: POST Y MASCOTAS---------- */
+.welcome {
+  margin-block-start: 120px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-home {
+  display: flex;
+  justify-content: center;
+}
+
+.container-home .clickable-card {
+  box-shadow: 2px 2px 5px -5px var(--black20);
+  border-radius: 10px;
+}
+
+.container-home .clickable-card:hover {
+  transform:scale(1.05);
+  -ms-transform:scale(1.05);
+  -moz-transform:scale(1.05);
+  -webkit-transform:scale(1.05);
+  -o-transform:scale(1.05);
+  transition: 0.3s;
+  box-shadow: 1px 1px 15px -5px var(--black20);
+}
+
+.col {
+  margin: 0;
+  width: 400px;
+}
+
+.card-home {
+  margin: auto;
+  margin-block: 20px;
+}
+
+.container-home img {
+  width: 40%;
+}
+
+/* -------PARA LOS MENSAJES DE ERRORES------ */
+.alert {
+  padding-block: 4px;
+}
+
+.m-0 {
+  margin-block-start: 20px !important;
+  margin-block-end: 0 !important;
+}
+
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
 footer {
     background: var(--blue30);
