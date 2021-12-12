@@ -3,6 +3,7 @@ package com.egg.patitas.red.email;
 import com.egg.patitas.red.exception.EmailExistException;
 import com.egg.patitas.red.model.Contact;
 import com.egg.patitas.red.service.ContactTemplateService;
+import com.egg.patitas.red.service.ThanksTemplateService;
 import com.egg.patitas.red.service.WelcomeTemplateService;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,7 @@ public class EmailService implements EmailSend{
     private final JavaMailSender mailSender;
     private final WelcomeTemplateService welcomeTemplateService;
     private final ContactTemplateService contactTemplateService;
+    private final ThanksTemplateService thanksTemplateService;
     private final String ORGANIZATION_EMAIL= "teamhuellapp@gmail.com";
 
     @Override
@@ -48,6 +50,14 @@ public class EmailService implements EmailSend{
         String subject = contactTemplateService.getSubject();
         String template = contactTemplateService.setTemplate(contact);
         send(ORGANIZATION_EMAIL, template, subject);
+    }
+
+    @Override
+    @Async
+    public void sendThanksContactEmail(Contact contact) throws EmailExistException, MessagingException {
+        String subject = thanksTemplateService.getSubject();
+        String template = thanksTemplateService.setTemplate(contact);
+        send(contact.getEmail(), template, subject);
     }
 }
 
