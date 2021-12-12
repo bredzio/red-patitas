@@ -1,6 +1,8 @@
 package com.egg.patitas.red.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,7 +15,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @SQLDelete(sql = "UPDATE Post SET enabled = false WHERE id = ?")
 @EntityListeners(AuditingEntityListener.class)
 @Entity

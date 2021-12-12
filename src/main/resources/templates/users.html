@@ -16,6 +16,18 @@
 <body>
 <nav th:replace="fragmentos :: navbar"></nav>
 
+<div th:if="${error}" class="container mt-4 text-center">
+    <div class="row col-md-4 mx-auto">
+        <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+    </div>
+</div>
+
+<div th:if="${success}" class="container mt-4 text-center">
+    <div class="row col-md-4 mx-auto">
+        <div th:text="${success}" class="alert alert-success m-0 shadow"></div>
+    </div>
+</div>
+
 <div class="container mt-5 main">
 
     <h2>Lista de Usuarios</h2>
@@ -23,20 +35,38 @@
     <div th:if="${users.isEmpty()}">
         <h5>Todavía no hay usuarios cargados. <a th:href="@{/users/create}">Cargar usuario.</a></h5>
     </div>
+    
     <div class="table-responsive" th:unless="${users.isEmpty()}">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">
             <tr>
-                <th class="col-md-6 px-md-4" scope="col">Nombre</th>
+                <th class="col-md-1 px-md-2" scope="col">Nombre</th>
+                <th class="col-md-1 px-md-2" scope="col">Apellido</th>
+                <th class="col-md-1 px-md-2" scope="col">Correo electrónico</th>
+                <th class="col-md-2 px-md-2" scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
                 <td class="col-md-6 px-md-4" th:text="${user.name}"></td>
+                <td class="col-md-6 px-md-4" th:text="${user.lastname}"></td>
+                <td class="col-md-6 px-md-4" th:text="${user.email}"></td>
+
+                <td class="col-md-2 px-md-2 d-flex justify-content-around w-100">
+                    <a class="btn btn-secondary btn-sm" th:href="@{/users/edit/__${user.id}__}">Editar</a>
+                    <form th:action="${user.enabled} ? @{/users/delete/__${user.id}__} : @{/users/enabled/__${user.id}__}"
+                    method="POST">
+                        <button th:class="${user.enabled} ? 'btn btn-danger btn-sm' : 'btn btn-primary btn-sm'"
+                                type="submit" th:text="${user.enabled} ? 'Eliminar' : 'Habilitar'">
+                        </button>
+                    </form>   
+                </td>
             </tr>
+            
             </tbody>
         </table>
     </div>
+
 </div>
 
 <footer th:replace="fragmentos :: footer"></footer>

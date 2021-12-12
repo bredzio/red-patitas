@@ -52,8 +52,8 @@
         <div class="form-floating mb-3 col-xl-6">
             <select aria-label="Elegir User" class="form-select" id="user" th:field="*{user}">
 <!--                <option selected value="">Elegir user</option>-->
-                <option th:text="|${session.name}|"
-                        th:value="${session.id}">
+                <option th:each="user : ${users}" th:text="|${user.name}|"
+                        th:value="${user.id}">
                 </option>
             </select>
             <label for="user">User</label>

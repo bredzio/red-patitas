@@ -14,11 +14,11 @@
 <body>
 
 <div class="text-center mt-5">
-    <img th:src="@{/img/error.png}" width="275">
+    <img th:src="@{https://huellapp.s3.us-east-2.amazonaws.com/error.png}" width="800">
     <h2 th:text="${codigo}" class="mt-1"></h2>
     <p th:text="${mensaje}"></p>
     <p th:text="${error}"></p>
-    <a th:href="@{/}" class="btn btn-danger">Home</a>
+    <a th:href="@{/}" class="btn btn-danger">Inicio</a>
 </div>
 
 <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>

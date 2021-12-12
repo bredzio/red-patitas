@@ -15,6 +15,12 @@ public interface ZoneRepository extends JpaRepository<Zone,Integer> {
 
 @Modifying
 @Query("UPDATE Zone z SET z.enabled=true WHERE z.id = :id")
-    void enabled(@Param("id") Integer id);
+    void enable(@Param("id") Integer id);
+
+@Modifying
+    @Query("UPDATE Zone z SET z.enabled=false WHERE z.id=:id")
+    void disable(@Param("id") Integer id);
+
+
 
 }
