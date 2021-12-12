@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 
@@ -31,7 +32,7 @@ public class PostService {
         post.setZone(dto.getZone());
         post.setUser(dto.getUser());
         post.setPet(dto.getPet());
-        post.setDescription(dto.getDescription());
+        post.setDescription(dto.getDescription().toLowerCase());
         post.setEnabled(true); // post habilitado
         post.setLostOrFound(dto.getLostOrFound());
 
@@ -50,7 +51,7 @@ public class PostService {
             post.setZone(dto.getZone());
             post.setUser(dto.getUser());
             post.setPet(dto.getPet());
-            post.setDescription(dto.getDescription());
+            post.setDescription(dto.getDescription().toLowerCase());
             post.setLostOrFound(dto.getLostOrFound());
 
             postRepository.save(post);

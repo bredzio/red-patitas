@@ -71,6 +71,7 @@ public class PetController {
     public RedirectView save(@RequestParam String name, @RequestParam MultipartFile photo, @RequestParam Animal animal, @RequestParam User user, RedirectAttributes attributes){
         try {
             petService.createPet(name, photo,animal, user); //pet.getAnimal()
+            attributes.addFlashAttribute("succes", "La mascota se creó con éxito!");
         }catch(Exception e){
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/create");
@@ -121,7 +122,7 @@ public class PetController {
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/pet-edit");
         }
-
+        attributes.addFlashAttribute("succes", "La mascota se editó con éxito!");
         return new RedirectView("/pets");
     }
     @PostMapping("/delete/{id}")
