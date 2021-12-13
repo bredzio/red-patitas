@@ -41,6 +41,9 @@
     <body>
         <nav th:replace="fragmentos :: navbarIndex"></nav>
 
+        <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse">
+        <img class="elipse4" th:src="@{/img/elipse4.png}" alt="fondo de elipse">
+
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
@@ -49,14 +52,17 @@
                         <h4>¡Hola <span th:text="${name}"></span>! Antes de continuar,</h4>
                         <h5>¿En que te podemos ayudar?</h5>
                     </section>
+
                     <div class="container-home mt-5 main">
                         <div class="row my-auto g-4 justify-content-evenly">
                             <div class="col">
-                                <div class="card text-center clickable-card">
-                                    <a class="link-dark" style="text-decoration: none;" th:href="@{/posts}">
+                                 <div class="card text-center clickable-card">
+
+                                    <a class="link-dark" style="text-decoration: none;" th:href="@{/posts/lostposts}">
+
                                         <div class="col-md-4 index-perdidas"></div>
-                                        <div class="card-body border-danger">
-                                            <img src="./img/perdidos.png" alt="mascotas-perdidas">
+                                        <div class="card-home">
+                                            <img th:src="@{/img/perdidos.png}" alt="Mascotas perdidas">
                                             <h4 class="card-title">Perdidos</h4>
                                             <p class="card-text">Listado de mascotas perdidas</p>
                                         </div>
@@ -67,10 +73,10 @@
 
                             <div class="col">
                                 <div class="card text-center clickable-card">
-                                    <a class="link-dark" style="text-decoration: none;" th:href="@{/posts}">
+                                    <a class="link-dark" style="text-decoration: none;" th:href="@{/posts/foundposts}">
                                         <div class="col-md-4 index-encontradas"></div>
-                                        <div class="card-body">
-                                            <img src="./img/encontrados.png" alt="mascotas-encontradas">
+                                        <div class="card-home">
+                                            <img th:src="@{/img/encontrados.png}" alt="Mascotas encontradas">
                                             <h4 class="card-title">Encontrados</h4>
                                             <p class="card-text">Listado de mascotas encontradas</p>
                                         </div>

@@ -43,14 +43,15 @@
   <nav th:replace="fragmentos :: navbarIndex"></nav>
 
   <img class="elipse2" src="./img/elipse2.svg" alt="fondo de elipse">
+  <img class="elipse4" th:src="@{/img/elipse4.png}" alt="fondo de elipse">
 
   <div class="main">
     <div class="wrapper">
       <div class="main-content">
 
         <section class="welcome">
-          <h4>¡Hola {nombre}! Antes de continuar,</h4>
-          <h5>¿Qué querés crear?</h5>
+          <h2>¡Hola {nombre}!</h2>
+          <h4>¿Qué querés crear?</h4>
         </section>
         <div class="container-home mt-5 main">
           <div class="row my-auto g-4 justify-content-evenly">
@@ -61,7 +62,7 @@
                   <div class="card-home border-danger">
                     <img th:src="@{/img/post.png}" alt="crear-publicación">
                     <h4 class="card-title">Publicación</h4>
-                    <p class="card-text">Accedé a crear una publicación</p>
+                    <p class="card-text">Crea un nuevo post</p>
                   </div>
                 </a>
               </div>

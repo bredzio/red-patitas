@@ -46,7 +46,7 @@ public class PetService {
         pet.setAnimal(animal);
         pet.setUser(user);
         pet.setEnabled(true);
-        pet.setName(name);
+        pet.setName(name.toLowerCase());
         pet.setPhoto(photoService.copy(photo));
         petRepository.save(pet);
 
@@ -77,7 +77,7 @@ public class PetService {
             Pet pet = answer.get();
             pet.setAnimal(animal);
             pet.setEnabled(true);
-            pet.setName(name);
+            pet.setName(name.toLowerCase());
             //pet.setPhoto(photoService.copy(photo));
             pet.setPhoto(storageService.uploadFile(photo));
             petRepository.save(pet);
@@ -112,7 +112,7 @@ public class PetService {
             Pet pet = answer.get();
             pet.setAnimal(animal);
             pet.setEnabled(true);
-            pet.setName(name);
+            pet.setName(name.toLowerCase());
             //pet.setPhoto(photoService.copy(photo));
             petRepository.save(pet);
 

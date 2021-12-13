@@ -43,27 +43,27 @@
     <body>
         <nav th:replace="fragmentos :: navbarIndex"></nav>
 
-        <!-- <img class="elipse1" th:src="@{/img/elipse1.svg}" alt="fondo de elipse"> -->
+        <img class="elipse4" th:src="@{/img/elipse4.png}" alt="fondo de elipse">
         <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse">
 
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
-                    <div th:if="${error}" class="container mt-4 text-center">
+                    <div th:if="${error}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
                             <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
                         </div>
                     </div>
 
-                    <div th:if="${logout}" class="container mt-4 text-center">
+                    <div th:if="${logout}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
                             <div th:text="${logout}" class="alert alert-success m-0 shadow"></div>
                         </div>
                     </div>
 
-                    <div th:if="${exito}" class="container mt-4 text-center">
+                    <div th:if="${exito}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
-                            <div th:text="${exito}" class="alert alert-danger m-0 shadow"></div>
+                            <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
 
                                     <div class="card-header">
                                         <div class="line-header"></div>
-                                        <h4>Iniciar Sesión</h4>
+                                        <h4>Iniciar sesión</h4>
                                     </div>
 
                                     <div class="card-body">
@@ -97,9 +97,9 @@
                                             </div>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
+                            <p>¿Aún no eres usuario? <a th:href="@{/auth/signup}" class="registrarse">Registrate</a></p>
                         </div>
                     </div>
 
