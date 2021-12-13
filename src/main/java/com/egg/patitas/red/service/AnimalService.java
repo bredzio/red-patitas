@@ -27,10 +27,10 @@ public class AnimalService {
     @Transactional
     public void createAnimal(String name) throws Exception {
 
-        isValidUsername(name);
+        isValidUsername(name.toLowerCase());
 
         Animal animal = new Animal();
-        animal.setName(name);
+        animal.setName(name.toLowerCase());
         animalRepository.save(animal);
     }
 
@@ -38,8 +38,8 @@ public class AnimalService {
     public void modifyAnimal(Integer id, String name, List<Pet> pet)  throws Exception{
 
         Animal animal = animalRepository.findById(id).get();
-        isValidUsername(name);
-        animal.setName(name);
+        isValidUsername(name.toLowerCase());
+        animal.setName(name.toLowerCase());
         animal.setPets(pet);
         animalRepository.save(animal);
     }

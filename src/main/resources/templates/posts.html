@@ -28,8 +28,9 @@
         </div>
     </div>
 
+
     <div class="container mt-4 main">
-        <h1>Listado de Post</h1>
+        <h1 th:text="${title}"></h1>
         <hr class="mb-4"/>
         <div th:if="${posts.isEmpty()}">
             <h5>Todavía no hay posts cargados. <a th:href="@{/posts/create}">Cargar post</a></h5>
