@@ -135,19 +135,18 @@
               <div class="dropdown-ingresar">
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    INGRESAR
+                    data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.id != null} ? ${session.name} : 'EMPEZAR'">      
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" th:href="@{/auth/login}">Iniciar sesión</a></li>
-                    <li><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
+                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/login}">Iniciar sesión</a></li>
+                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
                     <!-- USUARIO INGRESADO -->
-                    <li><a class="dropdown-item" th:href="@{/posts}">Mis publicaciones</a></li>
-                    <li><a class="dropdown-item" th:href="@{/pets}">Mis mascotas</a></li>
-                    <li><a class="dropdown-item" th:href="@{/users}">Mi perfil</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/users/edit/}+${session.email}">Mi perfil</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/pets/byUser/}+${session.email}">Mis mascotas</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/posts/byUser/}+${session.email}">Mis publicaciones</a></li>
                     <!-- PARA ADMIN -->
-                    <li><a class="dropdown-item" th:href="@{/posts}">Panel de control</a></li>
-                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                    <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/dashboard}">Panel de control</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
                   </ul>
                 </li>
               </div>

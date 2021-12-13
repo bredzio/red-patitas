@@ -4,11 +4,13 @@ import com.egg.patitas.red.model.Animal;
 import com.egg.patitas.red.model.Pet;
 import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.repository.PetRepository;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.AnimalService;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PhotoService;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +48,26 @@ public class PetController {
         }
         mav.addObject("title", "Mascotas");
         mav.addObject("pets",petService.findAll());
+        return mav;
+    }
+
+    @GetMapping("/edit/{email}")
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    public ModelAndView editUser(@PathVariable String email) {
+        ModelAndView mav = new ModelAndView("user-form");
+        mav.addObject("user", userService.findByEmail(email));
+        mav.addObject("title", "Editar Perfil");
+        mav.addObject("action", "modificar");
+        return mav;
+    }
+
+    @GetMapping("/byUser/{email}")
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    public ModelAndView petsByUser(@PathVariable String email){
+        ModelAndView mav = new ModelAndView("pets");
+
+        mav.addObject("title", "Tus Mascotas");
+        mav.addObject("pets",petService.findByUserEmail(email));
         return mav;
     }
 
