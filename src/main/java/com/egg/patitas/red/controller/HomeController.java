@@ -26,9 +26,9 @@ public class HomeController {
     @Autowired
     private ContactService contactService;
 
-    @GetMapping("/home")
+    @GetMapping("/selectPost")
     public ModelAndView home(Principal principal) {
-        ModelAndView mav = new ModelAndView("home");
+        ModelAndView mav = new ModelAndView("selectPost");
         return mav;
     }
 
@@ -70,7 +70,19 @@ public class HomeController {
 
     @GetMapping("/ayuda")
     public ModelAndView ayuda(Principal principal) {
-        ModelAndView mav = new ModelAndView("como-funciona");
+        ModelAndView mav = new ModelAndView("como-publicar");
+        return mav;
+    }
+
+    @GetMapping("/create")
+    public ModelAndView crear(Principal principal) {
+        ModelAndView mav = new ModelAndView("create");
+        return mav;
+    }
+
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard(Principal principal) {
+        ModelAndView mav = new ModelAndView("dashboard");
         return mav;
     }
 }

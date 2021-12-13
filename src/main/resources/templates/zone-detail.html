@@ -16,7 +16,10 @@
 <body>
 <nav th:replace="fragmentos :: navbar"></nav>
 
+
+
 <div class="container mt-5 main">
+    <h1 th:text="${title}">  </h1>
 
     <h2 th:text='${"Nombre de la ciudad: "+zone.city}'></h2>
 <br>
@@ -27,34 +30,62 @@
     <br>
     <br>
 
-
-    <div th:if="${postByZoneId.isEmpty()}">
+    <div th:if="${postsLostByZoneId.isEmpty() AND postsFoundByZoneId.isEmpty()}">
         <h5>Todavía no hay posteos cargados en esta ciudad</h5>
     </div>
-    <div class="table-responsive" th:unless="${postByZoneId.isEmpty()}">
+
+
+    <div class="table-responsive" th:unless="${postsLostByZoneId.isEmpty() AND postsFoundByZoneId.isEmpty()}">
+        <h2> Mascotas perdidas </h2>
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">
-<!--            ESTO ES PARA EL POST , NO PARA ZONE - ACORDARSE !! -->
             <tr>
-                <th class="col-md-4 px-md-2" scope="col">Ciudad</th>
-                <th class="col-md-4 px-md-2" scope="col">Provincia</th>
-                <th class="col-md-4 px-md-2" scope="col">Zip Code</th>
+                <th class="col-md-4 px-md-2" scope="col">Nombre de la mascota</th>
+                <th class="col-md-4 px-md-2" scope="col">Animal</th>
+                <th class="col-md-4 px-md-2" scope="col">Usuario</th>
+                <th class="col-md-4 px-md-2" scope="col">Fecha del post</th>
+                <th class="col-md-4 px-md-2" scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
-<!--            <tr th:each="zone : ${zonesById}">-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.city}"></td>-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.province}"></td>-->
-<!--                <td class="col-md-4 px-md-2" th:text="${zone.zipCode}"></td>-->
-<!--            </tr>-->
+            <tr th:each="postLost : ${postsLostByZoneId}">
+                <td class="col-md-4 px-md-2" th:text="${postLost.pet.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postLost.pet.animal.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postLost.user.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postLost.dateLostOrFound}"></td>
+                <td><a th:href="@{/posts/__${postLost.id}__}">Ver</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2> Mascotas encontradas </h2>
+
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-secondary text-center">
+            <tr>
+                <th class="col-md-4 px-md-2" scope="col">Nombre de la mascota</th>
+                <th class="col-md-4 px-md-2" scope="col">Animal</th>
+                <th class="col-md-4 px-md-2" scope="col">Usuario</th>
+                <th class="col-md-4 px-md-2" scope="col">Fecha del post</th>
+                <th class="col-md-4 px-md-2" scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="postFound : ${postsFoundByZoneId}">
+                <td class="col-md-4 px-md-2" th:text="${postFound.pet.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postFound.pet.animal.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postFound.user.name}"></td>
+                <td class="col-md-4 px-md-2" th:text="${postFound.dateLostOrFound}"></td>
+                <td><a th:href="@{/posts/__${postFound.id}__}">Ver</a></td>
+            </tr>
             </tbody>
         </table>
     </div>
-        
-    </div>
+
+
 </div>
 
-<footer th:replace="fragmentos :: footer"></footer>
+
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

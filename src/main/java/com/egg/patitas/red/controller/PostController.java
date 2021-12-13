@@ -49,6 +49,27 @@ public class PostController {
         return mav;
     }
 
+    @GetMapping("/lostposts")
+    public ModelAndView showLostPost(){
+        ModelAndView mav = new ModelAndView("posts");
+        mav.addObject("posts", postService.findLostPost());
+        mav.addObject("title","Mascotas perdidas");
+
+        return mav;
+    }
+
+    @GetMapping("/foundposts")
+    public ModelAndView showFoundPost(){
+        ModelAndView mav = new ModelAndView("posts");
+
+        mav.addObject("posts", postService.findFoundPost());
+        mav.addObject("title","Mascotas encontradas");
+
+        return mav;
+    }
+
+
+
     @GetMapping("/create")
     public ModelAndView createPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("post-form");
@@ -65,7 +86,7 @@ public class PostController {
         mav.addObject("users", userService.findByEmail(email));
         mav.addObject("pets",petService.findByUserEmail(email)); //pensar como traer pets solo del usuario loggeado
         mav.addObject("zones", zoneService.findAll());
-        mav.addObject("title", "Crear Post");
+        mav.addObject("title", "Nuevo Post");
         mav.addObject("action", "save");
         return mav;
     }
