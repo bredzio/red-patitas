@@ -2,8 +2,10 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.model.Zone;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,8 +14,6 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +25,7 @@ public class ZoneController {
     private ZoneService zoneService;
 
     @GetMapping
+    @PreAuthorize(SecurityConstant.ADMIN)
     public ModelAndView showAll(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("zones");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);

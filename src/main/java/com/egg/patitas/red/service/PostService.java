@@ -3,23 +3,25 @@ package com.egg.patitas.red.service;
 import com.egg.patitas.red.exception.MyException;
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.egg.patitas.red.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 
 @Service
+@AllArgsConstructor
 public class PostService {
-    @Autowired
-    private PostRepository postRepository;
 
-    @Autowired
-    private UserService userService;
+    private final PostRepository postRepository;
+
+    private final UserService userService;
+
+    private final UserRepository userRepository;
 
     @Transactional
     public void createPost(Post dto, String email) {
@@ -70,6 +72,11 @@ public class PostService {
     public List<Post> findAll(){
         return postRepository.findAll();
 
+    }
+
+    @Transactional
+    public List<Post> findByUser(String email){
+        return postRepository.findByUser_Id(userRepository.findByEmail(email).getId());
     }
 
     @Transactional(readOnly = true)

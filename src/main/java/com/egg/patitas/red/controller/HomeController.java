@@ -2,8 +2,10 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.model.Contact;
 import com.egg.patitas.red.model.User;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -27,8 +30,9 @@ public class HomeController {
     private ContactService contactService;
 
     @GetMapping("/selectPost")
-    public ModelAndView home(Principal principal) {
+    public ModelAndView home(HttpSession session) {
         ModelAndView mav = new ModelAndView("selectPost");
+        mav.addObject("name", session.getAttribute("name"));
         return mav;
     }
 
@@ -63,26 +67,28 @@ public class HomeController {
 
 
     @GetMapping("/nosotros")
-    public ModelAndView nosotros(Principal principal) {
+    public ModelAndView nosotros() {
         ModelAndView mav = new ModelAndView("quienes-somos");
         return mav;
     }
 
     @GetMapping("/ayuda")
-    public ModelAndView ayuda(Principal principal) {
+    public ModelAndView ayuda() {
         ModelAndView mav = new ModelAndView("como-publicar");
         return mav;
     }
 
     @GetMapping("/create")
-    public ModelAndView crear(Principal principal) {
+    public ModelAndView crear() {
         ModelAndView mav = new ModelAndView("create");
         return mav;
     }
 
     @GetMapping("/dashboard")
-    public ModelAndView dashboard(Principal principal) {
+    @PreAuthorize(SecurityConstant.ADMIN)
+    public ModelAndView dashboard(HttpSession session) {
         ModelAndView mav = new ModelAndView("dashboard");
+        mav.addObject("name", session.getAttribute("name"));
         return mav;
     }
 }

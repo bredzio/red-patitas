@@ -2,6 +2,7 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.exception.EmailExistException;
 import com.egg.patitas.red.model.User;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -76,10 +77,12 @@ public class UserController {
         return new RedirectView("/users");
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView editUser(@PathVariable Integer id) {
+    @GetMapping("/edit/{email}")
+    @PreAuthorize("hasRole('ADMIN') or #email == authentication.principal.username")
+    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    public ModelAndView editUser(@PathVariable String email) {
         ModelAndView mav = new ModelAndView("user-form");
-        mav.addObject("user", userService.findById(id).get());
+        mav.addObject("user", userService.findByEmail(email));
         mav.addObject("title", "Editar Perfil");
         mav.addObject("action", "modificar");
         return mav;
