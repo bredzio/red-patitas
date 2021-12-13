@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -72,6 +73,33 @@ public class PostService {
     public Optional<Post> findById(Integer id){
         return postRepository.findById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Post> findLostPost(){
+
+        List <Post> lostpost = new ArrayList<>();
+
+        for (Post p : findAll()) {
+            if (p.getLostOrFound() == false) {
+                lostpost.add(p);
+            }
+        }
+        return lostpost;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Post> findFoundPost(){
+
+        List <Post> foundpost = new ArrayList();
+
+        for (Post p : findAll()) {
+            if (p.getLostOrFound() == true) {
+                foundpost.add(p);
+            }
+        }
+        return foundpost;
+    }
+
 
     @Transactional
     public void delete(Integer id) {
