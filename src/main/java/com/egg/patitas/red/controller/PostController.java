@@ -105,8 +105,8 @@ public class PostController {
         }
 
         String email=(String) session.getAttribute("email");
-        mav.addObject("users", userService.findByEmail(email));
-        mav.addObject("pets",petService.findByUserEmail(email)); //pensar como traer pets solo del usuario loggeado
+//        mav.addObject("users", userService.findByEmail(email));
+        mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
         mav.addObject("title", "Nuevo Post");
         mav.addObject("action", "save");
@@ -142,11 +142,12 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes)  {
+    public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes, HttpSession session)  {
         RedirectView redirectView = new RedirectView("/posts");
 
         try {
-            postService.createPost(post);
+            String email=(String) session.getAttribute("email");
+            postService.createPost(post, email);
         }catch(Exception e){
             attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());

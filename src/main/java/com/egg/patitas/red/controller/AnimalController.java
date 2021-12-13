@@ -28,7 +28,7 @@ public class AnimalController {
 //            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
-        mav.addObject("title", "Animals");
+        mav.addObject("title", "Especies");
         mav.addObject("animals", animalService.findAll());
         return mav;
     }

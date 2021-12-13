@@ -27,8 +27,11 @@ public class PetService {
     @Autowired
     private StorageService storageService;
 
+    @Autowired
+    private UserService userService;
+
     @Transactional
-    public void createPet(String name, MultipartFile photo, Animal animal, User user) throws Exception{
+    public void createPet(String name, MultipartFile photo, Animal animal, String email) throws Exception{
 
         if(name==null || name.isEmpty()){
             throw new Exception("El nombre no puede ser nulo");
@@ -44,7 +47,7 @@ public class PetService {
 
         Pet pet = new Pet();
         pet.setAnimal(animal);
-        pet.setUser(user);
+        pet.setUser(userService.findByEmail(email));
         pet.setEnabled(true);
         pet.setName(name.toLowerCase());
         pet.setPhoto(photoService.copy(photo));
