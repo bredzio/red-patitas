@@ -18,20 +18,23 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Transactional
-    public void createPost(Post dto) {
+    public void createPost(Post dto, String email) {
 //        no es dto , solo lo puso de nombre por si en el futuro usamos dto
 
-        postRepository.save(buildPost(dto));
+        postRepository.save(buildPost(dto, email));
 
     }
 
     @Transactional
-    public Post buildPost(Post dto) {
+    public Post buildPost(Post dto,String email ) {
         Post post = new Post();
 
         post.setZone(dto.getZone());
-        post.setUser(dto.getUser());
+        post.setUser(userService.findByEmail(email));
         post.setPet(dto.getPet());
         post.setDescription(dto.getDescription().toLowerCase());
         post.setEnabled(true); // post habilitado

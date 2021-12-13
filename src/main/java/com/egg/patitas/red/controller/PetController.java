@@ -61,16 +61,17 @@ public class PetController {
         mav.addObject("pet", new Pet());
         mav.addObject("animals",animalService.findAll());
         String email=(String) session.getAttribute("email");
-        mav.addObject("users", userService.findByEmail(email));
+//        mav.addObject("user", userService.findByEmail(email));
         mav.addObject("title", "Nueva Mascota");
         mav.addObject("action", "save");
         return mav;
     }
 
     @PostMapping("/save")
-    public RedirectView save(@RequestParam String name, @RequestParam MultipartFile photo, @RequestParam Animal animal, @RequestParam User user, RedirectAttributes attributes){
+    public RedirectView save(@RequestParam String name, @RequestParam MultipartFile photo, @RequestParam Animal animal,HttpSession session , RedirectAttributes attributes){
         try {
-            petService.createPet(name, photo,animal, user); //pet.getAnimal()
+            String email=(String) session.getAttribute("email");
+            petService.createPet(name, photo,animal, email);
             attributes.addFlashAttribute("succes", "La mascota se creó con éxito!");
         }catch(Exception e){
             attributes.addFlashAttribute("error", e.getMessage());
