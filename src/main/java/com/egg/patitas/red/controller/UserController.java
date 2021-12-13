@@ -77,6 +77,7 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
+    //@PreAuthorize("hasRole('ROLE_ADMIN) or #authUser.id == #userId")
     public ModelAndView editUser(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("user-form");
         mav.addObject("user", userService.findById(id).get());

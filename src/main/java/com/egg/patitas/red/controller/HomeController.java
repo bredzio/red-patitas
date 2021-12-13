@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -27,8 +28,9 @@ public class HomeController {
     private ContactService contactService;
 
     @GetMapping("/selectPost")
-    public ModelAndView home(Principal principal) {
+    public ModelAndView home(HttpSession session) {
         ModelAndView mav = new ModelAndView("selectPost");
+        mav.addObject("name", session.getAttribute("name"));
         return mav;
     }
 

@@ -7,6 +7,7 @@ import com.egg.patitas.red.model.Role;
 import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.repository.RoleRepository;
 import com.egg.patitas.red.repository.UserRepository;
+import com.egg.patitas.red.security.SecurityUtils;
 import com.egg.patitas.red.security.token.TokenConfirmation;
 import com.egg.patitas.red.security.token.TokenConfirmationService;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -123,14 +121,14 @@ public class UserService implements UserDetailsService {
 
         if (!user.getEnabled()) throw new UsernameNotFoundException("Usuario inhabilitado");
 
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER" + user.getRole().getName());
+        GrantedAuthority authority = SecurityUtils.convertToAuthority(user.getRole().getName());
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
         HttpSession session = attr.getRequest().getSession(true);
 
         session.setAttribute("id", user.getId());
-        session.setAttribute("name", user.getName());
+        session.setAttribute("name", user.getName().toUpperCase(Locale.ROOT));
         session.setAttribute("email", user.getEmail());
         session.setAttribute("rol", user.getRole().getName());
 
