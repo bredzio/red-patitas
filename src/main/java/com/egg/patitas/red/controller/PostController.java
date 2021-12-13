@@ -2,11 +2,13 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.exception.MyException;
 import com.egg.patitas.red.model.Post;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
 import com.egg.patitas.red.service.UserService;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,26 @@ public class PostController {
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("posts", postService.findAll());
+        return mav;
+    }
+
+    @GetMapping("/edit/{email}")
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    public ModelAndView editUser(@PathVariable String email) {
+        ModelAndView mav = new ModelAndView("user-form");
+        mav.addObject("user", userService.findByEmail(email));
+        mav.addObject("title", "Editar Perfil");
+        mav.addObject("action", "modificar");
+        return mav;
+    }
+
+    @GetMapping("/byUser/{email}")
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    public ModelAndView postsByUser(@PathVariable String email){
+        ModelAndView mav = new ModelAndView("posts");
+
+        mav.addObject("title", "Tus Publicaciones");
+        mav.addObject("posts",postService.findByUser(email));
         return mav;
     }
 

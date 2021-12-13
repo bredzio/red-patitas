@@ -12,7 +12,6 @@ import com.egg.patitas.red.security.token.TokenConfirmation;
 import com.egg.patitas.red.security.token.TokenConfirmationService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -141,9 +141,9 @@
                     <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/login}">Iniciar sesión</a></li>
                     <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
                     <!-- USUARIO INGRESADO -->
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/users/edit/}+${session.id}">Mi perfil</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/pets}">Mis mascotas</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/posts}">Mis publicaciones</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/users/edit/}+${session.email}">Mi perfil</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/pets/byUser/}+${session.email}">Mis mascotas</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/posts/byUser/}+${session.email}">Mis publicaciones</a></li>
                     <!-- PARA ADMIN -->
                     <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/zones}">Panel de control</a></li>
                     <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>

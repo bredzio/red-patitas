@@ -1,8 +1,10 @@
 package com.egg.patitas.red.service;
 
 import com.egg.patitas.red.exception.MyException;
+import com.egg.patitas.red.model.Pet;
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.repository.PostRepository;
+import com.egg.patitas.red.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ import java.util.Optional;
 public class PostService {
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void createPost(Post dto) {
@@ -65,6 +70,11 @@ public class PostService {
     public List<Post> findAll(){
         return postRepository.findAll();
 
+    }
+
+    @Transactional
+    public List<Post> findByUser(String email){
+        return postRepository.findByUser_Id(userRepository.findByEmail(email).getId());
     }
 
     @Transactional(readOnly = true)

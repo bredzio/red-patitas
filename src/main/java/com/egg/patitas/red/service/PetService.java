@@ -165,6 +165,11 @@ public class PetService {
     }
 
     @Transactional
+    public List<Pet> findByUser(Integer id){
+        return petRepository.findAll();
+    }
+
+    @Transactional
     public List<Pet> listPet() throws Exception{
         List<Pet> pets = new ArrayList();
         List<Pet> petsEnabled = new ArrayList();
