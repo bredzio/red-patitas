@@ -62,7 +62,7 @@ public class PetController {
         mav.addObject("animals",animalService.findAll());
         String email=(String) session.getAttribute("email");
         mav.addObject("users", userService.findByEmail(email));
-        mav.addObject("title", "Crear Mascota");
+        mav.addObject("title", "Nueva Mascota");
         mav.addObject("action", "save");
         return mav;
     }

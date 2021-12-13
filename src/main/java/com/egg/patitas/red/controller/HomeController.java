@@ -79,4 +79,10 @@ public class HomeController {
         ModelAndView mav = new ModelAndView("create");
         return mav;
     }
+
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard(Principal principal) {
+        ModelAndView mav = new ModelAndView("dashboard");
+        return mav;
+    }
 }
