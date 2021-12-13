@@ -47,6 +47,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private TokenConfirmationService tokenConfirmationService;
 
+    private final String subject= "Confirme su email";
+
 
     @Transactional
     public void createUser(User dto) throws EmailExistException {
@@ -90,7 +92,7 @@ public class UserService implements UserDetailsService {
         String token = buildToken(user);
 
         String link = "http://localhost:8080/auth/register/confirm?token=" + token;
-        emailSend.send((dto.getEmail()), buildEmail(dto.getName(),link));
+        emailSend.send((dto.getEmail()), buildEmail(dto.getName(),link), subject);
         return user;
     }
 

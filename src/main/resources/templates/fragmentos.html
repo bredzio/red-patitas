@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #87AAAA;">  
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #87AAAA;">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Inicio</a>
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -74,11 +74,75 @@
     </div>
 </nav>
 
-<footer th:fragment="footer" class="footer py-1 fixed-bottom" style="background-color: #87AAAA;">
+<!--<footer th:fragment="footer" class="footer py-1 fixed-bottom" style="background-color: #87AAAA;">
     <div class="container d-flex justify-content-center">
-        <!-- al principio puse sesion pero no lo tomaba despues puse session y ando-->
+         al principio puse sesion pero no lo tomaba despues puse session y ando
         <span class="text-muted text-reset"
               th:text="${session.id != null} ? |${session.id} - ${session.name} - ${session.rol}| : 'HuellApp '">
         </span>
     </div>
-</footer>
+</footer>-->
+
+
+<header th:fragment="navbarIndex">
+    <div class="header">
+      <div class="wrapper">
+         <div class="header-container">
+            <div class="logo">
+              <a th:href="@{/}">
+                <img class="logo-huellapp" th:src="@{/img/huellapp.svg}" width="70px" height="70px" alt="Logo HuellApp">
+              </a>
+            </div>
+            <nav class="navbar navbar-expand-lg bg-light">
+              <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" th:href="@{/}">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/nosotros}">QUIÉNES SOMOS</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/ayuda}">CÓMO FUNCIONA</a>
+                    </li>
+                    <div class="dropdown-mascotas">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          MASCOTAS
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" th:href="@{/posts}">Perdidas</a></li>
+                          <li><a class="dropdown-item" th:href="@{/posts}">Encontradas</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-ingresar">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          INGRESAR
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" th:href="@{/auth/login}">Iniciar Sesión</a></li>
+                          <li><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
+                        </ul>
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <footer th:fragment="footer" class="footer">
+    <p>Hecho con <i class="fas fa-heart"></i> Copyright 2021 - Todos los derechos reservados</p>
+    <div class="footer-a">
+      <a href="..."> <i class="fab fa-linkedin"></i></a>
+      <a href="..."> <i class="fab fa-instagram-square"></i></a>
+      <a href="..."> <i class="fab fa-twitter-square"></i></a>
+    </div>
+  </footer>

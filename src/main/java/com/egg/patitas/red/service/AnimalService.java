@@ -96,7 +96,7 @@ public class AnimalService {
             }
         }
 
-
+        
 
 
         public void isValidUsername(String name) throws Exception {
