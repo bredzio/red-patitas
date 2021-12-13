@@ -86,7 +86,7 @@ public class PostController {
         mav.addObject("users", userService.findByEmail(email));
         mav.addObject("pets",petService.findByUserEmail(email)); //pensar como traer pets solo del usuario loggeado
         mav.addObject("zones", zoneService.findAll());
-        mav.addObject("title", "Crear Post");
+        mav.addObject("title", "Nuevo Post");
         mav.addObject("action", "save");
         return mav;
     }

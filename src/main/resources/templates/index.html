@@ -47,13 +47,13 @@
       <div class="wrapper">
         <div class="main-content">
 
-          <div th:if="${error}" class="container mt-4 text-center">
+          <div th:if="${error}" class="container-error mt-4 text-center">
             <div class="row col-md-4 mx-auto">
               <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
             </div>
           </div>
 
-          <div th:if="${exito}" class="container mt-4 text-center">
+          <div th:if="${exito}" class="container-error mt-4 text-center">
             <div class="row col-md-4 mx-auto">
               <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
             </div>
@@ -104,21 +104,21 @@
           </section>
 
           <!-- SECCION DE COMENTARIOS -->
+          <hr>
           <div class="section-comment">
             <h2>Testimonios</h2>
             <div class="container">
-              <div class="container__column">
 
+              <div class="container__column clickable-card">
                 <div class="container__content">
                   <img th:src="@{/img/persona1.png}" alt="Foto de persona">
                   <h6>“Utilice la plataforma de HuellApp para publicar un labrador que encontré y ahora está con sus dueños. Excelente
                   aplicación!”</h6>
                   <p>Martin Gonzalez</p>
                 </div>
-
               </div>
 
-              <div class="container__column">
+              <div class="container__column clickable-card">
                 <div class="container__content">
                   <img th:src="@{/img/persona2.png}" alt="Foto de persona">
                   <h6>“Mi mascota Lula estuvo perdida por donde vivo y con su ayuda pude localizarla. No sé que hubiera hecho sin ellos,
@@ -127,7 +127,7 @@
                 </div>
               </div>
 
-              <div class="container__column">
+              <div class="container__column clickable-card">
                 <div class="container__content">
                   <img th:src="@{/img/persona3.png}" alt="Foto de persona">
                   <h6>"Gracias a HuellaApp he encontrado a Arya, en estos momentos ya se encuentra en casa con nosotros. Muy contenta con sus servicios :) "</h6>
@@ -138,6 +138,7 @@
           </div>
 
           <!-- FORMULARIO DE CONTACTO -->
+          <hr>
           <div class="section-form">
             <div class="form-contact">
                 <section class="contactanos">
@@ -150,7 +151,7 @@
                   <div class="message">
                     <input id="message" th:field="*{message}" type="text" required placeholder="Mensaje" class="message">
                   </div>
-                  <input type="submit" value="Enviar mensaje">
+                  <input class="btn" type="submit" value="Enviar mensaje">
                 </form>
             </div>
           </div>
