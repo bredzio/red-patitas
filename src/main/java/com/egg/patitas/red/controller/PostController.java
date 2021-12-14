@@ -109,7 +109,8 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
-        if (!session.getAttribute("id").equals(id)) {
+        Post post = postService.findById(id).orElse(null);
+        if (!session.getAttribute("id").equals(post.getUser().getId())) {
             return new ModelAndView(new RedirectView("/"));
         }
 
@@ -121,7 +122,7 @@ public class PostController {
                 mav.addObject("error", flashMap.get("error"));
                 mav.addObject("post", flashMap.get("post"));
             } else {
-                mav.addObject("post", postService.findById(id));
+                mav.addObject("post", post);
                 String email=(String) session.getAttribute("email");
 //                mav.addObject("users", userService.findByEmail(email));
                 mav.addObject("pets",petService.findByUserEmail(email));
