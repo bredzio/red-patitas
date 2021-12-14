@@ -33,7 +33,6 @@ public class ZoneController {
 //            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
-        mav.addObject("title", "Zonas");
         mav.addObject("zones", zoneService.findAll());
         return mav;
     }

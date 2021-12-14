@@ -49,10 +49,10 @@
         <div class="main-content">
 
           <section class="welcome">
-            <h2>¡Bienvenido <span th:text="${name}"></span>!</h2>
-            <h4>Este es tu panel de control</h4>
+            <h1>¡Bienvenido <span th:text="${name}"></span>!</h1>
+            <h2>Este es tu panel de control</h2>
           </section>
-          <div class="container-home mt-5 main">
+          <div class="container-home main">
 
             <div class="col cards__item">
               <div class="card text-center clickable-card">
@@ -60,7 +60,7 @@
                   <div class="card-home">
                     <img th:src="@{/img/users.png}" alt="Logo de usuarios">
                     <h4 class="card-title">Usuarios</h4>
-                    <p class="card-text">Ver lista de usuarios</p>
+                    <p class="card-text">Administra los usuarios</p>
                   </div>
                 </a>
               </div>
@@ -85,7 +85,7 @@
                   <div class="card-home">
                     <img th:src="@{/img/pet.png}" alt="Logo de mascotas">
                     <h4 class="card-title">Mascotas</h4>
-                    <p class="card-text">Accedé a las mascotas cargadas</p>
+                    <p class="card-text">Accede a las mascotas cargadas</p>
                   </div>
                 </a>
               </div>
@@ -97,7 +97,7 @@
                   <div class="card-home">
                     <img th:src="@{/img/animals.png}" alt="Logo de animales">
                     <h4 class="card-title">Animales</h4>
-                    <p class="card-text">Accedé a los tipos de animales</p>
+                    <p class="card-text">Administra los tipos de animales</p>
                   </div>
                 </a>
               </div>
@@ -105,11 +105,11 @@
 
             <div class="col cards__item">
               <div class="card text-center clickable-card">
-                <a class="link-dark" style="text-decoration: none;" th:href="@{/posts}">
+                <a class="link-dark" style="text-decoration: none;" th:href="@{/selectPost}">
                   <div class="card-home">
                     <img th:src="@{/img/posts.png}" alt="Mascotas encontradas">
                     <h4 class="card-title">Publicaciones</h4>
-                    <p class="card-text">Accedé a todas las publicaciones</p>
+                    <p class="card-text">Accede a las publicaciones</p>
                   </div>
                 </a>
               </div>
@@ -121,7 +121,7 @@
                   <div class="card-home">
                     <img th:src="@{/img/miembros.png}" alt="Mascotas encontradas">
                     <h4 class="card-title">Miembros</h4>
-                    <p class="card-text">Accedé a los miembros de tu equipo</p>
+                    <p class="card-text">Accede a los miembros de tu equipo</p>
                   </div>
                 </a>
               </div>

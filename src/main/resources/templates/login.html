@@ -49,21 +49,22 @@
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
+
                     <div th:if="${error}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
-                            <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
+                            <div th:text="${error}" class="alert alert-danger shadow"></div>
                         </div>
                     </div>
 
                     <div th:if="${logout}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
-                            <div th:text="${logout}" class="alert alert-success m-0 shadow"></div>
+                            <div th:text="${logout}" class="alert alert-success shadow"></div>
                         </div>
                     </div>
 
                     <div th:if="${exito}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
-                            <div th:text="${exito}" class="alert alert-success m-0 shadow"></div>
+                            <div th:text="${exito}" class="alert alert-success shadow"></div>
                         </div>
                     </div>
 

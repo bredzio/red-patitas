@@ -79,8 +79,9 @@ public class HomeController {
     }
 
     @GetMapping("/create")
-    public ModelAndView crear() {
+    public ModelAndView crear(HttpSession session) {
         ModelAndView mav = new ModelAndView("create");
+        mav.addObject("name", session.getAttribute("name"));
         return mav;
     }
 

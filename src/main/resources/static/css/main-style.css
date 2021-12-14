@@ -522,9 +522,6 @@ p .enlaces {
 .col-md-4 {
   display: flex;
   align-items: center;
-  width: 450px;
-  margin-block-end: 20px;
-  margin-block-start: 40px;
 }
 
 .mb-4 {
@@ -554,7 +551,8 @@ p .enlaces {
 }
 
 .card {
-  width: 100%;
+  width: 95%;
+  margin: auto;
 }
 
 .form-floating {
@@ -601,7 +599,6 @@ p .enlaces {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-block-end: 40px;
 }
 
 .container-home .clickable-card {
@@ -621,11 +618,6 @@ p .enlaces {
   cursor: pointer;
 }
 
-.col {
-  margin: 0;
-  width: 400px;
-}
-
 .card-home {
   margin: auto;
   margin-block: 20px;
@@ -635,14 +627,19 @@ p .enlaces {
   width: 40%;
 }
 
+.col {
+  padding-inline: 5px;
+  margin-block-end: 40px;
+}
+
 /* -------PARA LOS MENSAJES DE ERRORES------ */
 .container-error {
   margin-block-end: 0px;
 }
 
-.m-0 {
-  margin-block-start: 20px !important;
-  margin-block-end: 0 !important;
+.alert {
+  padding: 7px;
+  margin-block-start: 20px;
 }
 
 /* -------FORM-POSTS Y PETS------ */
@@ -674,7 +671,6 @@ p .enlaces {
 
 .btn {
   height: auto;
-  width: 110px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -700,7 +696,7 @@ p .enlaces {
 }
 
 .btn-danger {
-  background: var(--blue20);
+  background: var(--blue30);
   border: 0px;
 }
 
@@ -713,13 +709,62 @@ p .enlaces {
   border: 0px;
 }
 .btn-secondary {
-  border-color: var(--black30);
+  background-color: var(--aquamarine20);
   border: 0px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--aquamarine20);
+}
+
+.fas {
+  font-size: 20px;
+  color: var(--blue30);
 }
 
 .table-secondary {
   --bs-table-bg: var(--blanco20);
 }
+
+/* ----------LISTA DE POST-------- */
+
+.card-img {
+  height: 250px;
+  object-fit:cover;
+}
+
+.card-post {
+  border-radius: 10px;
+}
+
+.card-footer{
+  background: var(--blanco30);
+}
+
+.col-post {
+  padding-block-end: 30px;
+  width: 370px;
+}
+
+.welcome h1 {
+  font-size: 35px;
+  color: var(--aquamarine20);
+}
+
+.welcome h2 {
+  font-size: 30px;
+}
+
+.row {
+  justify-content: center;
+}
+
+.create{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
 footer {
     background: var(--blue30);
@@ -737,7 +782,8 @@ footer a {
 footer p {
     display: inline-block;
     color: var(--blanco);
-    margin-block-start: 30px;
+    margin-block-start: 10px;
+    margin-block-end: 10px;
 }
 
 .footer p .far{
@@ -745,12 +791,17 @@ footer p {
 }
 
 .footer-a i {
-    margin-block-end: 30px;
+    margin-block-end: 10px;
 }
 
 .footer-a a .fab{
   font-size: 20px;
   padding: 0 15px 0 0;
+}
+
+.footer .fas {
+  color: var(--blanco30);
+  font-size: 14px;
 }
 
 @media screen and (min-width: 1366px) {

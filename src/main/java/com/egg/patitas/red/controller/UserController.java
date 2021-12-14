@@ -45,7 +45,7 @@ public class UserController {
             mav.addObject("error", flashMap.get("error"));
         }else{
             mav.addObject("user", new User());
-            mav.addObject("title", "Crear usuario");
+            mav.addObject("title", "Nuevo usuario");
             mav.addObject("action", "save");
         }
 
