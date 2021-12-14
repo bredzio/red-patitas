@@ -36,6 +36,14 @@ public class UserController {
         return mav;
     }
 
+    @GetMapping("/members")
+    public ModelAndView showAllMembers(){
+        ModelAndView mav = new ModelAndView("members");
+        mav.addObject("users", userService.findAll());
+        mav.addObject("title", "Miembros");
+        return mav;
+    }
+
     @GetMapping("/create")
     public ModelAndView createUser(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("user-form");
