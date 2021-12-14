@@ -92,14 +92,13 @@ public class PostController {
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            //mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         } else {
             mav.addObject("post", new Post());
         }
 
         String email=(String) session.getAttribute("email");
-//        mav.addObject("users", userService.findByEmail(email));
         mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
         mav.addObject("title", "Nuevo Post");
@@ -109,6 +108,11 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
+        Post post = postService.findById(id).orElse(null);
+        if (!session.getAttribute("id").equals(post.getUser().getId())) {
+            return new ModelAndView(new RedirectView("/"));
+        }
+
         ModelAndView mav = new ModelAndView("post-form");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
@@ -117,9 +121,8 @@ public class PostController {
                 mav.addObject("error", flashMap.get("error"));
                 mav.addObject("post", flashMap.get("post"));
             } else {
-                mav.addObject("post", postService.findById(id));
+                mav.addObject("post", post);
                 String email=(String) session.getAttribute("email");
-//                mav.addObject("users", userService.findByEmail(email));
                 mav.addObject("pets",petService.findByUserEmail(email));
                 mav.addObject("zones", zoneService.findAll());
 
