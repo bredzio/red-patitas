@@ -50,10 +50,10 @@
       <div class="main-content">
 
         <section class="welcome">
-          <h2>¡Hola {nombre}!</h2>
-          <h4>¿Qué querés crear?</h4>
+          <h1>¡Hola <span th:text="${name}"></span>!</h1>
+          <h2>¿En que te podemos ayudar?</h2>
         </section>
-        <div class="container-home mt-5 main">
+        <div class="container-home main">
           <div class="row my-auto g-4 justify-content-evenly">
             <div class="col">
               <div class="card text-center clickable-card">
@@ -62,7 +62,7 @@
                   <div class="card-home border-danger">
                     <img th:src="@{/img/post.png}" alt="crear-publicación">
                     <h4 class="card-title">Publicación</h4>
-                    <p class="card-text">Crea un nuevo post</p>
+                    <p class="card-text">Crear un nuevo post</p>
                   </div>
                 </a>
               </div>
@@ -76,7 +76,7 @@
                   <div class="card-home">
                     <img th:src="@{/img/pets.png}" alt="crear animal">
                     <h4 class="card-title">Mascota</h4>
-                    <p class="card-text">Carga los datos de tu mascota</p>
+                    <p class="card-text">Cargar datos de una mascota</p>
                   </div>
                 </a>
               </div>

@@ -192,12 +192,6 @@ public class PetService {
         }
     }
 
-
-   /* @Transactional
-    public List<Pet> finByUserId(Integer id){
-        return petRepository.findByUser_Id(id);
-    }*/
-
     @Transactional
     public Pet findById(Integer id) {
         return petRepository.findById(id).orElse(null);

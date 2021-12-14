@@ -53,7 +53,7 @@ public class UserController {
             mav.addObject("error", flashMap.get("error"));
         }else{
             mav.addObject("user", new User());
-            mav.addObject("title", "Crear usuario");
+            mav.addObject("title", "Nuevo usuario");
             mav.addObject("action", "save");
         }
 
@@ -86,8 +86,7 @@ public class UserController {
     }
 
     @GetMapping("/edit/{email}")
-    @PreAuthorize("hasRole('ADMIN') or #email == authentication.principal.username")
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     public ModelAndView editUser(@PathVariable String email) {
         ModelAndView mav = new ModelAndView("user-form");
         mav.addObject("user", userService.findByEmail(email));

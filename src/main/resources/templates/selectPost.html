@@ -47,24 +47,21 @@
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
-                    
+
                     <section class="welcome">
-                        <h4>¡Hola <span th:text="${name}"></span>! Antes de continuar,</h4>
-                        <h5>¿En que te podemos ayudar?</h5>
+                        <h1>¡Hola <span th:text="${name}"></span>!</h1>
+                        <h2>¿En que te podemos ayudar?</h2>
                     </section>
 
-                    <div class="container-home mt-5 main">
+                    <div class="container-home main">
                         <div class="row my-auto g-4 justify-content-evenly">
                             <div class="col">
                                  <div class="card text-center clickable-card">
-
                                     <a class="link-dark" style="text-decoration: none;" th:href="@{/posts/lostposts}">
-
-                                        <div class="col-md-4 index-perdidas"></div>
                                         <div class="card-home">
                                             <img th:src="@{/img/perdidos.png}" alt="Mascotas perdidas">
                                             <h4 class="card-title">Perdidos</h4>
-                                            <p class="card-text">Listado de mascotas perdidas</p>
+                                            <p class="card-text">Buscar mascotas perdidas</p>
                                         </div>
                                     </a>
                                 </div>
@@ -74,11 +71,10 @@
                             <div class="col">
                                 <div class="card text-center clickable-card">
                                     <a class="link-dark" style="text-decoration: none;" th:href="@{/posts/foundposts}">
-                                        <div class="col-md-4 index-encontradas"></div>
                                         <div class="card-home">
                                             <img th:src="@{/img/encontrados.png}" alt="Mascotas encontradas">
                                             <h4 class="card-title">Encontrados</h4>
-                                            <p class="card-text">Listado de mascotas encontradas</p>
+                                            <p class="card-text">Buscar mascotas encontradas</p>
                                         </div>
                                     </a>
                                 </div>

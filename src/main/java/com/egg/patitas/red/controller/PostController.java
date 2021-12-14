@@ -92,14 +92,13 @@ public class PostController {
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            //mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         } else {
             mav.addObject("post", new Post());
         }
 
         String email=(String) session.getAttribute("email");
-//        mav.addObject("users", userService.findByEmail(email));
         mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
         mav.addObject("title", "Nuevo Post");
@@ -124,7 +123,6 @@ public class PostController {
             } else {
                 mav.addObject("post", post);
                 String email=(String) session.getAttribute("email");
-//                mav.addObject("users", userService.findByEmail(email));
                 mav.addObject("pets",petService.findByUserEmail(email));
                 mav.addObject("zones", zoneService.findAll());
 
