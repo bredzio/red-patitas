@@ -49,13 +49,13 @@ public class PostService {
     }
 
     @Transactional
-    public void modify(Post dto) throws MyException {
+    public void modify(Post dto, String email) throws MyException {
 
         Optional<Post> answer = postRepository.findById(dto.getId());
         if(answer.isPresent()){
             Post post = answer.get();
             post.setZone(dto.getZone());
-            post.setUser(dto.getUser());
+            post.setUser(userService.findByEmail(email));
             post.setPet(dto.getPet());
             post.setDescription(dto.getDescription().toLowerCase());
             post.setLostOrFound(dto.getLostOrFound());
@@ -112,12 +112,18 @@ public class PostService {
 
 
     @Transactional
-    public void delete(Integer id) {
-        postRepository.deleteById(id); //enable = false
+    public void delete(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        postRepository.deleteById(id);
     }
 
     @Transactional
-    public void enabled(Integer id) {
+    public void enabled(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
         postRepository.enabled(id);
     }
 }

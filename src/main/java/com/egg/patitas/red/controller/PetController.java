@@ -51,16 +51,6 @@ public class PetController {
         return mav;
     }
 
-    @GetMapping("/edit/{email}")
-    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
-    public ModelAndView editUser(@PathVariable String email) {
-        ModelAndView mav = new ModelAndView("user-form");
-        mav.addObject("user", userService.findByEmail(email));
-        mav.addObject("title", "Editar Perfil");
-        mav.addObject("action", "modificar");
-        return mav;
-    }
-
     @GetMapping("/byUser/{email}")
     @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     public ModelAndView petsByUser(@PathVariable String email){
@@ -168,7 +158,7 @@ public class PetController {
         RedirectView redirectView = new RedirectView("/pets");
         try {
             petService.enabledPet(id);
-            attributes.addFlashAttribute("success","Se habilto el animal");
+            attributes.addFlashAttribute("success","Se habilito el animal");
         } catch (Exception e) {
             attributes.addFlashAttribute("error", e.getMessage());
         }
