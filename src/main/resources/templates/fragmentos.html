@@ -110,7 +110,7 @@
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                 <li><a class="dropdown-item" th:href="@{/create}">Crear</a></li>
-                                                <li><a class="dropdown-item" th:href="@{/selectPost}">Mostrar</a></li>
+                                                <li><a class="dropdown-item" th:href="@{/selectPost}">Buscar</a></li>
                                             </ul>
                                         </li>
                                     </div>
@@ -134,7 +134,7 @@
                     <ul class="navbar-nav">
                         <div class="dropdown-ingresar">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.id != null} ? ${session.name} : 'EMPEZAR'">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

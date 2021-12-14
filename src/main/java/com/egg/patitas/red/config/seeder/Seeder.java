@@ -75,8 +75,8 @@ public class Seeder implements CommandLineRunner {
     }
 
     private void loadUsersWithRoleUser(){
-        userRepository.save(buidUser("Wanda","Maldonado","wmaldonado@huellapp.com"));
-        userRepository.save(buidUser("Dianyeli","Yrigay","drigay@huellapp.com"));
+        userRepository.save(buidUser("Wanda","Rocha","wrocha@huellapp.com"));
+        userRepository.save(buidUser("Dianyeli","Yrigay","dyrigay@huellapp.com"));
         userRepository.save(buidUser("Martín ","Solá","msola@huellapp.com"));
         userRepository.save(buidUser("Fabiola ","Siles","fsiles@huellapp.com"));
         userRepository.save(buidUser("Camila ","Nani","cnani@huellapp.com"));
@@ -88,8 +88,8 @@ public class Seeder implements CommandLineRunner {
     }
 
     private void loadUsersWithRoleAdmin(){
-        userRepository.save(buidUserAdmin("Wanda","Maldonado","wmaldonado_admin@huellapp.com"));
-        userRepository.save(buidUserAdmin("Dianyeli","Yrigay","drigay_admin@huellapp.com"));
+        userRepository.save(buidUserAdmin("Wanda","Rocha","wrocha_admin@huellapp.com"));
+        userRepository.save(buidUserAdmin("Dianyeli","Yrigay","dyrigay_admin@huellapp.com"));
         userRepository.save(buidUserAdmin("Martín ","Solá","msola_admin@huellapp.com"));
         userRepository.save(buidUserAdmin("Fabiola ","Siles","fsiles_admin@huellapp.com"));
         userRepository.save(buidUserAdmin("Camila ","Nani","cnani_admin@huellapp.com"));
@@ -180,13 +180,13 @@ public class Seeder implements CommandLineRunner {
             petRepository.save(buildPet("Shazam", "bredzio@huellapp.com", GATO1,"Gato"));
             petRepository.save(buildPet("Clarita", "bredzio@huellapp.com", GATO2,"Gato"));
             petRepository.save(buildPet("Pepe", "bredzio@huellapp.com", GATO3,"Gato"));
-            petRepository.save(buildPet("Toto", "drigay@huellapp.com", GATO4,"Gato"));
-            petRepository.save(buildPet("Chicho", "drigay@huellapp.com", GATO5,"Gato"));
+            petRepository.save(buildPet("Toto", "dyrigay@huellapp.com", GATO4,"Gato"));
+            petRepository.save(buildPet("Chicho", "dyrigay@huellapp.com", GATO5,"Gato"));
             petRepository.save(buildPet("Pilu", "msola@huellapp.com", PERRO1,"Perro"));
             petRepository.save(buildPet("Luli", "cnani@huellapp.com", PERRO2,"Perro"));
             petRepository.save(buildPet("Lucas", "cnani@huellapp.com", PERRO3,"Perro"));
-            petRepository.save(buildPet("Sancho", "wmaldonado@huellapp.com", PERRO4,"Perro"));
-            petRepository.save(buildPet("Bugs", "wmaldonado@huellapp.com", CONEJO,"Conejo"));
+            petRepository.save(buildPet("Sancho", "wrocha@huellapp.com", PERRO4,"Perro"));
+            petRepository.save(buildPet("Bugs", "wrocha@huellapp.com", CONEJO,"Conejo"));
         }
     }
 
@@ -200,8 +200,8 @@ public class Seeder implements CommandLineRunner {
         post.setDescription(description);
         post.setPet(petRepository.findByName(pet).get());
         post.setZone(zoneRepository.findByCity(zone).get());
-        post.setLostOrFound(Boolean.TRUE);
-
+        post.setLostOrFound(Boolean.FALSE);
+        post.setEnabled(Boolean.TRUE);
         return post;
     }
 
@@ -212,8 +212,8 @@ public class Seeder implements CommandLineRunner {
         post.setDescription(description);
         post.setPet(petRepository.findByName(pet).get());
         post.setZone(zoneRepository.findByCity(zone).get());
-        post.setLostOrFound(Boolean.FALSE);
-
+        post.setLostOrFound(Boolean.TRUE);
+        post.setEnabled(Boolean.TRUE);
         return post;
     }
 
@@ -226,15 +226,15 @@ public class Seeder implements CommandLineRunner {
 
     private void loadPostsFound(){
             postRepository.save(buildPostFound("bredzio@huellapp.com","Es muy mimoso, te necesita","Shazam","Rafaela"));
-            postRepository.save(buildPostFound("drigay@huellapp.com","Con esta carita ¿como no lo vas a querer?","Toto","Rafaela"));
-            postRepository.save(buildPostFound("drigay@huellapp.com","Es charlatan y muy compañero","Chicho","Capital Federal"));
+            postRepository.save(buildPostFound("dyrigay@huellapp.com","Con esta carita ¿como no lo vas a querer?","Toto","Rafaela"));
+            postRepository.save(buildPostFound("dyrigay@huellapp.com","Es charlatan y muy compañero","Chicho","Capital Federal"));
             postRepository.save(buildPostFound("msola@huellapp.com","Es muy gracioso, te va a alegrar la vida","Pilu","Capital Federal"));
     }
 
     private void loadPostsLost(){
             postRepository.save(buildPostLost("cnani@huellapp.com","Perdido en la plaza almagro","Luli","Capital Federal"));
             postRepository.save(buildPostLost("cnani@huellapp.com","Perdido por la 9 de julio","Lucas","Capital Federal"));
-            postRepository.save(buildPostLost("wmaldonado@huellapp.com","Se fue corriendo y nunca más lo vi","Sancho","Rafaela"));
-            postRepository.save(buildPostLost("wmaldonado@huellapp.com","Era un loquito de las motos, y persiguiendo una, lo perdí de vista","Bugs","Rafaela"));
+            postRepository.save(buildPostLost("wrocha@huellapp.com","Se fue corriendo y nunca más lo vi","Sancho","Rafaela"));
+            postRepository.save(buildPostLost("wrocha@huellapp.com","Era un loquito de las motos, y persiguiendo una, lo perdí de vista","Bugs","Rafaela"));
     }
 }

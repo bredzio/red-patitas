@@ -46,19 +46,23 @@
         <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse">
         <img class="elipse4" th:src="@{/img/elipse4.png}" alt="fondo de elipse">
 
-        <div th:if="${error}" class="container mt-4 text-center">
-            <div class="row col-md-4 mx-auto">
-                <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
-            </div>
-        </div>
 
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
 
+                    <div th:if="${error}" class="container-error mt-4 text-center">
+                        <div class="row col-md-4 mx-auto">
+                            <div th:text="${error}" class="alert alert-danger shadow"></div>
+                        </div>
+                    </div>
+
                     <div class="container-form">
-                        <h2 th:text="${title}"></h2>
-                        <hr class="mb-5 col-xl-12" />
+                        <section class="welcome">
+                            <h1 th:text="${title}"></h1>
+                            <hr/>
+                        </section>
+
                         <form autocomplete="off" class="needs-validation form-post" id="formulario" method="POST" novalidate
                             th:action="@{/posts/__${action}__}" th:object="${post}">
                             <input th:field="*{id}" type="hidden" />
