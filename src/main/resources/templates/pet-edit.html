@@ -45,7 +45,7 @@
 
         <div class="card-body text-center my-2">
             <img class="rounded-circle"
-                 th:src="${pet.photo != null} ? @{https://huellapp.s3.us-east-2.amazonaws.com/}+${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                 th:src="${pet.photo != null} ? ${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
                  width="165">
         </div>
 
