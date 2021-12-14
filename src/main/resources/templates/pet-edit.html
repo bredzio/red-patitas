@@ -51,7 +51,7 @@
 
         <div class="form-floating mb-3 col-xl-6">
             <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}">
-                <option selected value="" th:text="${pet.animal.name}"></option>
+                <option selected value="">Elegir Especie</option>
                 <option th:each="animal : ${animals}" th:text="|${animal.name}|"
                         th:value="${animal.id}">
                 </option>
