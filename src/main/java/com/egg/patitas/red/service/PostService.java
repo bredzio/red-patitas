@@ -1,42 +1,42 @@
 package com.egg.patitas.red.service;
 
 import com.egg.patitas.red.exception.MyException;
-import com.egg.patitas.red.model.Pet;
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.repository.PostRepository;
 import com.egg.patitas.red.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 
 @Service
+@AllArgsConstructor
 public class PostService {
-    @Autowired
-    private PostRepository postRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final PostRepository postRepository;
+
+    private final UserService userService;
+
+    private final UserRepository userRepository;
 
     @Transactional
-    public void createPost(Post dto) {
+    public void createPost(Post dto, String email) {
 //        no es dto , solo lo puso de nombre por si en el futuro usamos dto
 
-        postRepository.save(buildPost(dto));
+        postRepository.save(buildPost(dto, email));
 
     }
 
     @Transactional
-    public Post buildPost(Post dto) {
+    public Post buildPost(Post dto,String email ) {
         Post post = new Post();
 
         post.setZone(dto.getZone());
-        post.setUser(dto.getUser());
+        post.setUser(userService.findByEmail(email));
         post.setPet(dto.getPet());
         post.setDescription(dto.getDescription().toLowerCase());
         post.setEnabled(true); // post habilitado
@@ -49,13 +49,13 @@ public class PostService {
     }
 
     @Transactional
-    public void modify(Post dto) throws MyException {
+    public void modify(Post dto, String email) throws MyException {
 
         Optional<Post> answer = postRepository.findById(dto.getId());
         if(answer.isPresent()){
             Post post = answer.get();
             post.setZone(dto.getZone());
-            post.setUser(dto.getUser());
+            post.setUser(userService.findByEmail(email));
             post.setPet(dto.getPet());
             post.setDescription(dto.getDescription().toLowerCase());
             post.setLostOrFound(dto.getLostOrFound());
@@ -112,12 +112,18 @@ public class PostService {
 
 
     @Transactional
-    public void delete(Integer id) {
-        postRepository.deleteById(id); //enable = false
+    public void delete(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        postRepository.deleteById(id);
     }
 
     @Transactional
-    public void enabled(Integer id) {
+    public void enabled(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
         postRepository.enabled(id);
     }
 }

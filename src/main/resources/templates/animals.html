@@ -62,14 +62,12 @@
 
                     <div class="container-list">
                         <section class="welcome">
-                            <!-- <h2 th:text="${title}"></h2> -->
                             <h2>Lista de Animales</h2>
-                            <hr class="mb-5" />
                             <div th:if="${animals.isEmpty()}">
                                 <h5>Todavía no hay animales cargados. <a th:href="@{/animals/create}">Crear nuevo</a></h5>
                             </div>
+                            <hr class="mb-5" />
                         </section>
-
 
                         <div class="table-responsive" th:unless="${animals.isEmpty()}">
                             <!-- <h2 class="mb-5">Especie</h2> -->

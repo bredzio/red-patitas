@@ -5,7 +5,6 @@ import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
-import com.egg.patitas.red.service.UserService;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,9 +30,6 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private ZoneService zoneService;
 
     @Autowired
@@ -51,16 +47,6 @@ public class PostController {
         return mav;
     }
 
-    @GetMapping("/edit/{email}")
-    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
-    public ModelAndView editUser(@PathVariable String email) {
-        ModelAndView mav = new ModelAndView("user-form");
-        mav.addObject("user", userService.findByEmail(email));
-        mav.addObject("title", "Editar Perfil");
-        mav.addObject("action", "modificar");
-        return mav;
-    }
-
     @GetMapping("/byUser/{email}")
     @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     public ModelAndView postsByUser(@PathVariable String email){
@@ -72,8 +58,13 @@ public class PostController {
     }
 
     @GetMapping("/lostposts")
-    public ModelAndView showLostPost(){
+    public ModelAndView showLostPost(HttpServletRequest request){
         ModelAndView mav = new ModelAndView("posts");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("success", flashMap.get("success"));
+            mav.addObject("error", flashMap.get("error"));
+        }
         mav.addObject("posts", postService.findLostPost());
         mav.addObject("title","Mascotas perdidas");
 
@@ -81,15 +72,18 @@ public class PostController {
     }
 
     @GetMapping("/foundposts")
-    public ModelAndView showFoundPost(){
+    public ModelAndView showFoundPost(HttpServletRequest request){
         ModelAndView mav = new ModelAndView("posts");
-
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("success", flashMap.get("success"));
+            mav.addObject("error", flashMap.get("error"));
+        }
         mav.addObject("posts", postService.findFoundPost());
         mav.addObject("title","Mascotas encontradas");
 
         return mav;
     }
-
 
 
     @GetMapping("/create")
@@ -105,8 +99,8 @@ public class PostController {
         }
 
         String email=(String) session.getAttribute("email");
-        mav.addObject("users", userService.findByEmail(email));
-        mav.addObject("pets",petService.findByUserEmail(email)); //pensar como traer pets solo del usuario loggeado
+//        mav.addObject("users", userService.findByEmail(email));
+        mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
         mav.addObject("title", "Nuevo Post");
         mav.addObject("action", "save");
@@ -114,7 +108,7 @@ public class PostController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
+    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
         if (!session.getAttribute("id").equals(id)) {
             return new ModelAndView(new RedirectView("/"));
         }
@@ -129,7 +123,7 @@ public class PostController {
             } else {
                 mav.addObject("post", postService.findById(id));
                 String email=(String) session.getAttribute("email");
-                mav.addObject("users", userService.findByEmail(email));
+//                mav.addObject("users", userService.findByEmail(email));
                 mav.addObject("pets",petService.findByUserEmail(email));
                 mav.addObject("zones", zoneService.findAll());
 
@@ -142,11 +136,12 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes)  {
+    public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes, HttpSession session)  {
         RedirectView redirectView = new RedirectView("/posts");
 
         try {
-            postService.createPost(post);
+            String email=(String) session.getAttribute("email");
+            postService.createPost(post, email);
         }catch(Exception e){
             attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());
@@ -157,7 +152,7 @@ public class PostController {
     }
 
     @PostMapping("/modify")
-    public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, RedirectAttributes attributes)  {
+    public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
         ModelAndView mav = new ModelAndView();
 
@@ -170,7 +165,8 @@ public class PostController {
         }
 
         try {
-            postService.modify(post);
+            String email=(String) session.getAttribute("email");
+            postService.modify(post, email);
             attributes.addFlashAttribute("success", "La actualización ha sido realizada satisfactoriamente");
             mav.setViewName("redirect:/posts");
         } catch (MyException e) {
@@ -183,14 +179,28 @@ public class PostController {
     }
 
     @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Integer id) {
-        postService.delete(id);
+    public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes) {
+        try {
+            postService.delete(id);
+            attributes.addFlashAttribute("success","Se borro el post");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+
+        }
+
         return new RedirectView("/posts");
     }
 
     @PostMapping("/enabled/{id}")
-    public RedirectView enabled(@PathVariable Integer id) {
-        postService.enabled(id);
+    public RedirectView enabled(@PathVariable Integer id, RedirectAttributes attributes) {
+        try {
+            postService.enabled(id);
+            attributes.addFlashAttribute("success","Se habilito el post");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error", e.getMessage());
+        }
+
         return new RedirectView("/posts");
     }
 

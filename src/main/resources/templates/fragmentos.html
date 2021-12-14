@@ -85,84 +85,84 @@
 </footer>-->
 
 
-  <header th:fragment="navbarIndex">
+<header th:fragment="navbarIndex">
     <div class="header">
-      <div class="wrapper">
-        <div class="header-container">
+        <div class="wrapper">
+            <div class="header-container">
 
-          <div class="logo">
-            <a th:href="@{/}">
-              <img class="logo-huellapp" th:src="@{/img/huellapp.svg}" width="70px" height="70px" alt="Logo HuellApp">
-            </a>
-          </div>
+                <div class="logo">
+                    <a th:href="@{/}">
+                        <img class="logo-huellapp" th:src="@{/img/huellapp.svg}" width="70px" height="70px" alt="Logo HuellApp">
+                    </a>
+                </div>
 
-          <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <nav class="navbar navbar-expand-lg bg-light">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
 
-                  <div class="navbar-container">
-                    <div class="dropdown-mascotas">
-                      <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
-                          data-bs-toggle="dropdown" aria-expanded="false">
-                          PUBLICACIONES
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li><a class="dropdown-item" th:href="@{/create}">Crear</a></li>
-                          <li><a class="dropdown-item" th:href="@{/selectPost}">Mostrar</a></li>
-                        </ul>
-                      </li>
+                                <div class="navbar-container">
+                                    <div class="dropdown-mascotas">
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                PUBLICACIONES
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                <li><a class="dropdown-item" th:href="@{/create}">Crear</a></li>
+                                                <li><a class="dropdown-item" th:href="@{/selectPost}">Mostrar</a></li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/ayuda}">AYUDA</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/nosotros}">NOSOTROS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/}">CONTÁCTANOS</a>
+                                    </li>
+                                </div>
+
+                            </ul>
+                        </div>
                     </div>
-                    <li class="nav-item">
-                      <a class="nav-link" th:href="@{/ayuda}">AYUDA</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" th:href="@{/nosotros}">NOSOTROS</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" th:href="@{/}">CONTÁCTANOS</a>
-                    </li>
-                  </div>
+                </nav>
 
-                </ul>
-              </div>
+                <nav>
+                    <ul class="navbar-nav">
+                        <div class="dropdown-ingresar">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.id != null} ? ${session.name} : 'EMPEZAR'">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/login}">Iniciar sesión</a></li>
+                                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
+                                    <!-- USUARIO INGRESADO -->
+                                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/users/edit/}+${session.email}">Mi perfil</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/pets/byUser/}+${session.email}">Mis mascotas</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/posts/byUser/}+${session.email}">Mis publicaciones</a></li>
+                                    <!-- PARA ADMIN -->
+                                    <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/dashboard}">Panel de control</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                        </div>
+                    </ul>
+                </nav>
+
             </div>
-          </nav>
-
-          <nav>
-            <ul class="navbar-nav">
-              <div class="dropdown-ingresar">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.id != null} ? ${session.name} : 'EMPEZAR'">      
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/login}">Iniciar sesión</a></li>
-                    <li sec:authorize=isAnonymous()><a class="dropdown-item" th:href="@{/auth/signup}">Registrarse</a></li>
-                    <!-- USUARIO INGRESADO -->
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/users/edit/}+${session.email}">Mi perfil</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/pets/byUser/}+${session.email}">Mis mascotas</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/posts/byUser/}+${session.email}">Mis publicaciones</a></li>
-                    <!-- PARA ADMIN -->
-                    <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/dashboard}">Panel de control</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-              </div>
-            </ul>
-          </nav>
-
         </div>
-      </div>
     </div>
-  </header>
+</header>
 
-  <footer th:fragment="footer" class="footer">
+<footer th:fragment="footer" class="footer">
     <p>Hecho con <i class="fas fa-heart"></i> Copyright 2021 - Todos los derechos reservados</p>
     <div class="footer-a">
-      <a href="..."> <i class="fab fa-linkedin"></i></a>
-      <a href="..."> <i class="fab fa-instagram-square"></i></a>
-      <a href="..."> <i class="fab fa-twitter-square"></i></a>
+        <a href="..."> <i class="fab fa-linkedin"></i></a>
+        <a href="..."> <i class="fab fa-instagram-square"></i></a>
+        <a href="..."> <i class="fab fa-twitter-square"></i></a>
     </div>
-  </footer>
+</footer>
