@@ -38,21 +38,4 @@ public class PhotoService {
                 || contentType.equals("image/jpg")
                 || contentType.equals("image/jpeg");
     }
-
-    /*public String copy(MultipartFile photo) throws Exception{
-
-        try{
-            String namePhoto = photo.getOriginalFilename();
-
-            Path pathPhoto = Paths.get(directory, namePhoto).toAbsolutePath();
-
-            Files.copy(photo.getInputStream(), pathPhoto, StandardCopyOption.REPLACE_EXISTING);
-
-            return namePhoto;
-
-        }catch(IOException e){
-            throw new Exception("Error al guardar la foto");
-        }
-
-    }*/
 }
