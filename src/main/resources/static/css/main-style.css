@@ -696,6 +696,7 @@ p .enlaces {
 /* -------LISTA DE USERS------- */
 .table>thead, .table>tbody {
   vertical-align: middle;
+  text-align: center;
 }
 
 .btn-danger {
@@ -703,6 +704,14 @@ p .enlaces {
   border: 0px;
 }
 
+.btn-danger:hover {
+  background: #dc1f19;
+}
+
+.btn-primary {
+  background: var(--blue20);
+  border: 0px;
+}
 .btn-secondary {
   border-color: var(--black30);
   border: 0px;
