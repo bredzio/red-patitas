@@ -18,8 +18,12 @@ import java.io.IOException;
 @Service
 public class StorageService {
 
-    @Value("${application.bucket.name}")
+    @Value("${amazonProperties.bucketName}")
     private String huellappBucket;
+
+    @Value("${amazonProperties.endpointUrl}")
+    private String endpointUrl;
+
 
     @Autowired
     private AmazonS3 s3Client;
@@ -28,8 +32,9 @@ public class StorageService {
         File fileObj= convertMultiPartFileToFile(file);
         String fileName=System.currentTimeMillis()+"_"+file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(huellappBucket,fileName,fileObj));
+        String fileUrl=endpointUrl+""+fileName;
         fileObj.delete();
-        return fileName;
+        return fileUrl;
     }
 
     public byte[] downloadFile(String fileName){

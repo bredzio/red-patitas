@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
@@ -18,6 +19,8 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
     List<Pet> findByUser_Id(Integer id);
 
     List<Pet> findByUser_Email(String email);
+
+    Optional<Pet> findByName(String name);
 
 
 }
