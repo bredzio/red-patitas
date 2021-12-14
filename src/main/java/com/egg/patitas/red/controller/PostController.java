@@ -109,10 +109,6 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
-        if (!session.getAttribute("id").equals(id)) {
-            return new ModelAndView(new RedirectView("/"));
-        }
-
         ModelAndView mav = new ModelAndView("post-form");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 

@@ -68,7 +68,6 @@
                             </div>
                             <hr class="mb-5" />
                         </section>
-                            <!--        <div class="row my-auto g-4 justify-content-evenly">-->
 
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                             <div class="col-post mb-4" th:each="post : ${posts}">
@@ -76,7 +75,7 @@
 
                                     <div class="card-body text-center">
                                         <img class="card-img"
-                                        th:src="${post.pet.photo != null} ? @{https://huellapp.s3.us-east-2.amazonaws.com/}+${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                                        th:src="${post.pet.photo != null} ? ${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
                                             width="165">
                                     </div>
 

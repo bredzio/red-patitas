@@ -78,8 +78,7 @@ public class UserController {
     }
 
     @GetMapping("/edit/{email}")
-    @PreAuthorize("hasRole('ADMIN') or #email == authentication.principal.username")
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+    @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     public ModelAndView editUser(@PathVariable String email) {
         ModelAndView mav = new ModelAndView("user-form");
         mav.addObject("user", userService.findByEmail(email));
