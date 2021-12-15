@@ -29,18 +29,28 @@ public class UserController {
     private  UserService userService;
 
     @GetMapping
-    public ModelAndView showAll(){
+    public ModelAndView showAllUser(HttpServletRequest request){
         ModelAndView mav = new ModelAndView("users");
-        mav.addObject("users", userService.findAll());
-        mav.addObject("title", "Users");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("success", flashMap.get("success"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+        mav.addObject("users", userService.findByRoleUser());
+        mav.addObject("title", "Lista de Usuarios");
         return mav;
     }
 
     @GetMapping("/members")
-    public ModelAndView showAllMembers(){
-        ModelAndView mav = new ModelAndView("members");
-        mav.addObject("users", userService.findAll());
-        mav.addObject("title", "Miembros");
+    public ModelAndView showAllMembers(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("users");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("success", flashMap.get("success"));
+            mav.addObject("error", flashMap.get("error"));
+        }
+        mav.addObject("users", userService.findByRoleAdmin());
+        mav.addObject("title", "Lista de Miembros");
         return mav;
     }
 
