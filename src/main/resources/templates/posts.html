@@ -38,13 +38,16 @@
         <meta name="theme-color" content="#ffffff">
     </head>
 
-    <body>
+    <body onload="myFunction()" style="margin:0;">
         <nav th:replace="fragmentos :: navbarIndex"></nav>
 
         <img class="elipse2" th:src="@{/img/elipse2.svg}" alt="fondo de elipse">
         <img class="elipse4" th:src="@{/img/elipse4.png}" alt="fondo de elipse">
 
-        <div class="main">
+        <div  class="main">
+            <div class="loader"></div>
+            <h1 class="loaders">Cargando</h1>
+            <div style="display:none;" id="myDiv" class="animate-bottom">
             <div class="wrapper">
                 <div class="main-content">
 
@@ -103,6 +106,7 @@
                 </div>
             </div>
         </div>
+        </div>
 
         <!-- JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -112,6 +116,19 @@
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
+        <script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 1);
+}
+
+function showPage() {
+  document.querySelector(".loader").style.display = "none";
+    document.querySelector(".loaders").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+        <footer th:replace="fragmentos :: footer"></footer>
     </body>
-    <footer th:replace="fragmentos :: footer"></footer>
 </html>
