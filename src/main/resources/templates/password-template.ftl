@@ -261,46 +261,27 @@
                       <div
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
                         <p style="text-align: center;"><span
-                            style="font-size: 24px;"><strong>¡Bienvenid@!</strong></span></p>
+                            style="font-size: 24px;"><strong>¡Hola ${name}!</strong></span></p>
                         <p style="text-align: center;">&nbsp;</p>
-                        <p style="text-align: center;margin: 0 0 25px 0;"><span style="font-size: 16px;">Hola ${name}, te has registrado exitosamente!</span></p>
-                        <p style="text-align: center;margin: 0 0 25px 0;"><span style="font-size: 16px;">El link de activación dura 15 minutos!</span></p>
-                        <p style="color: #FFFFFF;font-size: 20px;text-align: center;background-color: #258EDB;border-radius: 5px; padding: 10px; width: 100px; margin-left: 225px;"><span style="font-size: 16px;"><a href=${link}>Activar ahora</a></span></p>
-                      </div>
-          
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="font-size:0px;word-break:break-word;">
-                      <div style="height:30px;">
-                        &nbsp;
-                      </div>
+                        <p style="text-align: center;margin: 0 0 10px 0;"><span style="font-size: 16px;">Has solicitado un cambio de contraseña!</span></p>
+                        <p style="text-align: center;margin: 0 0 40px 0;"><span style="font-size: 16px;">En caso que no, desestima este correo electrónico.</span></p>
+                        <p style="text-align: center;margin: 0 0 10px 0;"><span style="font-size: 16px;">Para avanzar con el cambio, haz click sobre el boton.</span></p>
+                        <p style="text-align: center;margin: 0 0 10px 0;"><span style="font-size: 16px;">El link de activación dura 15 minutos!</span></p>
+                        <p style="color: #FFFFFF;font-size: 20px;text-align: center;background-color: #258EDB;border-radius: 5px; padding: 10px; width: 100px; margin-left: 225px;"><span style="font-size: 16px;"><a href=${link}>Click aquí</a></span></p>
+                      </div>          
                     </td>
                   </tr>
 
                   <tr>
                     <td align="left" style="font-size:0px;padding:15px 15px 15px 15px;word-break:break-word;">
-
                       <div
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#000000;">
-                        <p style="text-align: center;"><strong>Datos de contacto: </strong></p>
-                        <p style="text-align: center;">Nombre: ${name}</p>
-                        <p style="text-align: center;">Apellido: ${surname}</p>
+                        <p style="text-align: center;"><strong>Cualquier duda podes consultarnos a: </strong></p>
+                        <p style="text-align: center;">teamhuellapp@gmail.com</p>
                       </div>
-
                     </td>
                   </tr>
 
-                  <tr>
-                    <td style="font-size:0px;word-break:break-word;">
-
-                      <div style="height:30px;">
-                        &nbsp;
-                      </div>
-
-                    </td>
-                  </tr>
 
                 </table>
 

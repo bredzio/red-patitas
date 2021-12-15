@@ -1,8 +1,10 @@
 package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.model.Animal;
+import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +34,7 @@ public class AnimalController {
         return mav;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @GetMapping("/create")
     public ModelAndView create(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("animal-form");
@@ -62,6 +65,7 @@ public class AnimalController {
         return redirectView;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/delete/{id}")
     public RedirectView deleteAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/animals");
@@ -77,6 +81,7 @@ public class AnimalController {
         return redirectView;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/enabled/{id}")
     public RedirectView enabledAnimal(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/animals");

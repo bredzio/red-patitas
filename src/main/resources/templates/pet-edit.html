@@ -38,7 +38,7 @@
         <meta name="theme-color" content="#ffffff">
     </head>
 
-    <body>
+    <body onload="myFunction()" style="margin:0;">
         <nav th:replace="fragmentos :: navbarIndex"></nav>
 
         <div class="main">
@@ -70,6 +70,16 @@
                                 <label class="form-label">Cargar foto</label>
                                 <input  class="form-control mt-2" type="file" th:value="${pet.photo}" name="photo" accept="image/*">
                             </div>
+                          
+                          <div class="loader"></div>
+                            <h1 class="loaders">Cargando...</h1>
+                            <!-- <div style="display:none;" id="myDiv" class="animate-bottom"> -->
+                                <div class="form-floating text-center mb-3 col-xl-6">
+                                    <img class="form-img"
+                                        th:src="${pet.photo != null} ? ${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                                        width="165">
+                                </div>
+                            <!-- </div> -->
 
                             <div class="form-floating text-center mb-3 col-xl-6">
                                 <img class="form-img"
@@ -114,6 +124,19 @@
                 }, false);
             })()
         </script>
+        <script>
+        var myVar;
+
+        function myFunction() {
+          myVar = setTimeout(showPage, 1000);
+        }
+
+        function showPage() {
+          document.querySelector(".loader").style.display = "none";
+            document.querySelector(".loaders").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
             crossorigin="anonymous"></script>
@@ -123,5 +146,4 @@
         <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
     </body>
     <footer th:replace="fragmentos :: footer"></footer>
-
 </html>

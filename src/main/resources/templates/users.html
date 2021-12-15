@@ -63,7 +63,7 @@
 
                     <div class="container-list">
                         <section class="welcome">
-                            <h1>Lista de Usuarios</h1>
+                            <h1 th:text="${title}"></h1>
                             <div th:if="${users.isEmpty()}">
                                 <h5>No existen registros. <a th:href="@{/users/create}">Crear nuevo.</a></h5>
                             </div>
@@ -87,7 +87,7 @@
                                         <td class="col-md-6 px-md-4" th:text="${user.email}"></td>
 
                                         <td class="col-md-2 px-md-2 d-flex justify-content-around w-100">
-                                            <a class="btn-sm" th:href="@{/users/edit/__${user.id}__}"><i class="fas fa-edit"></i></a>
+                                            <a class="btn-sm" th:href="@{/users/edit/__${user.email}__}"><i class="fas fa-edit"></i></a>
                                             <form
                                                 th:action="${user.enabled} ? @{/users/delete/__${user.id}__} : @{/users/enabled/__${user.id}__}"
                                                 method="POST">

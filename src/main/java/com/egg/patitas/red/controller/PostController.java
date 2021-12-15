@@ -87,6 +87,7 @@ public class PostController {
 
 
     @GetMapping("/create")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView createPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("post-form");
 
@@ -106,7 +107,9 @@ public class PostController {
         return mav;
     }
 
+
     @GetMapping("/edit/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
         Post post = postService.findById(id).orElse(null);
         if (!session.getAttribute("id").equals(post.getUser().getId())) {
@@ -136,7 +139,7 @@ public class PostController {
 
     @PostMapping("/save")
     public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes, HttpSession session)  {
-        RedirectView redirectView = new RedirectView("/posts");
+        RedirectView redirectView = new RedirectView("/posts/byUser/" + session.getAttribute("email"));
 
         try {
             String email=(String) session.getAttribute("email");
@@ -150,11 +153,12 @@ public class PostController {
         return redirectView;
     }
 
+
     @PostMapping("/modify")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
         ModelAndView mav = new ModelAndView();
-
         if (result.hasErrors()) {
             mav.addObject("title", "Editar Post");
             mav.addObject("action", "modify");
@@ -167,7 +171,7 @@ public class PostController {
             String email=(String) session.getAttribute("email");
             postService.modify(post, email);
             attributes.addFlashAttribute("success", "La actualización ha sido realizada satisfactoriamente");
-            mav.setViewName("redirect:/posts");
+            mav.setViewName("redirect:/posts/byUser/" + session.getAttribute("email"));
         } catch (MyException e) {
             attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());
@@ -177,20 +181,29 @@ public class PostController {
         return mav;
     }
 
+
     @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes) {
-        try {
-            postService.delete(id);
-            attributes.addFlashAttribute("success","Se borro el post");
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
+    public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
 
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email"))){
+            try {
+                postService.delete(id);
+                attributes.addFlashAttribute("success","Se borro el post");
 
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
+
+            }
+            return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
-        return new RedirectView("/posts");
+            return  new RedirectView("/");
+
+
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/enabled/{id}")
     public RedirectView enabled(@PathVariable Integer id, RedirectAttributes attributes) {
         try {
