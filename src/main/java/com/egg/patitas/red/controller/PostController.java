@@ -87,6 +87,7 @@ public class PostController {
 
 
     @GetMapping("/create")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView createPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("post-form");
 
@@ -106,8 +107,9 @@ public class PostController {
         return mav;
     }
 
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+
     @GetMapping("/edit/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
         Post post = postService.findById(id).orElse(null);
         if (!session.getAttribute("id").equals(post.getUser().getId())) {
@@ -151,12 +153,12 @@ public class PostController {
         return redirectView;
     }
 
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+
     @PostMapping("/modify")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
         ModelAndView mav = new ModelAndView();
-
         if (result.hasErrors()) {
             mav.addObject("title", "Editar Post");
             mav.addObject("action", "modify");
@@ -179,19 +181,26 @@ public class PostController {
         return mav;
     }
 
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+
     @PostMapping("/delete/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
-        try {
-            postService.delete(id);
-            attributes.addFlashAttribute("success","Se borro el post");
 
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email"))){
+            try {
+                postService.delete(id);
+                attributes.addFlashAttribute("success","Se borro el post");
 
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
+
+            }
+            return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
-        return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
+            return  new RedirectView("/");
+
+
     }
 
     @PreAuthorize(SecurityConstant.ADMIN)
