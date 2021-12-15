@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -94,6 +96,7 @@ public class PostController {
         if (flashMap != null) {
             mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
+            mav.addObject("post", flashMap.get("post"));
         } else {
             mav.addObject("post", new Post());
         }
@@ -135,16 +138,27 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public RedirectView save(@ModelAttribute Post post, RedirectAttributes attributes, HttpSession session)  {
-        RedirectView redirectView = new RedirectView("/posts");
+    public RedirectView save(@Valid @ModelAttribute Post post, BindingResult result, RedirectAttributes attributes, HttpSession session)  {
+        RedirectView redirectView = new RedirectView("/posts/byUser/" + session.getAttribute("email"));
+
+        if (result.hasErrors()) {
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError error : errors ) {
+                attributes.addFlashAttribute("error",error.getDefaultMessage());
+                attributes.addFlashAttribute("post", post);
+            }
+
+            redirectView.setUrl("/posts/create");
+            return redirectView;
+        }
 
         try {
             String email=(String) session.getAttribute("email");
             postService.createPost(post, email);
         }catch(Exception e){
-            attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());
-            redirectView.setUrl("/post/create");
+            attributes.addFlashAttribute("post", post);
+            redirectView.setUrl("/posts/create");
         }
 
         return redirectView;
@@ -167,18 +181,18 @@ public class PostController {
             String email=(String) session.getAttribute("email");
             postService.modify(post, email);
             attributes.addFlashAttribute("success", "La actualización ha sido realizada satisfactoriamente");
-            mav.setViewName("redirect:/posts");
+            mav.setViewName("redirect:/posts/byUser/" + session.getAttribute("email"));
         } catch (MyException e) {
             attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());
-            mav.setViewName("redirect:/post/edit/" + post.getId());
+            mav.setViewName("redirect:/posts/edit/" + post.getId());
         }
 
         return mav;
     }
 
     @PostMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes) {
+    public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
         try {
             postService.delete(id);
             attributes.addFlashAttribute("success","Se borro el post");
@@ -188,11 +202,11 @@ public class PostController {
 
         }
 
-        return new RedirectView("/posts");
+        return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista
     }
 
     @PostMapping("/enabled/{id}")
-    public RedirectView enabled(@PathVariable Integer id, RedirectAttributes attributes) {
+    public RedirectView enabled(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
         try {
             postService.enabled(id);
             attributes.addFlashAttribute("success","Se habilito el post");
@@ -200,7 +214,7 @@ public class PostController {
             attributes.addFlashAttribute("error", e.getMessage());
         }
 
-        return new RedirectView("/posts");
+        return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista
     }
 
 }
