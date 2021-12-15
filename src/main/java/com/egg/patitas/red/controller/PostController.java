@@ -5,6 +5,7 @@ import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
+import com.egg.patitas.red.service.UserService;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +35,9 @@ public class PostController {
 
     @Autowired
     private PetService petService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request){
@@ -112,12 +116,10 @@ public class PostController {
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
         Post post = postService.findById(id).orElse(null);
-        if (!session.getAttribute("id").equals(post.getUser().getId())) {
-            return new ModelAndView(new RedirectView("/"));
-        }
 
-        ModelAndView mav = new ModelAndView("post-form");
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if((postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2)){
+            ModelAndView mav = new ModelAndView("post-form");
+            Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
             if (flashMap != null) {
                 mav.addObject("success", flashMap.get("success"));
@@ -131,9 +133,14 @@ public class PostController {
 
             }
 
-        mav.addObject("title", "Editar Post");
-        mav.addObject("action", "modify");
-        return mav;
+            mav.addObject("title", "Editar Post");
+            mav.addObject("action", "modify");
+            return mav;
+        }else{
+            return new ModelAndView(new RedirectView("/"));
+        }
+
+
 
     }
 
@@ -186,7 +193,7 @@ public class PostController {
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
 
-        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email"))){
+        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
             try {
                 postService.delete(id);
                 attributes.addFlashAttribute("success","Se borro el post");
