@@ -89,7 +89,7 @@ public class PetController {
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/create");
         }
-        return new RedirectView("/pets");
+        return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
 
 
@@ -101,7 +101,7 @@ public class PetController {
 //    }
 
 
-
+    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     @GetMapping("/edit/{id}")
     public ModelAndView editPet(@PathVariable Integer id){
 
@@ -121,7 +121,7 @@ public class PetController {
 
 
     @PostMapping("/edit/save")
-    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name ,@RequestParam Animal animal ,@RequestParam(required = false) MultipartFile photo, RedirectAttributes attributes) {
+    public RedirectView editSave(@RequestParam Integer id, @RequestParam String name ,@RequestParam Animal animal ,@RequestParam(required = false) MultipartFile photo, RedirectAttributes attributes, HttpSession session) {
         try {
             if (photo.isEmpty() || photo == null) {
                 petService.editPet(id, name, animal);
@@ -136,8 +136,10 @@ public class PetController {
             return new RedirectView("/pets/pet-edit");
         }
         attributes.addFlashAttribute("succes", "La mascota se editó con éxito!");
-        return new RedirectView("/pets");
+        return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
+
+    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     @PostMapping("/delete/{id}")
     public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/pets");
@@ -153,6 +155,7 @@ public class PetController {
         return redirectView;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/enabled/{id}")
     public RedirectView enabledPet(@PathVariable Integer id , RedirectAttributes attributes)  {
         RedirectView redirectView = new RedirectView("/pets");
