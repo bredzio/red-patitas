@@ -3,6 +3,7 @@ package com.egg.patitas.red.service;
 import com.egg.patitas.red.config.RoleEnum;
 import com.egg.patitas.red.email.EmailSend;
 import com.egg.patitas.red.exception.EmailExistException;
+import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.model.Role;
 import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.repository.RoleRepository;
@@ -146,6 +147,33 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public Optional<User> findById(Integer id){return userRepository.findById(id);}
+
+    @Transactional(readOnly = true)
+    public List<User> findByRoleUser(){
+
+        List <User> userRoleUser = new ArrayList();
+
+        for (User u : findAll()) {
+
+            if (u.getRole().getId() == 1) {
+                userRoleUser.add(u);
+            }
+        }
+        return userRoleUser;
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> findByRoleAdmin(){
+
+        List <User> userRoleAdmin = new ArrayList();
+
+        for (User u : findAll()) {
+            if (u.getRole().getId() == 2  ) {
+                userRoleAdmin.add(u);
+            }
+        }
+        return userRoleAdmin;
+    }
 
     @Transactional
     public void edit(Integer id, String name, String lastname, String email, String password) {

@@ -63,7 +63,7 @@
 
                     <div class="container-list">
                         <section class="welcome">
-                            <h1>Lista de Usuarios</h1>
+                            <h1 th:text="${title}"></h1>
                             <div th:if="${users.isEmpty()}">
                                 <h5>No existen registros. <a th:href="@{/users/create}">Crear nuevo.</a></h5>
                             </div>

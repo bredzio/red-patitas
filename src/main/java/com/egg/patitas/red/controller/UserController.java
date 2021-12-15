@@ -29,18 +29,18 @@ public class UserController {
     private  UserService userService;
 
     @GetMapping
-    public ModelAndView showAll(){
+    public ModelAndView showAllUser(){
         ModelAndView mav = new ModelAndView("users");
-        mav.addObject("users", userService.findAll());
-        mav.addObject("title", "Users");
+        mav.addObject("users", userService.findByRoleUser());
+        mav.addObject("title", "Lista de Usuarios");
         return mav;
     }
 
     @GetMapping("/members")
     public ModelAndView showAllMembers(){
-        ModelAndView mav = new ModelAndView("members");
-        mav.addObject("users", userService.findAll());
-        mav.addObject("title", "Miembros");
+        ModelAndView mav = new ModelAndView("users");
+        mav.addObject("users", userService.findByRoleAdmin());
+        mav.addObject("title", "Lista de Miembros");
         return mav;
     }
 
