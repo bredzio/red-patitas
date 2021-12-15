@@ -91,7 +91,7 @@ public class PostService {
         List <Post> lostpost = new ArrayList<>();
 
         for (Post p : findAll()) {
-            if (p.getLostOrFound() == false) {
+            if (!p.getLostOrFound() && p.getEnabled()) {
                 lostpost.add(p);
             }
         }
@@ -104,7 +104,7 @@ public class PostService {
         List <Post> foundpost = new ArrayList();
 
         for (Post p : findAll()) {
-            if (p.getLostOrFound() == true) {
+            if (p.getLostOrFound() && p.getEnabled()) {
                 foundpost.add(p);
             }
         }
