@@ -13,7 +13,7 @@
     <!--    <link rel="stylesheet" th:href="@{/css/style.css}"/>-->
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
 <nav th:replace="fragmentos :: navbar"></nav>
 
 
@@ -43,11 +43,22 @@
             <input  class="form-control mt-2" type="file" th:value="${pet.photo}" name="photo" accept="image/*">
         </div>
 
+            <div class="loader"></div>
+            <h1 class="loaders">Cargando...</h1>
+            <div style="display:none;" id="myDiv" class="animate-bottom">
         <div class="card-body text-center my-2">
             <img class="rounded-circle"
                  th:src="${pet.photo != null} ? ${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
                  width="165">
         </div>
+</div>
+
+
+
+
+
+
+
 
         <div class="form-floating mb-3 col-xl-6">
             <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}">
@@ -89,6 +100,19 @@
             form.classList.add("was-validated");
         }, false);
     })()
+</script>
+<script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 1000);
+}
+
+function showPage() {
+  document.querySelector(".loader").style.display = "none";
+    document.querySelector(".loaders").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
 </script>
 </body>
 
