@@ -80,16 +80,11 @@
                                         width="165">
                                 </div>
                             <!-- </div> -->
-
-                            <div class="form-floating text-center mb-3 col-xl-6">
-                                <img class="form-img"
-                                    th:src="${pet.photo != null} ? ${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
-                                    width="165">
-                            </div>
+                            
 
                             <div class="form-floating mb-3 col-xl-6">
-                                <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}">
-                                    <option selected value="">Elegir tipo de animal</option>
+                                <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}" required>
+
                                     <option th:each="animal : ${animals}" th:text="|${animal.name}|"
                                             th:value="${animal.id}">
                                     </option>
