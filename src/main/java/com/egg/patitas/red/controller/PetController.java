@@ -34,9 +34,6 @@ public class PetController {
     @Autowired
     AnimalService animalService;
 
-    @Autowired
-    UserService userService;
-
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request) {
@@ -61,12 +58,14 @@ public class PetController {
         return mav;
     }
 
+
     @GetMapping("/create")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView createPet(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("pet-form");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            //mav.addObject("exito", flashMap.get("exito-name"));
+
             mav.addObject("error", flashMap.get("error"));
         }
 
@@ -101,22 +100,29 @@ public class PetController {
 //    }
 
 
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+
     @GetMapping("/edit/{id}")
-    public ModelAndView editPet(@PathVariable Integer id){
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
+    public ModelAndView editPet(@PathVariable Integer id, HttpSession session){
 
         ModelAndView mav = new ModelAndView("pet-edit");
 
-        try{
-            mav.addObject("pet", petService.findById(id));
-            mav.addObject("title", "Editar Mascota");
-            mav.addObject("animals",animalService.findAll());;
-            mav.addObject("action", "edit/save");
-            return  mav;
-        }catch(Exception e){
-            mav.addObject("error", e.getMessage());
-            return  mav;
+        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email"))){
+            try{
+                mav.addObject("pet", petService.findById(id));
+                mav.addObject("title", "Editar Mascota");
+                mav.addObject("animals",animalService.findAll());;
+                mav.addObject("action", "edit/save");
+                return  mav;
+            }catch(Exception e){
+                mav.addObject("error", e.getMessage());
+                return  mav;
+            }
+        }else{
+            return new ModelAndView("pets");
         }
+
+
  }
 
 
@@ -139,17 +145,20 @@ public class PetController {
         return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
 
-    //@PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
+
     @PostMapping("/delete/{id}")
-    public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes)  {
-        RedirectView redirectView = new RedirectView("/pets");
-        try {
-            petService.deletePet(id);
-            attributes.addFlashAttribute("success","Se borro el animal");
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
+    public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes, HttpSession session)  {
+        RedirectView redirectView = new RedirectView("/pets/byUser/" + session.getAttribute("email"));
+        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email"))){
+            try {
+                petService.deletePet(id);
+                attributes.addFlashAttribute("success","Se borro el animal");
 
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
 
+            }
         }
 
         return redirectView;

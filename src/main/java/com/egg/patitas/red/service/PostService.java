@@ -1,6 +1,7 @@
 package com.egg.patitas.red.service;
 
 import com.egg.patitas.red.exception.MyException;
+import com.egg.patitas.red.model.Pet;
 import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.repository.PostRepository;
 import com.egg.patitas.red.repository.UserRepository;
@@ -125,5 +126,10 @@ public class PostService {
             throw new Exception("El id no puede ser nulo");
         }
         postRepository.enabled(id);
+    }
+
+    @Transactional
+    public Post findId(Integer id) {
+        return postRepository.findById(id).orElse(null);
     }
 }
