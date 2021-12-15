@@ -154,10 +154,145 @@ public class Seeder implements CommandLineRunner {
 
     private void loadZones() {
         if(zoneRepository.count()==0) {
-            zoneRepository.save(buildZone("Buenos Aires", "Capital Federal", 1111));
-            zoneRepository.save(buildZone("Buenos Aires", "Gran Buenos Aires", 2222));
-            zoneRepository.save(buildZone("Santa Fe", "Rosario", 3333));
-            zoneRepository.save(buildZone("Santa Fe", "Rafaela", 4444));
+            //Capital Federal
+            zoneRepository.save(buildZone("Capital Federal", "Agronomia", 1419));
+            zoneRepository.save(buildZone("Capital Federal", "Chacarita", 1418));
+            zoneRepository.save(buildZone("Capital Federal", "Paternal", 1417));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Crespo", 1069));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Sata Rita", 1416));
+            zoneRepository.save(buildZone("Capital Federal", "Almagro", 1172));
+            zoneRepository.save(buildZone("Capital Federal", "Balvanera", 1180));
+            zoneRepository.save(buildZone("Capital Federal", "Barracas", 1110));
+            zoneRepository.save(buildZone("Capital Federal", "Belgrano", 1424));
+            zoneRepository.save(buildZone("Capital Federal", "La Boca", 1063));
+            zoneRepository.save(buildZone("Capital Federal", "Boedo", 1218));
+            zoneRepository.save(buildZone("Capital Federal", "Coghlan", 1428));
+            zoneRepository.save(buildZone("Capital Federal", "Colegiales", 1414));
+            zoneRepository.save(buildZone("Capital Federal", "Constitucion", 1070));
+            zoneRepository.save(buildZone("Capital Federal", "Floresta", 1406));
+            zoneRepository.save(buildZone("Capital Federal", "Monserrat", 1010));
+            zoneRepository.save(buildZone("Capital Federal", "Monte Castro", 1407));
+            zoneRepository.save(buildZone("Capital Federal", "Nueva Pompeya", 1263));
+            zoneRepository.save(buildZone("Capital Federal", "Parque Chas", 1427));
+            zoneRepository.save(buildZone("Capital Federal", "Parque Patricios", 1234));
+            zoneRepository.save(buildZone("Capital Federal", "Puerto Madero ", 1005));
+            zoneRepository.save(buildZone("Capital Federal", "Retiro", 1007));
+            zoneRepository.save(buildZone("Capital Federal", "Saavedra", 1428));
+            zoneRepository.save(buildZone("Capital Federal", "San Cristobal", 1080));
+            zoneRepository.save(buildZone("Capital Federal", "San Nicolas", 1025));
+            zoneRepository.save(buildZone("Capital Federal", "San Telmo", 1065));
+            zoneRepository.save(buildZone("Capital Federal", "Velez Sarfield", 1407));
+            zoneRepository.save(buildZone("Capital Federal", "Versalles", 1068));
+            zoneRepository.save(buildZone("Capital Federal", "Villa del Parque", 1084));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Devoto", 1419));
+            zoneRepository.save(buildZone("Capital Federal", "Villa General Mitre", 1158));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Luro", 1440));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Ortuzar", 1430));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Pueyrredon", 1419));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Real", 1408));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Urquiza", 1427));
+            zoneRepository.save(buildZone("Capital Federal", "Caballito", 1184));
+
+            zoneRepository.save(buildZone("Capital Federal", "Flores", 1437));
+            zoneRepository.save(buildZone("Capital Federal", "Liniers", 1408));
+            zoneRepository.save(buildZone("Capital Federal", "Mataderos", 1439));
+            zoneRepository.save(buildZone("Capital Federal", "Parque Avellaneda", 1440));
+            zoneRepository.save(buildZone("Capital Federal", "Parque Chacabuco", 1238));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Lugano", 1439));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Riachuelo", 1439));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Soldati", 1407));
+            //Gran Buenos Aires
+            zoneRepository.save(buildZone("Buenos Aires", "La Matanza", 1770));
+            zoneRepository.save(buildZone("Buenos Aires", "Lanus", 1824));
+            zoneRepository.save(buildZone("Buenos Aires", "Lomas de Zamora", 1286));
+            zoneRepository.save(buildZone("Buenos Aires", "La Plata", 1902));
+            zoneRepository.save(buildZone("Buenos Aires", "Merlo", 1744));
+            zoneRepository.save(buildZone("Buenos Aires", "Moron", 1755));
+            zoneRepository.save(buildZone("Buenos Aires", "Pilar", 1630));
+            zoneRepository.save(buildZone("Buenos Aires", "Quilmes", 1878));
+            zoneRepository.save(buildZone("Buenos Aires", "Caseros", 1683));
+            zoneRepository.save(buildZone("Buenos Aires", "Tigre", 1648));
+            zoneRepository.save(buildZone("Buenos Aires", "Zarate", 1800));
+            //Sata Fe
+            zoneRepository.save(buildZone("Santa Fe", "Rosario", 2000));
+            zoneRepository.save(buildZone("Santa Fe", "Rafaela", 2300));
+            zoneRepository.save(buildZone("Santa Fe", "Santa Fe", 2013));
+
+            //Misiones
+            zoneRepository.save(buildZone("Misiones", "Posadas", 3300));
+            zoneRepository.save(buildZone("Misiones", "Puerto Iguazu", 3370));
+            zoneRepository.save(buildZone("Misiones", "Eldorado", 3380));
+
+            //Mendoza
+            zoneRepository.save(buildZone("Mendoza", "Maipu", 5511));
+            zoneRepository.save(buildZone("Mendoza", "Las Heras", 5502));
+            zoneRepository.save(buildZone("Mendoza", "Godoy Cruz", 5501));
+
+            //Cordoba
+            zoneRepository.save(buildZone("Cordoba", "Capilla del Monte", 5511));
+            zoneRepository.save(buildZone("Cordoba", "La Falda", 5172));
+
+            //Tierra Del fuego
+            zoneRepository.save(buildZone("Tierra del Fuego", "Ushuaia", 9410));
+            zoneRepository.save(buildZone("Tierra del Fuego", "Rio Grande", 9420));
+
+            //Santa Cruz
+            zoneRepository.save(buildZone("Santa Cruz", "Rio Gallegos", 9400));
+            zoneRepository.save(buildZone("Santa Cruz", "Rio Turbio", 9407));
+
+            //Chubut
+            zoneRepository.save(buildZone("Chubut", "Puerto Madryn", 9120));
+            zoneRepository.save(buildZone("Chubut", "Trelew", 9100));
+
+            //Rio Negro
+            zoneRepository.save(buildZone("Rio Negro", "Bariloche", 8400));
+            zoneRepository.save(buildZone("Rio Negro", "Viedma", 8500));
+
+            //Neuquen
+            zoneRepository.save(buildZone("Neuquen", "Neuquen", 8300));
+            zoneRepository.save(buildZone("Neuquen", "Zapala", 8340));
+
+            //La Pampa
+            zoneRepository.save(buildZone("La Pampa", "Santa Rosa", 6300));
+
+            //San Luis
+            zoneRepository.save(buildZone("San Luis", "San Luis", 5700));
+
+            //Entre Rios
+            zoneRepository.save(buildZone("Entre Rios", "Gualeguaychu", 2820));
+
+            //Corrientes
+            zoneRepository.save(buildZone("Corrientes", "San Luis", 5700));
+            //Santiago del Estero
+            zoneRepository.save(buildZone("Santiago del Estero", "Santiago del Estero", 4200));
+
+            //Chaco
+            zoneRepository.save(buildZone("Chaco", "Resistencia", 3500));
+
+            //La rioja
+            zoneRepository.save(buildZone("La Rioja", "La Rioja", 5300));
+
+            //San Juan
+            zoneRepository.save(buildZone("San Juan", "San Juan", 5400));
+
+            //Salta
+            zoneRepository.save(buildZone("Salta", "Salta", 4400));
+
+            //Jujuy
+            zoneRepository.save(buildZone("Jujuy", "San Salvador de Jujuy", 4600));
+
+            //Catamarca
+            zoneRepository.save(buildZone("Catamarca", "San Fernando del Valle de Catamarca", 4700));
+
+            //Tucuman
+            zoneRepository.save(buildZone("Tucuman", "San Miguel de Tucuman", 4000));
+
+            //Formosa
+            zoneRepository.save(buildZone("Formosa", "Formosa", 3600));
+
+
+
+
         }
     }
 
@@ -227,14 +362,14 @@ public class Seeder implements CommandLineRunner {
     private void loadPostsFound(){
             postRepository.save(buildPostFound("bredzio@huellapp.com","Es muy mimoso, te necesita","Shazam","Rafaela"));
             postRepository.save(buildPostFound("dyrigay@huellapp.com","Con esta carita ¿como no lo vas a querer?","Toto","Rafaela"));
-            postRepository.save(buildPostFound("dyrigay@huellapp.com","Es charlatan y muy compañero","Chicho","Capital Federal"));
-            postRepository.save(buildPostFound("msola@huellapp.com","Es muy gracioso, te va a alegrar la vida","Pilu","Capital Federal"));
+            postRepository.save(buildPostFound("dyrigay@huellapp.com","Es charlatan y muy compañero","Chicho","Paternal"));
+            postRepository.save(buildPostFound("msola@huellapp.com","Es muy gracioso, te va a alegrar la vida","Pilu","Boedo"));
     }
 
     private void loadPostsLost(){
-            postRepository.save(buildPostLost("cnani@huellapp.com","Perdido en la plaza almagro","Luli","Capital Federal"));
-            postRepository.save(buildPostLost("cnani@huellapp.com","Perdido por la 9 de julio","Lucas","Capital Federal"));
+            postRepository.save(buildPostLost("cnani@huellapp.com","Perdido en la plaza almagro","Luli","Villa Del Parque"));
+            postRepository.save(buildPostLost("cnani@huellapp.com","Perdido por la 9 de julio","Lucas","Posadas"));
             postRepository.save(buildPostLost("wrocha@huellapp.com","Se fue corriendo y nunca más lo vi","Sancho","Rafaela"));
-            postRepository.save(buildPostLost("wrocha@huellapp.com","Era un loquito de las motos, y persiguiendo una, lo perdí de vista","Bugs","Rafaela"));
+            postRepository.save(buildPostLost("wrocha@huellapp.com","Era un loquito de las motos, y persiguiendo una, lo perdí de vista","Bugs","La Plata"));
     }
 }
