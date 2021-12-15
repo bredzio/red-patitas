@@ -152,7 +152,7 @@ header .logo-huellapp {
   border: 0px;
 }
 
-.dropdown .dropdown-menu {
+.dropdown .dropdown-menu, .card-img {
   border: 0px;
   box-shadow: 0px 0px 40px rgb(127 137 161 / 25%);
 }
@@ -682,6 +682,11 @@ p .enlaces {
   padding-inline: 12px;
 }
 
+.form-img {
+  width: 60%;
+  border-radius: 10px;
+}
+
 /* ------DASHBOARD ------*/
 .cards__item {
   flex-basis: 30%;
@@ -711,6 +716,7 @@ p .enlaces {
 .btn-secondary {
   background-color: var(--aquamarine20);
   border: 0px;
+  margin-block-end: 10px;
 }
 
 .btn-secondary:hover {
@@ -738,7 +744,8 @@ p .enlaces {
 }
 
 .card-footer{
-  background: var(--blanco30);
+  background: var(--blue30);
+  color: var(--blanco30);
 }
 
 .col-post {

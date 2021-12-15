@@ -80,15 +80,15 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <div th:text="|Nombre: ${post.pet.name}|"></div>
+                                        <div th:text="|${post.pet.name}|"></div>
                                         <div th:text="|Zona: ${post.zone.city}|"></div>
                                         <!--<div th:text="|Comentarios: ${post.description}|" ></div>-->
-                                        <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
+                                        <!-- <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div> -->
                                         <div class="d-flex justify-content-start my-2">
                                             <a class="btn btn-secondary btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>
                                             <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
                                                 method="POST">
-                                                <button th:class="${post.enabled} ? 'btn btn-danger btn-sm' : 'btn btn-primary btn-sm'"
+                                                <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
                                                         type="submit" th:text="${post.enabled} ? 'Eliminar' : 'Habilitar'">
                                                 </button>
                                             </form>
