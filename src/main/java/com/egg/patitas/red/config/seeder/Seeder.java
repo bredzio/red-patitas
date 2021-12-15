@@ -290,9 +290,6 @@ public class Seeder implements CommandLineRunner {
             //Formosa
             zoneRepository.save(buildZone("Formosa", "Formosa", 3600));
 
-
-
-
         }
     }
 
