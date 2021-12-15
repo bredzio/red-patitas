@@ -3,6 +3,7 @@ package com.egg.patitas.red.email;
 import com.egg.patitas.red.exception.EmailExistException;
 import com.egg.patitas.red.model.Contact;
 import com.egg.patitas.red.service.ContactTemplateService;
+import com.egg.patitas.red.service.PasswordTemplateService;
 import com.egg.patitas.red.service.ThanksTemplateService;
 import com.egg.patitas.red.service.WelcomeTemplateService;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,8 @@ public class EmailService implements EmailSend{
     private final WelcomeTemplateService welcomeTemplateService;
     private final ContactTemplateService contactTemplateService;
     private final ThanksTemplateService thanksTemplateService;
+    private final PasswordTemplateService passwordTemplateService;
+
     private final String ORGANIZATION_EMAIL= "teamhuellapp@gmail.com";
 
     @Override
@@ -58,6 +61,14 @@ public class EmailService implements EmailSend{
         String subject = thanksTemplateService.getSubject();
         String template = thanksTemplateService.setTemplate(contact);
         send(contact.getEmail(), template, subject);
+    }
+
+    @Override
+    @Async
+    public void sendPasswordEmail(String to, String name,String link) throws EmailExistException, MessagingException {
+        String subject = passwordTemplateService.getSubject();
+        String template = passwordTemplateService.setTemplate(name, link);
+        send(to, template, subject);
     }
 }
 

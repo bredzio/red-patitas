@@ -264,6 +264,7 @@
                             style="font-size: 24px;"><strong>¡Bienvenid@!</strong></span></p>
                         <p style="text-align: center;">&nbsp;</p>
                         <p style="text-align: center;margin: 0 0 25px 0;"><span style="font-size: 16px;">Hola ${name}, te has registrado exitosamente!</span></p>
+                        <p style="text-align: center;margin: 0 0 25px 0;"><span style="font-size: 16px;">El link de activación dura 15 minutos!</span></p>
                         <p style="color: #FFFFFF;font-size: 20px;text-align: center;background-color: #258EDB;border-radius: 5px; padding: 10px; width: 100px; margin-left: 225px;"><span style="font-size: 16px;"><a href=${link}>Activar ahora</a></span></p>
                       </div>
           
