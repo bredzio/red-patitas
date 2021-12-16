@@ -2,6 +2,7 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.exception.MyException;
 import com.egg.patitas.red.model.Post;
+import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
@@ -20,7 +21,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/posts")
@@ -60,6 +63,22 @@ public class PostController {
         mav.addObject("posts",postService.findByUser(email));
         return mav;
     }
+
+    @GetMapping("/{id}")
+    public ModelAndView showById(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView("post-detail");
+        try {
+            Post post = postService.findId(id);
+            mav.addObject("post", post);
+            mav.addObject("title", "Detalles del Posteo");
+        } catch (Exception e) {
+            mav.addObject("error-get-post", e.getMessage());
+        }
+        return mav;
+    }
+
+
+
 
     @GetMapping("/lostposts")
     public ModelAndView showLostPost(HttpServletRequest request){
@@ -114,34 +133,37 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
-    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
-        Post post = postService.findById(id).orElse(null);
+    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
+       Optional<Post> maybePost = postService.findById(id);
 
-        if((postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2)){
-            ModelAndView mav = new ModelAndView("post-form");
-            Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        System.out.println(session.getAttribute("email"));
 
-            if (flashMap != null) {
-                mav.addObject("success", flashMap.get("success"));
-                mav.addObject("error", flashMap.get("error"));
-                mav.addObject("post", flashMap.get("post"));
-            } else {
-                mav.addObject("post", post);
-                String email=(String) session.getAttribute("email");
-                mav.addObject("pets",petService.findByUserEmail(email));
-                mav.addObject("zones", zoneService.findAll());
+        if(!maybePost.isPresent()) {
+            attributes.addFlashAttribute("error", "La publicación no existe");
+            return new ModelAndView(new RedirectView("/posts/byUser/" + session.getAttribute("email")));
+        }
 
-            }
-
-            mav.addObject("title", "Editar Post");
-            mav.addObject("action", "modify");
-            return mav;
-        }else{
+        Post post = maybePost.get();
+        if (!session.getAttribute("id").equals(post.getUser().getId())) {
             return new ModelAndView(new RedirectView("/"));
         }
 
+        ModelAndView mav = new ModelAndView("post-form");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("success", flashMap.get("success"));
+            mav.addObject("error", flashMap.get("error"));
+            mav.addObject("post", flashMap.get("post"));
+        } else {
+            mav.addObject("post", post);
+            String email=(String) session.getAttribute("email");
+            mav.addObject("pets",petService.findByUserEmail(email));
+            mav.addObject("zones", zoneService.findAll());
+        }
 
-
+        mav.addObject("title", "Editar Post");
+        mav.addObject("action", "modify");
+        return mav;
     }
 
     @PostMapping("/save")
@@ -156,7 +178,6 @@ public class PostController {
             attributes.addFlashAttribute("error", e.getMessage());
             redirectView.setUrl("/post/create");
         }
-
         return redirectView;
     }
 
