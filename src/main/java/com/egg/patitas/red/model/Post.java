@@ -39,7 +39,7 @@ public class Post {
     @OneToOne
     private Pet pet;
 
-    @NotEmpty(message = "La descrpcion es obligatoria")
+    @NotEmpty(message = "La descripcion es obligatoria")
     @NotNull(message = "La descripcion no puede ser nulo")
     private String description;
 
