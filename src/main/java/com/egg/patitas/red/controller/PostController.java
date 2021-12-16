@@ -2,6 +2,7 @@ package com.egg.patitas.red.controller;
 
 import com.egg.patitas.red.exception.MyException;
 import com.egg.patitas.red.model.Post;
+import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/posts")
@@ -62,6 +64,22 @@ public class PostController {
         mav.addObject("posts",postService.findByUser(email));
         return mav;
     }
+
+    @GetMapping("/{id}")
+    public ModelAndView showById(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView("post-detail");
+        try {
+            Post post = postService.findId(id);
+            mav.addObject("post", post);
+            mav.addObject("title", "Detalles del Posteo");
+        } catch (Exception e) {
+            mav.addObject("error-get-post", e.getMessage());
+        }
+        return mav;
+    }
+
+
+
 
     @GetMapping("/lostposts")
     public ModelAndView showLostPost(HttpServletRequest request){
@@ -117,9 +135,14 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
-    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
-        Post post = postService.findById(id).orElse(null);
+    public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session, RedirectAttributes attributes) {
+        Optional<Post> maybePost = postService.findById(id);
 
+        if(!maybePost.isPresent()) {
+            attributes.addFlashAttribute("error", "La publicación no existe");
+            return new ModelAndView(new RedirectView("/posts/byUser/" + session.getAttribute("email")));
+        }
+        Post post = maybePost.get();
         if((postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2)){
             ModelAndView mav = new ModelAndView("post-form");
             Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -168,7 +191,6 @@ public class PostController {
             attributes.addFlashAttribute("post", post);
             redirectView.setUrl("/posts/create");
         }
-
         return redirectView;
     }
 
