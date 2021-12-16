@@ -92,7 +92,7 @@
                                             <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
                                                 method="POST">
                                                 <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
-                                                        type="submit" th:text="${post.enabled} ? 'Eliminar' : 'Habilitar'">
+                                                        type="submit" th:text="${post.enabled} ? 'Deshabilitar' : 'Habilitar'">
                                                 </button>
                                             </form>
                                         </div>

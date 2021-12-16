@@ -25,7 +25,7 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createPost(Post dto, String email) {
+    public void createPost(Post dto, String email) throws Exception {
 //        no es dto , solo lo puso de nombre por si en el futuro usamos dto
 
         postRepository.save(buildPost(dto, email));
@@ -33,8 +33,16 @@ public class PostService {
     }
 
     @Transactional
-    public Post buildPost(Post dto,String email ) {
+    public Post buildPost(Post dto,String email ) throws Exception {
         Post post = new Post();
+
+        if(dto.getZone() == null){
+            throw new Exception("La zona no puede ser nula");
+        }
+
+        if(dto.getPet() == null){
+            throw new Exception("Tiene que elegir una mascota");
+        }
 
         post.setZone(dto.getZone());
         post.setUser(userService.findByEmail(email));
