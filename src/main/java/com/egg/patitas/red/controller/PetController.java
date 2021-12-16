@@ -22,7 +22,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/pets")
@@ -93,16 +92,6 @@ public class PetController {
         }
         return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
-
-
-//    @GetMapping("/{id}")
-//    public ModelAndView viewPet() throws Exception {
-//        ModelAndView mav = new ModelAndView("detailpet");
-//        mav.addObject("pets",petService.listPet());
-//        return mav;
-//    }
-
-
 
     @GetMapping("/edit/{id}")
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
