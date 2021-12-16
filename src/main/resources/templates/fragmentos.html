@@ -75,15 +75,6 @@
     </div>
 </nav>
 
-<!--<footer th:fragment="footer" class="footer py-1 fixed-bottom" style="background-color: #87AAAA;">
-    <div class="container d-flex justify-content-center">
-         al principio puse sesion pero no lo tomaba despues puse session y ando
-        <span class="text-muted text-reset"
-              th:text="${session.id != null} ? |${session.id} - ${session.name} - ${session.rol}| : 'HuellApp '">
-        </span>
-    </div>
-</footer>-->
-
 
 <header th:fragment="navbarIndex">
     <div class="header">
@@ -121,7 +112,7 @@
                                         <a class="nav-link" th:href="@{/nosotros}">NOSOTROS</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" th:href="@{/}">CONTÁCTANOS</a>
+                                        <a class="nav-link" th:href="@{/#contacto}">CONTÁCTANOS</a>
                                     </li>
                                 </div>
 

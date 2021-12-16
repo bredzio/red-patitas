@@ -61,6 +61,8 @@ public class PostController {
         ModelAndView mav = new ModelAndView("posts");
 
         mav.addObject("title", "Tus Publicaciones");
+        mav.addObject("estado", true);
+        mav.addObject("bottom", true);
         mav.addObject("posts",postService.findByUser(email));
         return mav;
     }
@@ -78,9 +80,6 @@ public class PostController {
         return mav;
     }
 
-
-
-
     @GetMapping("/lostposts")
     public ModelAndView showLostPost(HttpServletRequest request){
         ModelAndView mav = new ModelAndView("posts");
@@ -89,6 +88,7 @@ public class PostController {
             mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
+        mav.addObject("bottom", false);
         mav.addObject("posts", postService.findLostPost());
         mav.addObject("title","Mascotas perdidas");
 
@@ -103,6 +103,7 @@ public class PostController {
             mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
+        mav.addObject("bottom", false);
         mav.addObject("posts", postService.findFoundPost());
         mav.addObject("title","Mascotas encontradas");
 
@@ -142,6 +143,7 @@ public class PostController {
             attributes.addFlashAttribute("error", "La publicación no existe");
             return new ModelAndView(new RedirectView("/posts/byUser/" + session.getAttribute("email")));
         }
+
         Post post = maybePost.get();
         if((postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2)){
             ModelAndView mav = new ModelAndView("post-form");
@@ -163,7 +165,8 @@ public class PostController {
             mav.addObject("action", "modify");
             return mav;
         }else{
-            return new ModelAndView(new RedirectView("/"));
+            attributes.addFlashAttribute("error", "No puedes editar el post de otro usuario");
+            return new ModelAndView(new RedirectView("/posts/byUser/" + session.getAttribute("email")));
         }
 
     }
@@ -200,6 +203,7 @@ public class PostController {
     public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
         ModelAndView mav = new ModelAndView();
+
         if (result.hasErrors()) {
             mav.addObject("title", "Editar Post");
             mav.addObject("action", "modify");
@@ -239,7 +243,7 @@ public class PostController {
             return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
-        return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista
+        return new RedirectView("/posts/byUser/" + session.getAttribute("email"));
 
     }
 
@@ -257,7 +261,7 @@ public class PostController {
             return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
-        return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista
+        return new RedirectView("/posts/byUser/" + session.getAttribute("email"));
     }
 
 }

@@ -30,7 +30,7 @@ public class ZoneController {
         ModelAndView mav = new ModelAndView("zones");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("exito", flashMap.get("exito"));
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("zones", zoneService.findAll());
@@ -44,7 +44,7 @@ public class ZoneController {
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("exito", flashMap.get("exito"));
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("zone", new Zone());
@@ -73,8 +73,6 @@ public class ZoneController {
 
         return mav;
     }
-
-    //Falta delete
 
     @PostMapping("/save")
     public RedirectView save(@RequestParam String city, @RequestParam String province, @RequestParam Integer zipCode, RedirectAttributes attributes) {
