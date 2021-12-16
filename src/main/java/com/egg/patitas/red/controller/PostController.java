@@ -5,6 +5,7 @@ import com.egg.patitas.red.model.Post;
 import com.egg.patitas.red.security.SecurityConstant;
 import com.egg.patitas.red.service.PetService;
 import com.egg.patitas.red.service.PostService;
+import com.egg.patitas.red.service.UserService;
 import com.egg.patitas.red.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,6 +37,9 @@ public class PostController {
 
     @Autowired
     private PetService petService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ModelAndView showAll(HttpServletRequest request){
@@ -89,6 +93,7 @@ public class PostController {
 
 
     @GetMapping("/create")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView createPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mav = new ModelAndView("post-form");
 
@@ -109,15 +114,15 @@ public class PostController {
         return mav;
     }
 
+
     @GetMapping("/edit/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modifyPost(@PathVariable Integer id, HttpServletRequest request, HttpSession session) {
         Post post = postService.findById(id).orElse(null);
-        if (!session.getAttribute("id").equals(post.getUser().getId())) {
-            return new ModelAndView(new RedirectView("/"));
-        }
 
-        ModelAndView mav = new ModelAndView("post-form");
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if((postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2)){
+            ModelAndView mav = new ModelAndView("post-form");
+            Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
 
             if (flashMap != null) {
                 mav.addObject("success", flashMap.get("success"));
@@ -131,9 +136,12 @@ public class PostController {
 
             }
 
-        mav.addObject("title", "Editar Post");
-        mav.addObject("action", "modify");
-        return mav;
+            mav.addObject("title", "Editar Post");
+            mav.addObject("action", "modify");
+            return mav;
+        }else{
+            return new ModelAndView(new RedirectView("/"));
+        }
 
     }
 
@@ -164,11 +172,12 @@ public class PostController {
         return redirectView;
     }
 
+
     @PostMapping("/modify")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
         ModelAndView mav = new ModelAndView();
-
         if (result.hasErrors()) {
             mav.addObject("title", "Editar Post");
             mav.addObject("action", "modify");
@@ -191,27 +200,39 @@ public class PostController {
         return mav;
     }
 
+
     @PostMapping("/delete/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public RedirectView delete(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
-        try {
-            postService.delete(id);
-            attributes.addFlashAttribute("success","Se borro el post");
 
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
+            try {
+                postService.delete(id);
+                attributes.addFlashAttribute("success","Se deshabilito el post");
 
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
+
+            }
+            return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
         return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista
+
     }
 
     @PostMapping("/enabled/{id}")
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public RedirectView enabled(@PathVariable Integer id, RedirectAttributes attributes, HttpSession session) {
-        try {
-            postService.enabled(id);
-            attributes.addFlashAttribute("success","Se habilito el post");
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+
+        if(postService.findId(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
+            try {
+                postService.enabled(id);
+                attributes.addFlashAttribute("success","Se habilito el post");
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
+            }
+            return new RedirectView("/posts/byUser/" + session.getAttribute("email") );
         }
 
         return new RedirectView("/posts/byUser/" + session.getAttribute("email")); //cambiar a otra vista

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -23,6 +22,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User a " + "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableAppUser(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User a " + "SET a.password = ?1 WHERE a.email = ?2")
+    void changePasswordUser(String password, String email);
 
     @Modifying
     @Query("UPDATE User u SET u.enabled = true WHERE u.id = :id")

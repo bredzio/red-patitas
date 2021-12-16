@@ -152,7 +152,7 @@ header .logo-huellapp {
   border: 0px;
 }
 
-.dropdown .dropdown-menu {
+.dropdown .dropdown-menu, .card-img {
   border: 0px;
   box-shadow: 0px 0px 40px rgb(127 137 161 / 25%);
 }
@@ -682,6 +682,11 @@ p .enlaces {
   padding-inline: 12px;
 }
 
+.form-img {
+  width: 60%;
+  border-radius: 10px;
+}
+
 /* ------DASHBOARD ------*/
 .cards__item {
   flex-basis: 30%;
@@ -711,6 +716,7 @@ p .enlaces {
 .btn-secondary {
   background-color: var(--aquamarine20);
   border: 0px;
+  margin-block-end: 10px;
 }
 
 .btn-secondary:hover {
@@ -738,7 +744,8 @@ p .enlaces {
 }
 
 .card-footer{
-  background: var(--blanco30);
+  background: var(--blue30);
+  color: var(--blanco30);
 }
 
 .col-post {
@@ -830,4 +837,64 @@ footer p {
     top: 280px;
     z-index: -1;
   }
+
+
+    .loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 1s linear infinite;
+      }
+
+      .loaders {
+      position: absolute;
+      left: 46%;
+      top: 25%;
+    z-index: 1;
+      width: 300px;
+      height: 300px;
+      margin: -76px 0 0 -76px;
+      }
+
+      @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+      }
+
+      /* Add animation to "page content" */
+      .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 0.1s;
+      animation-name: animatebottom;
+      animation-duration: 0.1s
+      }
+
+      @-webkit-keyframes animatebottom {
+      from { bottom:-100px; opacity:0 }
+      to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom {
+      from{ bottom:-100px; opacity:0 }
+      to{ bottom:0; opacity:1 }
+      }
+
+      #myDiv {
+      display: none;
+      text-align: center;
+      }
 }

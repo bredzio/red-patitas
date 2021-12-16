@@ -1,5 +1,7 @@
 package com.egg.patitas.red.controller;
 
+import com.egg.patitas.red.exception.EmailExistException;
+import com.egg.patitas.red.exception.EmailNoExistException;
 import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;;
@@ -14,12 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @Controller
@@ -116,4 +118,54 @@ public class AuthController {
         }
         return mav;
     }
+
+    @GetMapping("/resetPassword")
+    public ModelAndView resetPasssword(HttpServletRequest request, Principal principal) {
+        ModelAndView mav = new ModelAndView("resetPassword");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+
+        if (principal != null) {
+            mav.setViewName("redirect:/");
+        }
+
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito"));
+            mav.addObject("error", flashMap.get("error"));
+            mav.addObject("user", flashMap.get("user"));
+
+        }
+
+        return mav;
+    }
+
+    @PostMapping("/editPassword")
+    public RedirectView editPassword(@RequestParam String email, RedirectAttributes attributes) throws EmailExistException, MessagingException, EmailNoExistException {
+        RedirectView redirectView = new RedirectView("auth/login");
+        try{
+            userService.changePasswordUser(email);
+            redirectView.setUrl("/auth/login?success=true");
+        }catch(Exception e){
+            attributes.addFlashAttribute("error", e.getMessage());
+            redirectView.setUrl("/auth/resetPassword");
+        }
+
+        return redirectView;
+    }
+
+
+    @GetMapping("/password/confirm")
+    public ModelAndView savePassword(@RequestParam("token") String token) {
+        ModelAndView mav = new ModelAndView("login");
+        try {
+            mav.addObject("exito", userService.confirmPasswordToken(token));
+
+        }catch(Exception e){
+            mav.addObject("error",e.getMessage());
+        }
+        return mav;
+    }
+
+
+
 }

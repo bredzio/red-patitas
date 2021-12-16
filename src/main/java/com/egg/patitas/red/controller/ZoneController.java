@@ -37,6 +37,7 @@ public class ZoneController {
         return mav;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @GetMapping("/create")
     public ModelAndView create(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("zone-form");
@@ -90,12 +91,14 @@ public class ZoneController {
         return redirectView;
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/disable/{id}")
     public RedirectView disable(@PathVariable Integer id){
         zoneService.disable(id);
         return new RedirectView("/zones");
     }
 
+    @PreAuthorize(SecurityConstant.ADMIN)
     @PostMapping("/enable/{id}")
     public RedirectView enable(@PathVariable Integer id){
         zoneService.enable(id);
