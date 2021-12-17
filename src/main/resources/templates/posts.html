@@ -46,69 +46,71 @@
 
         <div  class="main">
             <div class="loader"></div>
-            <h1 class="loaders">Cargando</h1>
+            <h2 class="loaders">Cargando</h2>
             <div style="display:none;" id="myDiv" class="animate-bottom">
-            <div class="wrapper">
-                <div class="main-content">
+                <div class="wrapper">
+                    <div class="main-content">
 
-                    <div th:if="${error}" class="container-error mt-4 text-center">
-                        <div class="row col-md-4 mx-auto">
-                            <div th:text="${error}" class="alert alert-danger shadow"></div>
-                        </div>
-                    </div>
-
-                    <div th:if="${success}" class="container-error mt-4 text-center">
-                        <div class="row col-md-4 mx-auto">
-                            <div th:text="${success}" class="alert alert-success shadow"></div>
-                        </div>
-                    </div>
-
-                    <div class="container-post mt-4 main">
-                        <section class="welcome">
-                            <h1 th:text="${title}"></h1>
-                            <div th:if="${posts.isEmpty()}">
-                                <h5>No existen registros. <a th:href="@{/posts/create}">Cargar post</a></h5>
+                        <div th:if="${error}" class="container-error mt-4 text-center">
+                            <div class="row col-md-4 mx-auto">
+                                <div th:text="${error}" class="alert alert-danger shadow"></div>
                             </div>
-                            <hr class="mb-5" />
-                        </section>
+                        </div>
 
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                            <div class="col-post mb-4" th:each="post : ${posts}">
-                                <div class="card-post mb-4 shadow clickable-card">
+                        <div th:if="${success}" class="container-error mt-4 text-center">
+                            <div class="row col-md-4 mx-auto">
+                                <div th:text="${success}" class="alert alert-success shadow"></div>
+                            </div>
+                        </div>
 
-                                    <div class="card-body text-center">
-                                        <img class="card-img"
-                                        th:src="${post.pet.photo != null} ? ${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
-                                            width="165">
-                                    </div>
+                        <div class="container-post mt-4 main">
+                            <section class="welcome">
+                                <h1 th:text="${title}"></h1>
+                                <h5>Para acceder al detalle de la mascota haz click sobre la publicación</h5>
+                                <div th:if="${posts.isEmpty()}">
+                                    <h5>No existen registros. <a th:href="@{/posts/create}">Cargar post</a></h5>
+                                </div>
+                                <hr/>
+                            </section>
 
-                                    <div class="card-footer">
-                                        <div th:text="|${post.pet.name}|"></div>
-                                        <div th:text="|Zona: ${post.zone.city}|"></div>
-                                        <div th:if="${emailUser}" th:text="|Email: ${post.user.email}|" ></div>
-                                        <div th:if="${estado}">
-                                            <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                <div class="col-post mb-4" th:each="post : ${posts}">
+                                    <div class="card-post mb-4 shadow clickable-card">
+
+                                        <div class="card-body text-center" >
+                                            <!-- <a th:href="@{/post/__${post.id}__}">Click aqui</a> -->
+                                            <img class="card-img"
+                                            th:src="${post.pet.photo != null} ? ${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                                                width="165">
                                         </div>
 
-                                        <div th:if="${bottom}" class="d-flex justify-content-start my-2">
-                                            <a class="btn btn-secondary btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>
-                                            <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
-                                                method="POST">
-                                                <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
-                                                        type="submit" th:text="${post.enabled} ? 'Deshabilitar' : 'Habilitar'">
-                                                </button>
-                                            </form>
+                                        <div class="card-footer">
+
+                                            <div class="name-pet" th:text="|${post.pet.name}|"></div>
+                                            <div class="description-post" th:text="|Zona: ${post.zone.city}|"></div>
+                                            <div th:if="${emailUser}" th:text="|Email: ${post.user.email}|" ></div>
+                                            <div th:if="${estado}">
+                                                <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
+                                            </div>
+                                            <div th:if="${bottom}" class="d-flex justify-content-start my-2">
+                                                <a class="btn btn-secondary btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>
+                                                <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
+                                                    method="POST">
+                                                    <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
+                                                            type="submit" th:text="${post.enabled} ? 'Deshabilitar' : 'Habilitar'">
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
         </div>
 
         <!-- JavaScript -->
@@ -120,18 +122,18 @@
             crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
         <script>
-var myVar;
+            var myVar;
 
-function myFunction() {
-  myVar = setTimeout(showPage, 1);
-}
+            function myFunction() {
+            myVar = setTimeout(showPage, 1);
+            }
 
-function showPage() {
-  document.querySelector(".loader").style.display = "none";
-    document.querySelector(".loaders").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
-}
-</script>
+            function showPage() {
+            document.querySelector(".loader").style.display = "none";
+                document.querySelector(".loaders").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
         <footer th:replace="fragmentos :: footer"></footer>
     </body>
 </html>
