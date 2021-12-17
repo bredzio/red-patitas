@@ -85,7 +85,7 @@
                                     <div class="card-footer">
                                         <div th:text="|${post.pet.name}|"></div>
                                         <div th:text="|Zona: ${post.zone.city}|"></div>
-                                        <!--<div th:text="|Comentarios: ${post.description}|" ></div>-->
+                                        <div th:if="${emailUser}" th:text="|Email: ${post.user.email}|" ></div>
                                         <div th:if="${estado}">
                                             <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
                                         </div>

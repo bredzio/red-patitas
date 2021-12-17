@@ -51,6 +51,8 @@ public class PostController {
             mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
+        mav.addObject("bottom", true);
+        mav.addObject("emailUser", true);
         mav.addObject("posts", postService.findAll());
         return mav;
     }
