@@ -52,7 +52,7 @@ public class PostController {
     public ModelAndView postsByUser(@PathVariable String email){
         ModelAndView mav = new ModelAndView("posts");
 
-        mav.addObject("title", "Tus Publicaciones");
+        mav.addObject("title", "Tus publicaciones");
         mav.addObject("posts",postService.findByUser(email));
         return mav;
     }
@@ -102,7 +102,7 @@ public class PostController {
         String email=(String) session.getAttribute("email");
         mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
-        mav.addObject("title", "Nuevo Post");
+        mav.addObject("title", "Nueva publicación");
         mav.addObject("action", "save");
         return mav;
     }

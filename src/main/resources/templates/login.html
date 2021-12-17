@@ -97,11 +97,13 @@
                                                 <button class="btn-login btn-success" type="submit">Ingresar</button>
                                             </div>
                                         </form>
+                                        <section class="section-login form-floating">
+                                            <p>¿Olvidaste la contraseña? <a th:href="@{/auth/resetPassword}" class="registrarse">Recupérala</a></p>
+                                            <p>¿Aún no eres usuario? <a th:href="@{/auth/signup}" class="registrarse">Registrate</a></p>
+                                        </section>
                                     </div>
                                 </div>
                             </div>
-                            <p>¿Aún no eres usuario? <a th:href="@{/auth/signup}" class="registrarse">Registrate</a></p>
-                            <p>¿Olvidaste la contraseña? <a th:href="@{/auth/resetPassword}" class="registrarse">Recupérala</a></p>
                         </div>
                     </div>
 

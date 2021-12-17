@@ -60,21 +60,14 @@
                     <div class="container-form">
                         <section class="welcome">
                             <h1 th:text="${title}"></h1>
+                            <h5>Todos los campos son obligatorios</h5>
                             <hr/>
                         </section>
 
                         <form autocomplete="off" class="needs-validation form-post" id="formulario" method="POST" novalidate
                             th:action="@{/posts/__${action}__}" th:object="${post}">
                             <input th:field="*{id}" type="hidden" />
-                            <div class="form-floating mb-3 col-xl-6">
-                                <select aria-label="Elegir Zona" class="form-select" id="zone" th:field="*{zone}">
-                                    <option selected value="">Elegir zona</option>
-                                    <option th:each="zone : ${zones}" th:text="|${zone.city}|" th:value="${zone.id}">
-                                    </option>
-                                </select>
 
-                                <label for="zone">Zona</label>
-                            </div>
 
                             <div class="form-floating mb-3 col-xl-6">
                                 <select aria-label="Elegir Zona" class="form-select" id="pet" th:field="*{pet}">
@@ -83,6 +76,15 @@
                                     </option>
                                 </select>
                                 <label for="pet">Mascota</label>
+                            </div>
+
+                            <div class="form-floating mb-3 col-xl-6">
+                                <select aria-label="Elegir Zona" class="form-select" id="zone" th:field="*{zone}">
+                                    <option selected value="">Elegir zona</option>
+                                    <option th:each="zone : ${zones}" th:text="|${zone.city}|" th:value="${zone.id}">
+                                    </option>
+                                </select>
+                                <label for="zone">Zona</label>
                             </div>
 
                             <div class="description mb-3 col-xl-6">

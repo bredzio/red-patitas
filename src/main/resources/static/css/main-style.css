@@ -188,12 +188,12 @@ header .logo-huellapp {
 
 /* -----SECCION PRINCIPAL---- */
 .text-main {
-  max-width: 550px;
+  max-width: 600px;
   padding-inline-end: 40px;
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 70px;
   font-weight: bold;
   color: var(--black20);
 }
@@ -205,15 +205,15 @@ h1 {
 h3 {
   margin-block-start: 50px;
   text-align: justify ;
-  font-size: 20px;
-  line-height : 30px;
+  font-size: 25px;
+  line-height : 35px;
 }
 
 .section-principal {
   display: flex;
   justify-content: space-between;
-  margin-block-end: 50px;
-  padding-block: 50px;
+  padding-block-start: 70px;
+  height: 100vh
 }
 
 .main-content .section-principal p{
@@ -222,17 +222,18 @@ h3 {
   font-size: 18px;
 }
 
-h3 .registrarse {
+h3 .registrarse, p .registrarse {
   text-decoration: none;
   color: #06b89d;
 }
 
-h3 .registrarse:hover {
+h3 .registrarse:hover, p .registrarse:hover {
   text-decoration: underline;
 }
 
 .section-form {
-  padding-block-start: 40px;
+  height: 100vh;
+  /* padding-block-start: 40px; */
 }
 
 /* QUIENES SOMOS */
@@ -381,7 +382,7 @@ p .enlaces {
 }
 
 .carousel-inner {
-  width: 600px;
+  width: 550px;
 }
 
 .carousel-inner img {
@@ -522,6 +523,7 @@ p .enlaces {
 .col-md-4 {
   display: flex;
   align-items: center;
+  width: 40%;
 }
 
 .mb-4 {
@@ -570,10 +572,11 @@ p .enlaces {
 }
 
 
-.btn-login, .btn-signup {
-  border-radius: 0px;
+.btn-login {
+  border-radius: 4px;
   height: 50px;
   width: 100%;
+  margin-block-end: 12px;
 }
 
 .card-body {
@@ -582,7 +585,21 @@ p .enlaces {
 }
 
 .form-group {
-  margin-block-start: 30px;
+  padding-inline: 12px;
+}
+
+.section-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.section-login p {
+  font-size: 15px;
+}
+
+p .registrarse {
+  font-size: 16px;
 }
 
 /* ----------BUSCAR: PERDIDOS Y ENCONTRADOS / CREAR: POST Y MASCOTAS---------- */
@@ -772,6 +789,16 @@ p .enlaces {
   flex-direction: row;
 }
 
+.name-pet {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.description-pet {
+  font-size: 14px;
+  margin-block-end: 20px;
+}
+
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
 footer {
     background: var(--blue30);
@@ -837,8 +864,6 @@ footer p {
     top: 280px;
     z-index: -1;
   }
-
-
     .loader {
       position: absolute;
       left: 50%;
@@ -858,7 +883,7 @@ footer p {
       position: absolute;
       left: 46%;
       top: 25%;
-    z-index: 1;
+      z-index: 1;
       width: 300px;
       height: 300px;
       margin: -76px 0 0 -76px;
