@@ -27,7 +27,7 @@ public class AnimalController {
         ModelAndView mav = new ModelAndView("animals");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("animals", animalService.findAll());
@@ -41,7 +41,7 @@ public class AnimalController {
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-//            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error"));
         }
 

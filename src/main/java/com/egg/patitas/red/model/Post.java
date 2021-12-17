@@ -17,7 +17,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE Post SET enabled = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE `post` SET enabled = false WHERE id = ?")
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
@@ -34,12 +34,12 @@ public class Post {
     @ManyToOne
     private User user;
 
-//    agregado para acceder directo a pets
+    //    agregado para acceder directo a pets
     @Nullable
     @OneToOne
     private Pet pet;
 
-    @NotEmpty(message = "La descrpcion es obligatoria")
+    @NotEmpty(message = "La descripcion es obligatoria")
     @NotNull(message = "La descripcion no puede ser nulo")
     private String description;
 

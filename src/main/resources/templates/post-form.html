@@ -89,8 +89,9 @@
 
                             <div class="description mb-3 col-xl-6">
                                 <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3"
                                     th:field="*{description}"></textarea>
+                                <div class="invalid-feedback">La descripcion es obligatoria</div>
                             </div>
 
                             <div class="form-floating mb-3 col-xl-6">

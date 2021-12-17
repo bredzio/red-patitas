@@ -22,17 +22,19 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/pets")
 public class PetController {
 
     @Autowired
-    PetService petService;
+    private PetService petService;
 
     @Autowired
-    AnimalService animalService;
+    private AnimalService animalService;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping
@@ -91,23 +93,13 @@ public class PetController {
         return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
 
-
-//    @GetMapping("/{id}")
-//    public ModelAndView viewPet() throws Exception {
-//        ModelAndView mav = new ModelAndView("detailpet");
-//        mav.addObject("pets",petService.listPet());
-//        return mav;
-//    }
-
-
-
     @GetMapping("/edit/{id}")
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public ModelAndView editPet(@PathVariable Integer id, HttpSession session){
 
         ModelAndView mav = new ModelAndView("pet-edit");
 
-        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email"))){
+        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
             try{
                 mav.addObject("pet", petService.findById(id));
                 mav.addObject("title", "Editar Mascota");
@@ -150,7 +142,7 @@ public class PetController {
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
     public RedirectView deletePet(@PathVariable Integer id , RedirectAttributes attributes, HttpSession session)  {
         RedirectView redirectView = new RedirectView("/pets/byUser/" + session.getAttribute("email"));
-        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email"))){
+        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
             try {
                 petService.deletePet(id);
                 attributes.addFlashAttribute("success","Se borro el animal");

@@ -213,7 +213,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   padding-block-start: 70px;
-  height: 100vh
+  height: 100vh;
 }
 
 .main-content .section-principal p{
@@ -229,11 +229,6 @@ h3 .registrarse, p .registrarse {
 
 h3 .registrarse:hover, p .registrarse:hover {
   text-decoration: underline;
-}
-
-.section-form {
-  height: 100vh;
-  /* padding-block-start: 40px; */
 }
 
 /* QUIENES SOMOS */
@@ -458,13 +453,20 @@ p .enlaces {
   font-size: 20px;
 }
 /* -----------FORMULARIO DE CONTACTO-------- */
+.section-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .form-contact {
+  height: 100vh;
   margin-block-start: 20px;
   display: flex;
   position: static;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-block-start: 50px;
 }
 
 .form-contact h4 p{
@@ -474,11 +476,9 @@ p .enlaces {
 .form input {
   border: 1px solid var(--blanco);
   background: var(--blanco30);
-  inline-size: 100%;
   box-sizing: border-box;
   border-radius: 8px;
   padding-inline: 12px;
-  padding-block: 16px;
   color: var(--black);
   font-size: 16px;
   margin-block-end: 24px;
@@ -486,10 +486,9 @@ p .enlaces {
   display: block;
   height: 64px;
   width: 543px;
-
 }
 
-.message input{
+#message{
   height: 170px;
 }
 
@@ -501,6 +500,7 @@ p .enlaces {
   background: linear-gradient(135deg, #0dc7a5 0%, #3FB6E0 63.54%, #3573d0 100%);
   border: none;
   color: var(--blanco30);
+  margin-block-end: 0px;
 }
 
 .contactanos h4 {
@@ -794,9 +794,46 @@ p .registrarse {
   font-weight: bold;
 }
 
-.description-pet {
-  font-size: 14px;
+.description-post {
+  font-size: 15px;
   margin-block-end: 20px;
+}
+
+/* ---------DETALLE POST-------- */
+/* .container-detail {
+  height: 100vh;
+} */
+
+.section-detailPet{
+  margin-block-start: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.photo-pet img {
+  border: 3px solid var(--black20);
+  width: 500px;
+  height: 400px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 1px 1px 15px -5px var(--black20);
+}
+
+.description-pet h2, .contact-user h2{
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.description-pet p, .contact-user p{
+  text-align: left;
+  font-size: 20px;
+}
+
+.contact-user {
+  margin-block-start: 30px;
 }
 
 /* ---------------FOOTER/ PIE DE PAGINA----------- */

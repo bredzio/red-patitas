@@ -139,7 +139,7 @@
 
           <!-- FORMULARIO DE CONTACTO -->
           <hr>
-          <div class="section-form">
+          <div id="contacto" class="section-form">
             <div class="form-contact">
                 <section class="contactanos">
                   <h4>CONTÁCTANOS</h4>
@@ -148,9 +148,7 @@
                 <form id="formulario" th:action="@{/createContact}" class="form" method="POST" autocomplete="off" novalidate th:object="${contact}">
                   <input id="name" th:field="*{name}" type="text" required placeholder="Nombre y Apellido">
                   <input id="email" th:field="*{email}" type="email" required placeholder="Correo Electronico">
-                  <div class="message">
-                    <input id="message" th:field="*{message}" type="text" required placeholder="Mensaje" class="message">
-                  </div>
+                  <input id="message" th:field="*{message}" type="text" required placeholder="Mensaje" class="message">
                   <input class="btn" type="submit" value="Enviar mensaje">
                 </form>
             </div>
