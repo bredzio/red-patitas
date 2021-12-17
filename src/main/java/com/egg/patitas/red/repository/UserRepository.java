@@ -1,5 +1,6 @@
 package com.egg.patitas.red.repository;
 
+import com.egg.patitas.red.model.Role;
 import com.egg.patitas.red.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -33,8 +34,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void enabled(@Param("id") Integer id);
 
     @Modifying
-    @Query("UPDATE User u SET u.name = :name, u.lastname = :lastname, u.email = :email, u.password = :password WHERE u.id = :id")
-    void modificar(@Param("id") Integer id, @Param("name") String name, @Param("lastname") String lastname, @Param("email") String email, @Param("password") String password);
+    @Query("UPDATE User u SET u.name = :name, u.lastname = :lastname, u.email = :email, u.password = :password, u.role = :role WHERE u.id = :id")
+    void modificar(@Param("id") Integer id, @Param("name") String name, @Param("lastname") String lastname, @Param("email") String email, @Param("password") String password, @Param("role") Role role);
 
 
 }

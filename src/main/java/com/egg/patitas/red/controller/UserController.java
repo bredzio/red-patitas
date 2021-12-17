@@ -3,6 +3,7 @@ package com.egg.patitas.red.controller;
 import com.egg.patitas.red.exception.EmailExistException;
 import com.egg.patitas.red.model.User;
 import com.egg.patitas.red.security.SecurityConstant;
+import com.egg.patitas.red.service.RoleService;
 import com.egg.patitas.red.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     private  UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @PreAuthorize(SecurityConstant.ADMIN)
     @GetMapping
@@ -99,18 +104,27 @@ public class UserController {
 
     @GetMapping("/edit/{email}")
     @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
-    public ModelAndView editUser(@PathVariable String email) {
+    public ModelAndView editUser(@PathVariable String email, HttpSession session) {
         ModelAndView mav = new ModelAndView("user-form");
         mav.addObject("user", userService.findByEmail(email));
+        mav.addObject("roles",roleService.findAll());
         mav.addObject("title", "Editar Perfil");
         mav.addObject("action", "modificar");
+
+        if(!session.getAttribute("rol").equals("ROLE_USER")) mav.addObject("seleccionRol", "true");
         return mav;
     }
 
     @PostMapping("/modificar")
     @PreAuthorize(SecurityConstant.ADMIN_OR_USERAUTH)
     public RedirectView modificar(@ModelAttribute User user, RedirectAttributes attributes) {
-        userService.edit(user.getId(), user.getName(),user.getLastname(),user.getEmail(),user.getPassword());
+        try{
+            userService.edit(user);
+            attributes.addFlashAttribute("success","Usuario modificado exitosamente");
+        }catch(Exception e){
+            attributes.addFlashAttribute("error",e.getMessage());
+        }
+
         return new RedirectView("/users");
     }
 
