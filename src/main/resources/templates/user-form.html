@@ -75,19 +75,25 @@
                             </div>
 
                             <div class="form-floating mb-3 col-xl-6">
-                                <input class="form-control" id="correo" placeholder="Correo" required th:field="*{email}"
-                                th:readonly="${user.id != null}" type="email"/>
+                                <input class="form-control" id="correo" placeholder="Correo" required th:field="*{email}" th:readonly="${user.id != null}" type="email"/>
                                 <label for="correo">Correo</label>
                                 <div class="invalid-feedback">El correo es obligatorio</div>
                             </div>
 
+                            <div th:if="${seleccionRol != null}" class="form-floating mb-3 col-xl-6">
+                                <select aria-label="Elegir perfil" class="form-select" id="role" th:field="*{role}">
+                                    <option th:each="role : ${roles}" th:text="|${role.name}|" th:value="${role.id}"></option>
+                                </select>
+                                <label for="role">Perfil</label>
+                            </div>
+
+
                             <div class="form-floating mb-3 col-xl-6">
-                                <input class="form-control" id="clave" placeholder="Clave" required th:field="*{password}"
+                                <input class="form-control" id="password" placeholder="Clave" required th:field="*{password}"
                                     type="password"/>
                                 <label for="clave">Clave</label>
                                 <div class="invalid-feedback">La clave es obligatoria</div>
                             </div>
-                            <!-- FALTA COLOCAR EL ROL -->
 
                             <div class="row-form">
                                 <button class="btn btn-success" th:text="${action == 'save'} ? 'Guardar' : 'Guardar cambios'"

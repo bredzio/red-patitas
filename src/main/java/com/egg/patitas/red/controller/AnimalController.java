@@ -17,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/animals")
+
 public class AnimalController {
 
     @Autowired
