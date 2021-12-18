@@ -155,14 +155,13 @@ public class PostController {
                 mav.addObject("success", flashMap.get("success"));
                 mav.addObject("error", flashMap.get("error"));
                 mav.addObject("post", flashMap.get("post"));
-            } else {
+            }else{
                 mav.addObject("post", post);
-                String email=(String) session.getAttribute("email");
-                mav.addObject("pets",petService.findByUserEmail(email));
-                mav.addObject("zones", zoneService.findAll());
-
             }
 
+            String email=(String) session.getAttribute("email");
+            mav.addObject("pets",petService.findByUserEmail(email));
+            mav.addObject("zones", zoneService.findAll());
             mav.addObject("title", "Editar Post");
             mav.addObject("action", "modify");
             return mav;
@@ -202,30 +201,33 @@ public class PostController {
 
     @PostMapping("/modify")
     @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
-    public ModelAndView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
+    public RedirectView modify(@Valid @ModelAttribute Post post, BindingResult result, HttpSession session, RedirectAttributes attributes)  {
 
-        ModelAndView mav = new ModelAndView();
+        RedirectView redirectView = new RedirectView();
 
         if (result.hasErrors()) {
-            mav.addObject("title", "Editar Post");
-            mav.addObject("action", "modify");
-            mav.addObject("post", post);
-            mav.setViewName("post-form");
-            return mav;
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError error : errors ) {
+                attributes.addFlashAttribute("error",error.getDefaultMessage());
+                attributes.addFlashAttribute("post", post);
+            }
+
+            redirectView.setUrl("/posts/edit/" + post.getId());
+            return redirectView;
         }
 
         try {
             String email=(String) session.getAttribute("email");
             postService.modify(post, email);
             attributes.addFlashAttribute("success", "La actualización ha sido realizada satisfactoriamente");
-            mav.setViewName("redirect:/posts/byUser/" + session.getAttribute("email"));
-        } catch (MyException e) {
+            redirectView.setUrl("/posts/byUser/" + session.getAttribute("email"));
+        } catch (Exception e) {
             attributes.addFlashAttribute("post", post);
             attributes.addFlashAttribute("error", e.getMessage());
-            mav.setViewName("redirect:/posts/edit/" + post.getId());
+            redirectView.setUrl("/posts/edit/" + post.getId());
         }
 
-        return mav;
+        return redirectView;
     }
 
 
