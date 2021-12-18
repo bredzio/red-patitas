@@ -92,7 +92,7 @@ public class PostController {
         }
         mav.addObject("bottom", false);
         mav.addObject("posts", postService.findLostPost());
-        mav.addObject("title","Mascotas perdidas");
+        mav.addObject("title","Mascotas Perdidas");
 
         return mav;
     }
@@ -107,7 +107,7 @@ public class PostController {
         }
         mav.addObject("bottom", false);
         mav.addObject("posts", postService.findFoundPost());
-        mav.addObject("title","Mascotas encontradas");
+        mav.addObject("title","Mascotas Encontradas");
 
         return mav;
     }
@@ -130,7 +130,7 @@ public class PostController {
         String email=(String) session.getAttribute("email");
         mav.addObject("pets",petService.findByUserEmail(email));
         mav.addObject("zones", zoneService.findAll());
-        mav.addObject("title", "Nueva publicación");
+        mav.addObject("title", "Nueva Publicación");
         mav.addObject("action", "save");
         return mav;
     }
