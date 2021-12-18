@@ -58,10 +58,17 @@ public class PostService {
     }
 
     @Transactional
-    public void modify(Post dto, String email) throws MyException {
+    public void modify(Post dto, String email) throws Exception {
 
         Optional<Post> answer = postRepository.findById(dto.getId());
         if(answer.isPresent()){
+            if(dto.getZone() == null){
+                throw new Exception("La zona no puede ser nula");
+            }
+
+            if(dto.getPet() == null){
+                throw new Exception("Tiene que elegir una mascota");
+            }
             Post post = answer.get();
             post.setZone(dto.getZone());
             post.setUser(userService.findByEmail(email));
@@ -72,7 +79,7 @@ public class PostService {
             postRepository.save(post);
 
         }else{
-            throw new MyException("No se encontró el pet solicitado");
+            throw new Exception("No se encontró el pet solicitado");
         }
 
     }

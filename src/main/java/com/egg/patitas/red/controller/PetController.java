@@ -85,7 +85,7 @@ public class PetController {
         try {
             String email=(String) session.getAttribute("email");
             petService.createPet(name, photo,animal, email);
-            attributes.addFlashAttribute("succes", "La mascota se creó con éxito!");
+            attributes.addFlashAttribute("success", "La mascota se creó con éxito!");
         }catch(Exception e){
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/create");
@@ -133,7 +133,7 @@ public class PetController {
             attributes.addFlashAttribute("error", e.getMessage());
             return new RedirectView("/pets/pet-edit");
         }
-        attributes.addFlashAttribute("succes", "La mascota se editó con éxito!");
+        attributes.addFlashAttribute("success", "La mascota se editó con éxito!");
         return new RedirectView("/pets/byUser/" + session.getAttribute("email"));
     }
 
