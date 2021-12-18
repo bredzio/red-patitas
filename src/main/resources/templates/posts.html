@@ -75,34 +75,34 @@
 
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                                 <div class="col-post mb-4" th:each="post : ${posts}">
-                                    <div class="card-post mb-4 shadow clickable-card">
-
-                                        <div class="card-body text-center" >
-                                            <!-- <a th:href="@{/post/__${post.id}__}">Click aqui</a> -->
-                                            <img class="card-img"
-                                            th:src="${post.pet.photo != null} ? ${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
-                                                width="165">
-                                        </div>
-
-                                        <div class="card-footer">
-
-                                            <div class="name-pet" th:text="|${post.pet.name}|"></div>
-                                            <div class="description-post" th:text="|Zona: ${post.zone.city}|"></div>
-                                            <div th:if="${emailUser}" th:text="|Email: ${post.user.email}|" ></div>
-                                            <div th:if="${estado}">
-                                                <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
+                                    <a th:href="@{/posts/__${post.id}__}">
+                                        <div class="card-post mb-4 shadow clickable-card">
+                                            <div class="card-body text-center" >
+                                                <img class="card-img"
+                                                th:src="${post.pet.photo != null} ? ${post.pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
+                                                    width="165">
                                             </div>
-                                            <div th:if="${bottom}" class="d-flex justify-content-start my-2">
-                                                <a class="btn btn-secondary btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>
-                                                <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
-                                                    method="POST">
-                                                    <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
-                                                            type="submit" th:text="${post.enabled} ? 'Deshabilitar' : 'Habilitar'">
-                                                    </button>
-                                                </form>
+
+                                            <div class="card-footer">
+
+                                                <div class="name-pet" th:text="|${post.pet.name}|"></div>
+                                                <div class="description-post" th:text="|Zona: ${post.zone.city}|"></div>
+                                                <div th:if="${emailUser}" th:text="|Email: ${post.user.email}|" ></div>
+                                                <div th:if="${estado}">
+                                                    <div th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></div>
+                                                </div>
+                                                <div th:if="${bottom}" class="d-flex justify-content-start my-2">
+                                                    <a class="btn btn-secondary btn-sm me-2" th:href="@{/posts/edit/__${post.id}__}">Editar</a>
+                                                    <form th:action="${post.enabled} ? @{/posts/delete/__${post.id}__} : @{/posts/enabled/__${post.id}__}"
+                                                        method="POST">
+                                                        <button th:class="${post.enabled} ? 'btn btn-secondary btn-sm' : 'btn btn-primary btn-sm'"
+                                                                type="submit" th:text="${post.enabled} ? 'Deshabilitar' : 'Habilitar'">
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
 

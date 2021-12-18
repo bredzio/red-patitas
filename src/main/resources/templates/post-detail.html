@@ -60,10 +60,10 @@
               </div>
               <div class="description-pet">
                 <h2 th:text='${post.pet.name}'></h2>
-                <p th:text='${"Zona: "+ post.zone.city + " - " + post.zone.province}'></p>
                 <p th:text='${"Descripcion: "+post.description}'></p>
                 <p th:text='${"Animal: "+post.pet.animal.name}'></p>
                 <p th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></p>
+                <p th:text='${"Zona: "+ post.zone.city + " - " + post.zone.province}'></p>
                 <section class="contact-user">
                   <h2>Datos del tutor</h2>
                   <p th:text='${"Nombre: "+ post.user.name + " " + post.user.lastname}'></p>
