@@ -40,18 +40,19 @@
 
     <body onload="myFunction()" style="margin:0;">
         <nav th:replace="fragmentos :: navbarIndex"></nav>
-
+        <div class="loader"></div>
+        <h1 class="loaders">Cargando...</h1>
         <div class="main">
             <div class="wrapper">
                 <div class="main-content">
-
+                    <div style="display:none;" id="myDiv" class="animate-bottom">
                     <div class="container-form">
                         <section class="welcome">
                             <h1 th:text="${title}"></h1>
-                            <hr class="mb-5 col-xl-12" />
+                            <hr/>
                         </section>
 
-                        <div th:if="${error}" class="container mt-4 text-center">
+                        <div th:if="${error}" class="container-error mt-4 text-center">
                             <div class="row col-md-4 mx-auto">
                                 <div th:text="${error}" class="alert alert-danger m-0 shadow"></div>
                             </div>
@@ -68,19 +69,18 @@
 
                             <div class="description mb-3 col-xl-6">
                                 <label class="form-label">Cargar foto</label>
-                                <input  class="form-control mt-2" type="file" th:value="${pet.photo}" name="photo" accept="image/*">
+                                <input  class="form-control mt-2" type="file" th:value="${pet.photo}" name="photo" accept="image/*" onchange="loadFile(event)">
                             </div>
-                          
-                          <div class="loader"></div>
-                            <h1 class="loaders">Cargando...</h1>
+
+
                             <!-- <div style="display:none;" id="myDiv" class="animate-bottom"> -->
-                                <div class="form-floating text-center mb-3 col-xl-6">
-                                    <img class="form-img"
+                                <div class="form-floating text-center mb-3 col-xl-6" id="imagen">
+                                    <img class="form-img" id="output"
                                         th:src="${pet.photo != null} ? ${pet.photo} : @{https://huellapp.s3.us-east-2.amazonaws.com/dog-face-cartoon-illustration.jpg}"
                                         width="165">
                                 </div>
                             <!-- </div> -->
-                            
+
 
                             <div class="form-floating mb-3 col-xl-6">
                                 <select aria-label="Elegir Animal" class="form-select" id="animal"  th:field="*{animal}" required>
@@ -102,7 +102,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
     <!-- JavaScript -->
         <script>
             (() => {
@@ -114,16 +114,30 @@
                         event.preventDefault();
                         event.stopPropagation();
                     }
-
                     form.classList.add("was-validated");
                 }, false);
             })()
         </script>
+
+
+
+
+        <script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+
+  };
+</script>
         <script>
         var myVar;
 
         function myFunction() {
-          myVar = setTimeout(showPage, 1000);
+          myVar = setTimeout(showPage, 10);
         }
 
         function showPage() {

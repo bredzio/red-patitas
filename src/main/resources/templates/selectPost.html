@@ -49,7 +49,7 @@
                 <div class="main-content">
 
                     <section class="welcome">
-                        <h1>¡Hola <span th:text="${name}"></span>!</h1>
+                        <h1>¡Hola <span th:text="${name != null} ? ${name} : 'INVITADO'"></span>!</h1>
                         <h2>¿En que te podemos ayudar?</h2>
                     </section>
 
