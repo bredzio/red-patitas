@@ -17,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/animals")
+
 public class AnimalController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class AnimalController {
         ModelAndView mav = new ModelAndView("animals");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("animals", animalService.findAll());
@@ -41,7 +42,7 @@ public class AnimalController {
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("success", flashMap.get("success"));
             mav.addObject("error", flashMap.get("error"));
         }
 
@@ -56,6 +57,7 @@ public class AnimalController {
         RedirectView redirectView = new RedirectView("/animals");
         try{
             animalService.createAnimal(name);
+            attributes.addFlashAttribute("success", "El animal se creó con éxito!");
             redirectView.setUrl("/animals");
         }catch(Exception e){
             attributes.addFlashAttribute("error", e.getMessage());

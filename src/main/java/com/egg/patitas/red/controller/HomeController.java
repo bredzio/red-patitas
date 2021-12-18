@@ -43,7 +43,6 @@ public class HomeController {
         if (bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors ) {
-                System.out.println(error.getDefaultMessage());
                 attributes.addFlashAttribute("error",error.getDefaultMessage());
                 attributes.addFlashAttribute("contact", contact);
             }

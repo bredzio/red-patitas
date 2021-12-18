@@ -4,10 +4,7 @@ import com.egg.patitas.red.config.RoleEnum;
 import com.egg.patitas.red.email.EmailSend;
 import com.egg.patitas.red.exception.EmailExistException;
 import com.egg.patitas.red.exception.EmailNoExistException;
-import com.egg.patitas.red.model.Post;
-import com.egg.patitas.red.model.Role;
 import com.egg.patitas.red.model.User;
-import com.egg.patitas.red.repository.RoleRepository;
 import com.egg.patitas.red.repository.UserRepository;
 import com.egg.patitas.red.security.SecurityUtils;
 import com.egg.patitas.red.security.token.TokenConfirmation;
@@ -200,8 +197,8 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void edit(Integer id, String name, String lastname, String email, String password) {
-        userRepository.modificar(id,name,lastname,email,bCryptPasswordEncoder.encode(password));
+    public void edit(User user) {
+        userRepository.modificar(user.getId(),user.getName(),user.getLastname(),user.getEmail(),bCryptPasswordEncoder.encode(user.getPassword()),user.getRole());
     }
 
     @Transactional

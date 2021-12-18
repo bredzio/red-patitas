@@ -73,16 +73,26 @@
 
                             <div class="description mb-3 col-xl-6">
                                 <label class="form-label">Cargar foto</label>
-                                <input class="form-control mt-2" type="file" name="photo" accept="image/*">
+                                <input  class="form-control mt-2" type="file" name="photo" accept="image/*" onchange="loadFile(event)">
                             </div>
 
+
+                            <!-- <div style="display:none;" id="myDiv" class="animate-bottom"> -->
+                            <div class="form-floating text-center mb-3 col-xl-6" id="imagen">
+                                <img class="form-img" id="output"
+                                     width="165">
+                            </div>
+
+
+
                             <div class="form-floating mb-3 col-xl-6">
-                                <select aria-label="Elegir Animal" class="form-select" id="animal" th:field="*{animal}">
+                                <select aria-label="Elegir Animal" class="form-select" id="animal" th:field="*{animal}" required>
                                     <option selected value="">Tipo de animal</option>
                                     <option th:each="animal : ${animals}" th:text="|${animal.name}|" th:value="${animal.id}">
                                     </option>
                                 </select>
                                 <label for="animal">Animal</label>
+                                <div class="invalid-feedback">Debe selecionar un tipo de animal</div>
                             </div>
 
                             <div class="row-form">
@@ -121,4 +131,15 @@
         <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
     </body>
     <footer th:replace="fragmentos :: footer"></footer>
+    <script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+
+  };
+</script>
 </html>
