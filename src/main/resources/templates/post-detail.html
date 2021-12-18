@@ -64,10 +64,13 @@
                 <p th:text='${"Animal: "+post.pet.animal.name}'></p>
                 <p th:text="${post.lostOrFound} ? 'Estado: Encontrado' : 'Estado: Perdido'"></p>
                 <p th:text='${"Zona: "+ post.zone.city + " - " + post.zone.province}'></p>
+                <hr>
                 <section class="contact-user">
-                  <h2>Datos del tutor</h2>
-                  <p th:text='${"Nombre: "+ post.user.name + " " + post.user.lastname}'></p>
-                  <p th:text='${"Mail de contacto: "+post.user.email}'></p>
+                  <h2>Datos del Tutor</h2>
+                  <ul>
+                    <li><p th:text='${"Nombre: "+ post.user.name + " " + post.user.lastname}'></p></li>
+                    <li><p th:text='${"Mail de contacto: "+post.user.email}'></p></li>
+                  </ul>
                 </section>
               </div>
             </section>
@@ -86,5 +89,4 @@
     <script src="https://kit.fontawesome.com/e529d2bf0a.js" crossorigin="anonymous"></script>
   </body>
   <footer th:replace="fragmentos :: footer"></footer>
-
 </html>

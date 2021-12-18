@@ -677,6 +677,7 @@ p .registrarse {
 
 .description {
   padding-inline: 12px;
+  text-align: left;
 }
 
 .row-form {
@@ -702,6 +703,7 @@ p .registrarse {
 .form-img {
   width: 60%;
   border-radius: 10px;
+  box-shadow: 1px 1px 10px -5px var(--black30);;
 }
 
 /* ------DASHBOARD ------*/
@@ -756,10 +758,6 @@ p .registrarse {
   object-fit:cover;
 }
 
-.card-post {
-  border-radius: 10px;
-}
-
 .card-footer{
   background: var(--blue30);
   color: var(--blanco30);
@@ -770,8 +768,13 @@ p .registrarse {
   width: 370px;
 }
 
+.col-post a {
+  text-decoration: none;
+  color: var(--blanco30);
+}
+
 .welcome h1 {
-  font-size: 35px;
+  font-size: 43px;
   color: var(--aquamarine20);
 }
 
@@ -799,10 +802,21 @@ p .registrarse {
   margin-block-end: 20px;
 }
 
+.administrar-post {
+  margin-block-start: 15px;
+}
+
+.btn-enabled {
+  background: var(--black30);
+  color: var(--blanco30);
+}
+
+.btn-enabled:hover {
+  background: #dc1f19;
+  color: var(--blanco30);
+}
+
 /* ---------DETALLE POST-------- */
-/* .container-detail {
-  height: 100vh;
-} */
 
 .section-detailPet{
   margin-block-start: 30px;
@@ -811,29 +825,56 @@ p .registrarse {
 }
 
 .photo-pet img {
-  border: 3px solid var(--black20);
   width: 500px;
   height: 400px;
   object-fit: cover;
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  box-shadow: 1px 1px 15px -5px var(--black20);
+  box-shadow: 1px 1px 10px -5px var(--black20);
 }
 
-.description-pet h2, .contact-user h2{
+.description-pet {
+  max-width: 450px;
+}
+
+.description-pet h2 {
   text-align: center;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 35px;
+  color: var(--black20);
+}
+
+.contact-user h2 {
+  font-size: 27px;
 }
 
 .description-pet p, .contact-user p{
-  text-align: left;
+  text-align: justify;
   font-size: 20px;
 }
 
 .contact-user {
   margin-block-start: 30px;
+}
+
+.description-pet hr {
+  display: flex;
+  height: 2px;
+  background: var(--black30);
+}
+/* ------------DETAIL ZONA------------ */
+.detail-zone {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tittle-detailZone h1 {
+  font-size: 35px;
+  color: var(--black20);
+  padding-block-start: 40px;
+  padding-block-end: 15px;
 }
 
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
