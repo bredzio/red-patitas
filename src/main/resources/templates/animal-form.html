@@ -53,7 +53,11 @@
 
                     <div th:if="${error}" class="container-error mt-4 text-center">
                         <div class="row col-md-4 mx-auto">
-                            <div th:text="${error}" class="alert alert-danger shadow"></div>
+                            <div  class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+                                <i class="fas fa-exclamation-triangle"  ></i>
+                               <span th:text="${'&nbsp &nbsp' + error}"></span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         </div>
                     </div>
 

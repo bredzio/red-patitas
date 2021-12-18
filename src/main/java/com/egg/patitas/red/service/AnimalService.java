@@ -96,10 +96,13 @@ public class AnimalService {
             }
         }
 
-        
-
-
         public void isValidUsername(String name) throws Exception {
+
+            Optional<Animal> animal;
+            animal = animalRepository.findByName(name);
+            if(animal.isPresent()){
+            throw new Exception("El animal "  + name + " ya se encuentra agregado, por favor ingrese otro");
+        }
             if (name == null || name.trim().isEmpty()) {
                 throw new Exception("El nombre de la ciudad no puede ser nulo");
             }
@@ -110,6 +113,4 @@ public class AnimalService {
                 throw new Exception("El nombre no es valido, tiene que solo letras sin espacios entre 3 y 16 caracteres");
             }
         }
-
-
     }
