@@ -64,9 +64,7 @@ create database huellapp
 
 **5. Change AWS credentials as per your installation**
 
-+ open `src/main/resources/application.yml`
-
-+ change `cloud.aws.credentials.access-key` , `cloud.aws.credentials.secret-key` , `cloud.aws.region.static` , `cloud.application.bucket.name` as per your Amazon Web Service configuration
++ change `amazonProperties.access-key` , `amazonProperties.secret-key` , `amazonProperties.region` , `amazonProperties.bucketName`, `amazonProperties.endpointUrl` as per your Amazon Web Service configuration
 
 
 **6. Build and run the app using maven**
