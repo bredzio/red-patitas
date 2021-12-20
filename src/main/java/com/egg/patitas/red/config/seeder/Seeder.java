@@ -159,7 +159,7 @@ public class Seeder implements CommandLineRunner {
             zoneRepository.save(buildZone("Capital Federal", "Chacarita", 1418));
             zoneRepository.save(buildZone("Capital Federal", "Paternal", 1417));
             zoneRepository.save(buildZone("Capital Federal", "Villa Crespo", 1069));
-            zoneRepository.save(buildZone("Capital Federal", "Villa Sata Rita", 1416));
+            zoneRepository.save(buildZone("Capital Federal", "Villa Santa Rita", 1416));
             zoneRepository.save(buildZone("Capital Federal", "Almagro", 1172));
             zoneRepository.save(buildZone("Capital Federal", "Balvanera", 1180));
             zoneRepository.save(buildZone("Capital Federal", "Barracas", 1110));
@@ -213,82 +213,114 @@ public class Seeder implements CommandLineRunner {
             zoneRepository.save(buildZone("Buenos Aires", "Caseros", 1683));
             zoneRepository.save(buildZone("Buenos Aires", "Tigre", 1648));
             zoneRepository.save(buildZone("Buenos Aires", "Zarate", 1800));
+            zoneRepository.save(buildZone("Buenos Aires", "Otra", 1111));
             //Sata Fe
             zoneRepository.save(buildZone("Santa Fe", "Rosario", 2000));
             zoneRepository.save(buildZone("Santa Fe", "Rafaela", 2300));
             zoneRepository.save(buildZone("Santa Fe", "Santa Fe", 2013));
+            zoneRepository.save(buildZone("Santa Fe", "Otra", 0000));
 
             //Misiones
             zoneRepository.save(buildZone("Misiones", "Posadas", 3300));
             zoneRepository.save(buildZone("Misiones", "Puerto Iguazu", 3370));
             zoneRepository.save(buildZone("Misiones", "Eldorado", 3380));
+            zoneRepository.save(buildZone("Misiones", "Otra", 0000));
 
             //Mendoza
             zoneRepository.save(buildZone("Mendoza", "Maipu", 5511));
             zoneRepository.save(buildZone("Mendoza", "Las Heras", 5502));
             zoneRepository.save(buildZone("Mendoza", "Godoy Cruz", 5501));
+            zoneRepository.save(buildZone("Mendoza", "Otra", 0000));
 
             //Cordoba
             zoneRepository.save(buildZone("Cordoba", "Capilla del Monte", 5511));
             zoneRepository.save(buildZone("Cordoba", "La Falda", 5172));
+            zoneRepository.save(buildZone("Cordoba", "Otra", 0000));
+
 
             //Tierra Del fuego
             zoneRepository.save(buildZone("Tierra del Fuego", "Ushuaia", 9410));
             zoneRepository.save(buildZone("Tierra del Fuego", "Rio Grande", 9420));
+            zoneRepository.save(buildZone("Tierra del Fuego", "Otra", 9410));
 
             //Santa Cruz
             zoneRepository.save(buildZone("Santa Cruz", "Rio Gallegos", 9400));
             zoneRepository.save(buildZone("Santa Cruz", "Rio Turbio", 9407));
+            zoneRepository.save(buildZone("Santa Cruz", "Otra", 0000));
 
             //Chubut
             zoneRepository.save(buildZone("Chubut", "Puerto Madryn", 9120));
             zoneRepository.save(buildZone("Chubut", "Trelew", 9100));
+            zoneRepository.save(buildZone("Chubut", "Otra", 0000));
 
             //Rio Negro
             zoneRepository.save(buildZone("Rio Negro", "Bariloche", 8400));
             zoneRepository.save(buildZone("Rio Negro", "Viedma", 8500));
+            zoneRepository.save(buildZone("Rio Negro", "Otra", 0000));
 
             //Neuquen
             zoneRepository.save(buildZone("Neuquen", "Neuquen", 8300));
             zoneRepository.save(buildZone("Neuquen", "Zapala", 8340));
+            zoneRepository.save(buildZone("Neuquen", "Otra", 0000));
 
             //La Pampa
             zoneRepository.save(buildZone("La Pampa", "Santa Rosa", 6300));
+            zoneRepository.save(buildZone("La Pampa", "Otra", 0000));
+
 
             //San Luis
             zoneRepository.save(buildZone("San Luis", "San Luis", 5700));
-
+            zoneRepository.save(buildZone("San Luis", "Otra", 0000));
             //Entre Rios
             zoneRepository.save(buildZone("Entre Rios", "Gualeguaychu", 2820));
+            zoneRepository.save(buildZone("Entre Rios", "Otra", 0000));
 
             //Corrientes
             zoneRepository.save(buildZone("Corrientes", "San Luis", 5700));
+            zoneRepository.save(buildZone("Corrientes", "Otra", 0000));
             //Santiago del Estero
             zoneRepository.save(buildZone("Santiago del Estero", "Santiago del Estero", 4200));
+            zoneRepository.save(buildZone("Santiago del Estero", "Otra", 0000));
+
 
             //Chaco
             zoneRepository.save(buildZone("Chaco", "Resistencia", 3500));
+            zoneRepository.save(buildZone("Chaco", "Otra", 0000));
+
 
             //La rioja
             zoneRepository.save(buildZone("La Rioja", "La Rioja", 5300));
+            zoneRepository.save(buildZone("La Rioja", "Otra", 0000));
+
 
             //San Juan
             zoneRepository.save(buildZone("San Juan", "San Juan", 5400));
+            zoneRepository.save(buildZone("San Juan", "Otra", 0000));
+
 
             //Salta
             zoneRepository.save(buildZone("Salta", "Salta", 4400));
+            zoneRepository.save(buildZone("Salta", "Otra", 0000));
 
             //Jujuy
             zoneRepository.save(buildZone("Jujuy", "San Salvador de Jujuy", 4600));
+            zoneRepository.save(buildZone("Jujuy", "Otra", 0000));
+
 
             //Catamarca
             zoneRepository.save(buildZone("Catamarca", "San Fernando del Valle de Catamarca", 4700));
+            zoneRepository.save(buildZone("Catamarca", "Otra", 0000));
+
 
             //Tucuman
             zoneRepository.save(buildZone("Tucuman", "San Miguel de Tucuman", 4000));
+            zoneRepository.save(buildZone("Tucuman", "Otra", 0000));
+
 
             //Formosa
             zoneRepository.save(buildZone("Formosa", "Formosa", 3600));
+            zoneRepository.save(buildZone("Formosa", "Otra", 0000));
+
 
         }
     }

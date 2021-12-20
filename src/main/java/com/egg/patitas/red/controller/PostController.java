@@ -129,7 +129,8 @@ public class PostController {
 
         String email=(String) session.getAttribute("email");
         mav.addObject("pets",petService.findByUserEmail(email));
-        mav.addObject("zones", zoneService.findAll());
+        mav.addObject("zones", zoneService.zonesJson());
+        mav.addObject("provinces", zoneService.provinces());
         mav.addObject("title", "Nueva Publicación");
         mav.addObject("action", "save");
         return mav;
