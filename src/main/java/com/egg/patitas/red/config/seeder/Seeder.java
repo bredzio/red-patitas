@@ -314,12 +314,12 @@ public class Seeder implements CommandLineRunner {
 
             //Tucuman
             zoneRepository.save(buildZone("Tucuman", "San Miguel de Tucuman", 4000));
-            zoneRepository.save(buildZone("Tucuman", "San Miguel de Tucuman", 0000));
+            zoneRepository.save(buildZone("Tucuman", "Otra", 0000));
 
 
             //Formosa
             zoneRepository.save(buildZone("Formosa", "Formosa", 3600));
-            zoneRepository.save(buildZone("Formosa", "Formosa", 0000));
+            zoneRepository.save(buildZone("Formosa", "Otra", 0000));
 
 
         }
