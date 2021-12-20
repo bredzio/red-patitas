@@ -65,6 +65,10 @@
 
                     <div class="tittle-detailZone table-responsive" th:unless="${postsLostByZoneId.isEmpty() AND postsFoundByZoneId.isEmpty()}">
                         <h1> Mascotas Perdidas </h1>
+                        <div th:if="${postsLostByZoneId.isEmpty()}">
+                        <h3>Hasta el momento no hay posteos de mascotas perdidas </h3>
+                        </div>
+                            <div th:unless="${postsLostByZoneId.isEmpty()}">
                         <table class="table table-hover table-sm table-bordered">
                             <thead class="table-secondary text-center">
                             <tr>
@@ -85,10 +89,15 @@
                             </tr>
                             </tbody>
                         </table>
+                            </div>
 
                         <h1> Mascotas Encontradas </h1>
-                        <table class="table table-hover table-sm table-bordered">
-                            <thead class="table-secondary text-center">
+                        <div th:if="${postsFoundByZoneId.isEmpty()}">
+                            <h3>Hasta el momento no hay posteos de mascotas encontradas </h3>
+                        </div>
+                        <div th:unless="${postsFoundByZoneId.isEmpty()}">
+                            <table class="table table-hover table-sm table-bordered">
+                                <thead class="table-secondary text-center">
                                 <tr>
                                     <th class="col-md-6 px-md-4" scope="col">Nombre de la mascota</th>
                                     <th class="col-md-6 px-md-4" scope="col">Animal</th>
@@ -96,8 +105,8 @@
                                     <th class="col-md-6 px-md-4" scope="col">Fecha del post</th>
                                     <th class="col-md-6 px-md-4" scope="col">Opciones</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 <tr th:each="postFound : ${postsFoundByZoneId}">
                                     <td class="col-md-6 px-md-4" th:text="${postFound.pet.name}"></td>
                                     <td class="col-md-6 px-md-4" th:text="${postFound.pet.animal.name}"></td>
@@ -105,8 +114,9 @@
                                     <td class="col-md-6 px-md-4" th:text="${postFound.dateLostOrFound}"></td>
                                     <td><a th:href="@{/posts/__${postFound.id}__}">Ver</a></td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
 

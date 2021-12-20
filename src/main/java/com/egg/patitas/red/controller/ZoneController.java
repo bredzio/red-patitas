@@ -59,7 +59,7 @@ public class ZoneController {
         try {
             Zone zone = zoneService.findById(id);
             mav.addObject("zone", zone);
-            mav.addObject("title", "Detalles Zona");
+            mav.addObject("title", "Detalle Zona");
 
             List<Post> postsLost = zoneService.findLostPostsByIdZone(id);
             mav.addObject("postsLostByZoneId", postsLost);
