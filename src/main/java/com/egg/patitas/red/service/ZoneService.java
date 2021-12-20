@@ -3,17 +3,16 @@ package com.egg.patitas.red.service;
 import com.egg.patitas.red.model.Zone;
 import com.egg.patitas.red.repository.PostRepository;
 import com.egg.patitas.red.repository.ZoneRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.egg.patitas.red.model.Post;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,7 +68,6 @@ public class ZoneService {
         if(!zone.isPresent()) {
             throw new Exception("no se encuentra la zona con id "+ id);
         }
-
 
         return zone.get();
     }
@@ -162,5 +160,34 @@ public class ZoneService {
     }
 
 
+    public Map<String, List<Zone>> zonesMap() {
+        Map<String, List<Zone>> result = new HashMap<>();
+        List<Zone> zones = findAll();
+
+        for(Zone z: zones) {
+            // Si la provincia existe como key, entonces obtengo la lista de zonas.
+            // De lo contrario, obtengo una lista vacia (para no lidiar con nulls).
+            List<Zone> provinceZones = result.getOrDefault(z.getProvince(), new ArrayList<>());
+            // En ambos casos, agrego la zona.
+            provinceZones.add(z);
+            // Y actualizo el valor de la clave con la lista nueva.
+            result.put(z.getProvince(), provinceZones);
+        }
+
+        return result;
+    }
+
+    public String zonesJson() {
+        try {
+            return new ObjectMapper().writeValueAsString(zonesMap());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public Set<String> provinces() {
+        return zonesMap().keySet();
+    }
 }
 

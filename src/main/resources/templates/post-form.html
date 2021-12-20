@@ -79,10 +79,18 @@
                             </div>
 
                             <div class="form-floating mb-3 col-xl-6">
+                                <select aria-label="Elegir Provincia" class="form-select" id="province" th:field="${provinces}">
+                                    <option selected value="">Elegir provincia</option>
+                                    <option th:each="province : ${provinces}" th:text="|${province}|" th:value="${province}">
+                                    </option>
+                                </select>
+                                <label for="zone">Provincia</label>
+                            </div>
+
+                            <div class="form-floating mb-3 col-xl-6">
                                 <select aria-label="Elegir Zona" class="form-select" id="zone" th:field="*{zone}">
                                     <option selected value="">Elegir zona</option>
-                                    <option th:each="zone : ${zones}" th:text="|${zone.city}|" th:value="${zone.id}">
-                                    </option>
+
                                 </select>
                                 <label for="zone">Zona</label>
                             </div>
@@ -109,6 +117,7 @@
                                 </button>
                             </div>
                         </form>
+                        <div id="all-zones" th:value="${zones}"></div>
                     </div>
 
                 </div>
@@ -130,6 +139,19 @@
                     form.classList.add("was-validated");
                 }, false);
             })()
+
+            zones = JSON.parse(document.getElementById("all-zones").attributes.value.value);
+            document.getElementById("province").onchange = function() {
+                selectedProvince = document.getElementById("province").value;
+                cities = zones[selectedProvince];
+                innerHTML = '<option selected value="">Elegir zona</option>';
+                for(c of cities) {
+                    innerHTML = innerHTML + `<option value="${c.id}">${c.city}</option>`;
+                }
+                document.getElementById("zone").innerHTML = innerHTML;
+            }
+
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
