@@ -81,8 +81,8 @@ public class PetService {
             pet.setAnimal(animal);
             pet.setEnabled(true);
             pet.setName(name.toLowerCase());
-            //pet.setPhoto(photoService.copy(photo));
-            pet.setPhoto(storageService.uploadFile(photo));
+            pet.setPhoto(photoService.copy(photo));
+            //pet.setPhoto(storageService.uploadFile(photo));
             petRepository.save(pet);
 
         }else{
