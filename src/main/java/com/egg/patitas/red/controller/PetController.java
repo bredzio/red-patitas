@@ -156,15 +156,18 @@ public class PetController {
         return redirectView;
     }
 
-    @PreAuthorize(SecurityConstant.ADMIN)
+
     @PostMapping("/enabled/{id}")
-    public RedirectView enabledPet(@PathVariable Integer id , RedirectAttributes attributes)  {
-        RedirectView redirectView = new RedirectView("/pets");
-        try {
-            petService.enabledPet(id);
-            attributes.addFlashAttribute("success","Se habilito el animal");
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error", e.getMessage());
+    @PreAuthorize(SecurityConstant.ADMIN_AND_USER)
+    public RedirectView enabledPet(@PathVariable Integer id , RedirectAttributes attributes, HttpSession session)  {
+        RedirectView redirectView = new RedirectView("/pets/byUser/" + session.getAttribute("email"));
+        if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2) {
+            try {
+                petService.enabledPet(id);
+                attributes.addFlashAttribute("success", "Se habilito el animal");
+            } catch (Exception e) {
+                attributes.addFlashAttribute("error", e.getMessage());
+            }
         }
         return redirectView;
 
