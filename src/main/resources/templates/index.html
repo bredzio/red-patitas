@@ -45,7 +45,7 @@
 
     <div class="main">
       <div class="wrapper">
-        <div class="main-content">
+        <div class="index">
 
           <div th:if="${error}" class="container-error mt-4 text-center">
             <div class="row col-md-4 mx-auto">
@@ -103,9 +103,31 @@
             </div>
           </section>
 
+          <!-- POR QUÉ NOSOTROS -->
+          <hr>
+          <section class="section-nosotros">
+
+            <div class="img-index">
+              <img th:src="@{/img/reencuentro.jpg}" alt="Reencuentro">
+            </div>
+
+            <div class="text-main">
+              <h2>¿Por qué nosotros?</h2>
+              <h3>
+                Nos enfocamos en que nuestros usuarios publiquen sus mascotas de forma sencilla, rápida y segura, buscando conectar a
+                la persona que la perdió con aquella que la encontró.
+              </h3>
+              <h3>
+                Gracias a que nuestra plataforma está dedicada únicamente a la difusión de mascotas, hace que la búsqueda sea más
+                eficiente. Está dirigida a un público que busca lo mismo que vos, por lo que una publicación tendría mayor alcance en
+                comparación a otras aplicaciones.
+              </h3>
+            </div>
+          </section>
+
           <!-- SECCION DE COMENTARIOS -->
           <hr>
-          <div class="section-comment">
+          <section class="section-comment">
             <h2>Testimonios</h2>
             <div class="container">
 
@@ -135,11 +157,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- FORMULARIO DE CONTACTO -->
           <hr>
-          <div id="contacto" class="section-form">
+          <section id="contacto" class="section-form">
             <div class="form-contact">
                 <section class="contactanos">
                   <h4>CONTÁCTANOS</h4>
@@ -152,7 +174,7 @@
                   <input class="btn" type="submit" value="Enviar mensaje">
                 </form>
             </div>
-          </div>
+          </section>
 
         </div>
       </div>

@@ -28,6 +28,15 @@ body{
 
 }
 
+.elipse1 {
+  width: 35%;
+  position: absolute;
+  left: 810px;
+  top: 450px;
+  z-index: -1;
+  margin-inline-start: 100px;
+}
+
 .elipse2 {
   position: absolute;
   width: 400px;
@@ -37,29 +46,20 @@ body{
   z-index: -1;
 }
 
-.elipse1 {
-  width: 35%;
-  position: absolute;
-  left: 500px;
-  top: 450px;
-  z-index: -1;
-}
-
 .elipse3 {
   position: absolute;
   z-index: -1;
   width: 400px;
   height: 400px;
-  left: -400px;
-  top: 800px;
+  left: -200px;
+  top: 1200px;
 }
 
 .elipse4 {
-  width: 400px;
-  height: 400px;
+  width: 28%;
   position: absolute;
-  left: 550px;
-  top: 180px;
+  left: 950px;
+  top: 280px;
   z-index: -1;
 }
 
@@ -177,6 +177,11 @@ header .logo-huellapp {
   margin-block-start: 80px;
 }
 
+.index {
+  position: relative;
+  padding-inline: 20px;
+}
+
 .main-content p {
   margin-block: 10px;
   text-align: center;
@@ -212,11 +217,13 @@ h3 {
 .section-principal {
   display: flex;
   justify-content: space-between;
-  padding-block-start: 70px;
   height: 100vh;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100%;
 }
 
-.main-content .section-principal p{
+.main-content .section-principal p, .section-nosotros p{
   margin-block-start: 10px;
   color: var(--black20);
   font-size: 18px;
@@ -264,7 +271,8 @@ h3 .registrarse:hover, p .registrarse:hover {
   color: var(--aquamarine20);
 }
 
-/* COMO FUNCIONA */
+/* COMO PUBLICAR */
+
 .section-content h4 {
   color: var(--black20);
   font-size: 24px;
@@ -284,13 +292,13 @@ h3 .registrarse:hover, p .registrarse:hover {
 }
 
 .line {
-  background-color: var(--blue20);
-  height: 150px;
+  background-image: linear-gradient(6.07deg, var(--blue30) 0.63%, var(--blue10) 100.18%);
+  height: 300px;
   position: absolute;
   width: 100%;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  top: 600px;
+  top: 420px;
 }
 
 /* -----------FEATURE LIST----------------- */
@@ -329,7 +337,6 @@ p .enlaces {
 
 .main-content h4 + img {
   margin-block: 50px;
-  width: 45%;
   margin-block-end: 100px;
 }
 
@@ -397,10 +404,11 @@ p .enlaces {
   display: flex;
   flex-direction: column;
 }
+
 .section-comment h2{
   font-weight: bold;
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .container {
@@ -452,6 +460,31 @@ p .enlaces {
   color: var(--black20);
   font-size: 20px;
 }
+
+/* ------POR QUE NOSOTROS------ */
+
+.section-nosotros h2{
+  font-weight: bold;
+  text-align: center;
+  font-size: 50px;
+}
+
+.section-nosotros {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100%;
+  padding-block-end: 70px;
+}
+.img-index img {
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  box-shadow: 1px 1px 15px -5px var(--black20);
+}
+
 /* -----------FORMULARIO DE CONTACTO-------- */
 .section-form {
   display: flex;
@@ -517,12 +550,14 @@ p .enlaces {
   margin: 0;
 }
 
+.form-contact p {
+  margin-block-start: 17px;
+}
+
 /* --------LOGIN y SIGNUP---------- */
 
 
 .col-md-4 {
-  display: flex;
-  align-items: center;
   width: 40%;
 }
 
@@ -877,6 +912,25 @@ p .registrarse {
   padding-block-end: 15px;
 }
 
+.btn-secondary a {
+  color: var(--blanco30);
+  text-decoration: none;
+}
+
+.btn-secondary a:hover {
+  color: var(--blanco30);
+}
+
+.btn-ver {
+  width: min-content;
+  margin-inline-start: 85px;
+}
+
+.btn-ver2 {
+  width: min-content;
+  margin-inline-start: 35px;
+}
+
 /* ---------------FOOTER/ PIE DE PAGINA----------- */
 footer {
     background: var(--blue30);
@@ -906,7 +960,7 @@ footer p {
     margin-block-end: 10px;
 }
 
-.footer-a a .fab{
+.footer-a a .fab, .footer-a a .fas{
   font-size: 20px;
   padding: 0 15px 0 0;
 }
@@ -916,32 +970,11 @@ footer p {
   font-size: 14px;
 }
 
+.footer-a a:hover, .footer-a a .fas:hover {
+  color: var(--aquamarine10);
+}
+
 @media screen and (min-width: 1366px) {
-  .elipse1 {
-    width: 35%;
-    position: absolute;
-    left: 810px;
-    top: 450px;
-    z-index: -1;
-    margin-inline-start: 100px;
-  }
-
-  .elipse3 {
-    position: absolute;
-    z-index: -1;
-    width: 400px;
-    height: 400px;
-    left: -200px;
-    top: 1200px;
-  }
-
-  .elipse4 {
-    width: 28%;
-    position: absolute;
-    left: 950px;
-    top: 280px;
-    z-index: -1;
-  }
     .loader {
       position: absolute;
       left: 50%;

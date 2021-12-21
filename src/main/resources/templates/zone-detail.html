@@ -66,34 +66,39 @@
                     <div class="tittle-detailZone table-responsive" th:unless="${postsLostByZoneId.isEmpty() AND postsFoundByZoneId.isEmpty()}">
                         <h1> Mascotas Perdidas </h1>
                         <div th:if="${postsLostByZoneId.isEmpty()}">
-                        <h3>Hasta el momento no hay posteos de mascotas perdidas </h3>
+                        <h4>Hasta el momento no hay posteos en esta zona. </h4>
                         </div>
-                            <div th:unless="${postsLostByZoneId.isEmpty()}">
-                        <table class="table table-hover table-sm table-bordered">
-                            <thead class="table-secondary text-center">
-                            <tr>
-                                <th class="col-md-6 px-md-4" scope="col">Nombre de la mascota</th>
-                                <th class="col-md-6 px-md-4" scope="col">Animal</th>
-                                <th class="col-md-6 px-md-4" scope="col">Usuario</th>
-                                <th class="col-md-6 px-md-4" scope="col">Fecha del post</th>
-                                <th class="col-md-6 px-md-4" scope="col">Opciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="postLost : ${postsLostByZoneId}">
-                                <td class="col-md-6 px-md-4" th:text="${postLost.pet.name}"></td>
-                                <td class="col-md-6 px-md-4" th:text="${postLost.pet.animal.name}"></td>
-                                <td class="col-md-6 px-md-4" th:text="${postLost.user.name}"></td>
-                                <td class="col-md-6 px-md-4" th:text="${postLost.dateLostOrFound}"></td>
-                                <td><a th:href="@{/posts/__${postLost.id}__}">Ver</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                            </div>
+                        <div th:unless="${postsLostByZoneId.isEmpty()}">
+                            <table class="table table-hover table-sm table-bordered">
+                                <thead class="table-secondary text-center">
+                                <tr>
+                                    <th class="col-md-6 px-md-4" scope="col">Nombre de la mascota</th>
+                                    <th class="col-md-6 px-md-4" scope="col">Animal</th>
+                                    <th class="col-md-6 px-md-4" scope="col">Usuario</th>
+                                    <th class="col-md-6 px-md-4" scope="col">Fecha del post</th>
+                                    <th class="col-md-6 px-md-4" scope="col">Opciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="postLost : ${postsLostByZoneId}">
+                                    <td class="col-md-6 px-md-4" th:text="${postLost.pet.name}"></td>
+                                    <td class="col-md-6 px-md-4" th:text="${postLost.pet.animal.name}"></td>
+                                    <td class="col-md-6 px-md-4" th:text="${postLost.user.name}"></td>
+                                    <td class="col-md-6 px-md-4" th:text="${postLost.dateLostOrFound}"></td>
+                                    <td>
+                                        <span>
+                                            <a class="btn btn-secondary btn-ver2 me-2" type="submit"th:href="@{/posts/__${postLost.id}__}">Ver</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
+                        <hr>
                         <h1> Mascotas Encontradas </h1>
                         <div th:if="${postsFoundByZoneId.isEmpty()}">
-                            <h3>Hasta el momento no hay posteos de mascotas encontradas </h3>
+                            <h4>Hasta el momento no hay posteos en esta zona.</h4>
                         </div>
                         <div th:unless="${postsFoundByZoneId.isEmpty()}">
                             <table class="table table-hover table-sm table-bordered">
