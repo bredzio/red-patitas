@@ -396,7 +396,7 @@ public class Seeder implements CommandLineRunner {
     }
 
     private void loadPostsLost(){
-            postRepository.save(buildPostLost("cnani@huellapp.com","Perdido en la plaza almagro","Luli","Villa Del Parque"));
+            postRepository.save(buildPostLost("cnani@huellapp.com","Perdida en Villa del Parque, llevaba una correa rosa","Luli","Villa Del Parque"));
             postRepository.save(buildPostLost("cnani@huellapp.com","Perdido por la 9 de julio","Lucas","Posadas"));
             postRepository.save(buildPostLost("wrocha@huellapp.com","Se fue corriendo y nunca más lo vi","Sancho","Rafaela"));
             postRepository.save(buildPostLost("wrocha@huellapp.com","Era un loquito de las motos, y persiguiendo una, lo perdí de vista","Bugs","La Plata"));
