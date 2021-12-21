@@ -145,7 +145,7 @@ public class PetController {
         if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2){
             try {
                 petService.deletePet(id);
-                attributes.addFlashAttribute("success","Se borro el animal");
+                attributes.addFlashAttribute("success","Se eliminó la mascota");
 
             } catch (Exception e) {
                 attributes.addFlashAttribute("error", e.getMessage());
@@ -164,7 +164,7 @@ public class PetController {
         if(petService.findById(id).getUser().getEmail().equals(session.getAttribute("email")) || userService.findByEmail((String) session.getAttribute("email")).getRole().getId()==2) {
             try {
                 petService.enabledPet(id);
-                attributes.addFlashAttribute("success", "Se habilito el animal");
+                attributes.addFlashAttribute("success", "Se habilitó la mascota");
             } catch (Exception e) {
                 attributes.addFlashAttribute("error", e.getMessage());
             }
