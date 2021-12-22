@@ -34,7 +34,7 @@ public class ZoneService {
     }
 
     @Transactional
-    public void create(String city, String province, Integer zipCode) throws Exception {
+    public void create(String province, String city, Integer zipCode) throws Exception {
 
         validateCity(city);
         validateProvince(province);
