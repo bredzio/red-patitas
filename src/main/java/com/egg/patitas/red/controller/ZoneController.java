@@ -48,6 +48,7 @@ public class ZoneController {
             mav.addObject("error", flashMap.get("error"));
         }
         mav.addObject("zone", new Zone());
+        mav.addObject("provinces", zoneService.provinces());
         mav.addObject("title", "Crear Zona");
         mav.addObject("action", "save");
         return mav;
@@ -75,11 +76,11 @@ public class ZoneController {
     }
 
     @PostMapping("/save")
-    public RedirectView save(@RequestParam String city, @RequestParam String province, @RequestParam Integer zipCode, RedirectAttributes attributes) {
+    public RedirectView save(@RequestParam String province, @RequestParam String city, @RequestParam Integer zipCode, RedirectAttributes attributes) {
         RedirectView redirectView = new RedirectView("/zones");
 
         try {
-            zoneService.create(city, province, zipCode);
+            zoneService.create(province, city, zipCode);
             redirectView.setUrl("/zones");
         } catch (Exception e) {
             attributes.addFlashAttribute("error", e.getMessage());

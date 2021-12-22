@@ -66,16 +66,19 @@
                             <input th:field="*{id}" type="hidden" />
 
                             <div class="form-floating mb-3 col-xl-6">
+                                <select aria-label="Elegir Provincia" class="form-select" id="province" th:field="*{province}">
+                                    <option selected value="">Elegir provincia</option>
+                                    <option th:each="province : ${provinces}" th:text="|${province}|" th:value="${province}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-floating mb-3 col-xl-6">
                                 <input class="form-control" id="city" placeholder="City" required th:field="*{city}" type="text"/>
                                 <label for="City">Ciudad</label>
                                 <div class="invalid-feedback">La ciudad es obligatorio</div>
                             </div>
 
-                            <div class="form-floating mb-3 col-xl-6">
-                                <input class="form-control" id="province" placeholder="province" required th:field="*{province}" type="text"/>
-                                <label for="province">Provincia</label>
-                                <div class="invalid-feedback">La ciudad es obligatorio</div>
-                            </div>
 
                             <div class="form-floating mb-3 col-xl-6">
                                 <input class="form-control" id="zipCode" placeholder="zipCode" required th:field="*{zipCode}" type="number"/>
