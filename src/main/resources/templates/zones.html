@@ -64,6 +64,8 @@
                         </section>
 
                         <div class="table-responsive" th:unless="${zones.isEmpty()}">
+                            <div></div>
+
                             <table class="table table-hover table-sm table-bordered">
                                 <thead class="table-secondary text-center">
                                     <tr>
@@ -77,6 +79,7 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="zone : ${zones}">
+                                        <div th:if="${zone.numberOfPosts > 0}">
                                         <td class="col-md-1 px-md-2" th:text="${zone.city}"></td>
                                         <td class="col-md-1 px-md-2" th:text="${zone.province}"></td>
                                         <td class="col-md-1 px-md-2" th:text="${zone.zipCode}"></td>
@@ -103,6 +106,38 @@
                                                 <a class="btn btn-secondary btn-ver me-2" type="submit" th:href="@{/zones/__${zone.id}__}">Ver</a>
                                             </span>
                                         </td>
+                                        </div>
+                                    </tr>
+
+                                    <tr th:each="zone : ${zones}">
+                                        <div th:if="${zone.numberOfPosts == 0}">
+                                            <td class="col-md-1 px-md-2" th:text="${zone.city}"></td>
+                                            <td class="col-md-1 px-md-2" th:text="${zone.province}"></td>
+                                            <td class="col-md-1 px-md-2" th:text="${zone.zipCode}"></td>
+                                            <td class="col-md-1 px-md-2" th:text="${zone.numberOfPosts}"></td>
+
+                                            <td class="col-md-2 px-md-2 d-flex justify-content-around w-100" th:switch="${zone.enabled}">
+                                            <span th:case="true">
+                                                <form method="post" th:action="@{/zones/disable/__${zone.id}__}">
+                                                    <button class="btn btn-danger btn-sm" type="submit"> Eliminar
+                                                    </button>
+                                                </form>
+                                            </span>
+
+                                                <span th:case="false">
+                                                <form method="post" th:action="@{/zones/enable/__${zone.id}__}">
+                                                    <button class="btn btn-primary btn-sm" type="submit"> Habilitar
+                                                    </button>
+                                                </form>
+                                            </span>
+                                            </td>
+
+                                            <td>
+                                            <span>
+                                                <a class="btn btn-secondary btn-ver me-2" type="submit" th:href="@{/zones/__${zone.id}__}">Ver</a>
+                                            </span>
+                                            </td>
+                                        </div>
                                     </tr>
                                 </tbody>
                             </table>
