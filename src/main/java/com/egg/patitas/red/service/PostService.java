@@ -1,0 +1,150 @@
+package com.egg.patitas.red.service;
+
+import com.egg.patitas.red.exception.MyException;
+import com.egg.patitas.red.model.Pet;
+import com.egg.patitas.red.model.Post;
+import com.egg.patitas.red.repository.PostRepository;
+import com.egg.patitas.red.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+
+@Service
+@AllArgsConstructor
+public class PostService {
+
+    private final PostRepository postRepository;
+
+    private final UserService userService;
+
+    private final UserRepository userRepository;
+
+    @Transactional
+    public void createPost(Post dto, String email) throws Exception {
+//        no es dto , solo lo puso de nombre por si en el futuro usamos dto
+
+        postRepository.save(buildPost(dto, email));
+
+    }
+
+    @Transactional
+    public Post buildPost(Post dto,String email ) throws Exception {
+        Post post = new Post();
+
+        if(dto.getZone() == null){
+            throw new Exception("La zona no puede ser nula");
+        }
+
+        if(dto.getPet() == null){
+            throw new Exception("Tiene que elegir una mascota");
+        }
+
+        post.setZone(dto.getZone());
+        post.setUser(userService.findByEmail(email));
+        post.setPet(dto.getPet());
+        post.setDescription(dto.getDescription().toLowerCase());
+        post.setEnabled(true); // post habilitado
+        post.setLostOrFound(dto.getLostOrFound());
+
+        postRepository.save(post);
+        System.out.println(post.getId());
+
+        return post;
+    }
+
+    @Transactional
+    public void modify(Post dto, String email) throws Exception {
+
+        Optional<Post> answer = postRepository.findById(dto.getId());
+        if(answer.isPresent()){
+            if(dto.getZone() == null){
+                throw new Exception("La zona no puede ser nula");
+            }
+
+            if(dto.getPet() == null){
+                throw new Exception("Tiene que elegir una mascota");
+            }
+            Post post = answer.get();
+            post.setZone(dto.getZone());
+            post.setUser(userService.findByEmail(email));
+            post.setPet(dto.getPet());
+            post.setDescription(dto.getDescription().toLowerCase());
+            post.setLostOrFound(dto.getLostOrFound());
+
+            postRepository.save(post);
+
+        }else{
+            throw new Exception("No se encontró el pet solicitado");
+        }
+
+    }
+
+    @Transactional
+    public List<Post> findAll(){
+        return postRepository.findAll();
+
+    }
+
+    @Transactional
+    public List<Post> findByUser(String email){
+        return postRepository.findByUser_Id(userRepository.findByEmail(email).getId());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Post> findById(Integer id){
+        return postRepository.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Post> findLostPost(){
+
+        List <Post> lostpost = new ArrayList<>();
+
+        for (Post p : findAll()) {
+            if (!p.getLostOrFound() && p.getEnabled()) {
+                lostpost.add(p);
+            }
+        }
+        return lostpost;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Post> findFoundPost(){
+
+        List <Post> foundpost = new ArrayList();
+
+        for (Post p : findAll()) {
+            if (p.getLostOrFound() && p.getEnabled()) {
+                foundpost.add(p);
+            }
+        }
+        return foundpost;
+    }
+
+
+    @Transactional
+    public void delete(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        postRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void enabled(Integer id) throws Exception {
+        if(id==null){
+            throw new Exception("El id no puede ser nulo");
+        }
+        postRepository.enabled(id);
+    }
+
+    @Transactional
+    public Post findId(Integer id) {
+        return postRepository.findById(id).orElse(null);
+    }
+}
