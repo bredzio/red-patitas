@@ -4,6 +4,9 @@
 
 Develop a website for an ONG whose objective is to find lost pets.
 
+![screen-recording](https://user-images.githubusercontent.com/85000317/153296205-f6c7d2ae-2833-4cfd-9efe-56990abd6aa6.gif)
+
+
 ## Technologies
 <p align="left"><a href="https://www.java.com" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/></a> 
 <a href="https://developer.mozilla.org/es/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/get-icon/geticon/master/icons/javascript.svg"  width="40px" height="40"/></a>
