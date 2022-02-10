@@ -1,13 +1,13 @@
 # Educación Egg
 
-## Objective:
+## Objectivo:
 
-Develop a website for an ONG whose objective is to find lost pets.
+Desarrollo de un sitio web para encontrar y/o publicar animales perdidos.
 
 ![screen-recording](https://user-images.githubusercontent.com/85000317/153296205-f6c7d2ae-2833-4cfd-9efe-56990abd6aa6.gif)
 
 
-## Technologies
+## Tecnologías
 <p align="left"><a href="https://www.java.com" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/></a> 
 <a href="https://developer.mozilla.org/es/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/get-icon/geticon/master/icons/javascript.svg"  width="40px" height="40"/></a>
 <a href="https://spring.io/" target="_blank"><img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/></a>
@@ -19,7 +19,7 @@ Develop a website for an ONG whose objective is to find lost pets.
 <a href="https://code.visualstudio.com/" target="_blank"><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png"  width="40px"height="40"/> </a>
 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png"  width="40px" height="40"/><a href="https://www.mysql.com/" target="_blank"><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mysql/mysql.png" alt="java" width="40" height="40"/></a> </p>
 
-## Requirements
+## Requerimientos
 
 1. Java - 1.8.x
 
@@ -27,7 +27,7 @@ Develop a website for an ONG whose objective is to find lost pets.
 
 3. Mysql - 8.x.x
 
-## Dependencies:
+## Dependencias:
 - ✔️ Spring Data JPA 
 - ✔️ MySQL DRIVER
 - ✔️ Spring Web
@@ -40,41 +40,42 @@ Develop a website for an ONG whose objective is to find lost pets.
 - ✔️ Amazon Web Service
 
 
-## Steps to Setup
+## Pasos para configurar
 
-**1. Clone the application**
+**1. Clonar la aplicación**
 
 ```bash
 git clone https://github.com/bredzio/red-patitas.git
 ```
 
-**2. Create Mysql database**
+**2. Crear base de dato en Mysql**
 ```bash
 create database huellapp
 ```
 
-**3. Change mysql username and password as per your installation**
+**3. Cambiar usuario y contraseña de MySQL según su configuración**
 
-+ open `src/main/resources/application.properties`
++ abrir `src/main/resources/application.properties`
 
-+ change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
++ cambiar `spring.datasource.username` and `spring.datasource.password` según su configuración de MySQL
 
-**4. Change email username and password as per your installation**
+**4. Cambiar correo electrónico y contraseña para su configuración**
 
-+ open `src/main/resources/application.properties`
++ abrir `src/main/resources/application.properties`
 
-+ change `spring.mail.username` , `spring.mail.password` , `spring.mail.port` , `spring.mail.host` as per your mail configuration
-
-**5. Change AWS credentials as per your installation**
-
-+ change `amazonProperties.access-key` , `amazonProperties.secret-key` , `amazonProperties.region` , `amazonProperties.bucketName`, `amazonProperties.endpointUrl` as per your Amazon Web Service configuration
++ cambiar `spring.mail.username` , `spring.mail.password` , `spring.mail.port` , `spring.mail.host` as per your mail configuration
 
 
-**6. Build and run the app using maven**
+**5. Cambiar credenciales de AWS **
+
++ cambiar `amazonProperties.access-key` , `amazonProperties.secret-key` , `amazonProperties.region` , `amazonProperties.bucketName`, `amazonProperties.endpointUrl` as per your Amazon Web Service configuration
+
+
+**6. Inicialiar app usando Maven**
 
 
 ```bash
 mvn spring-boot:run
 ```
 
-The app will start running at <http://localhost:8080>.
+La app inicia en <http://localhost:8080>.
